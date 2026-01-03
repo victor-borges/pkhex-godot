@@ -1,0 +1,27 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PKHeX.Godot", "PKHeX.Godot.csproj", "{6857DCE1-9840-4E47-8062-0C78931A5E99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PKHeX.Facade", "..\PKHeX.Facade\PKHeX.Facade.csproj", "{36AE5C5D-8BB7-489B-B4EA-2A87DCA4C42F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6857DCE1-9840-4E47-8062-0C78931A5E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6857DCE1-9840-4E47-8062-0C78931A5E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6857DCE1-9840-4E47-8062-0C78931A5E99}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{6857DCE1-9840-4E47-8062-0C78931A5E99}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{6857DCE1-9840-4E47-8062-0C78931A5E99}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{6857DCE1-9840-4E47-8062-0C78931A5E99}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{36AE5C5D-8BB7-489B-B4EA-2A87DCA4C42F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36AE5C5D-8BB7-489B-B4EA-2A87DCA4C42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36AE5C5D-8BB7-489B-B4EA-2A87DCA4C42F}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36AE5C5D-8BB7-489B-B4EA-2A87DCA4C42F}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{36AE5C5D-8BB7-489B-B4EA-2A87DCA4C42F}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{36AE5C5D-8BB7-489B-B4EA-2A87DCA4C42F}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal

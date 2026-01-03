@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[accessibility]
+
+general/name="PKHeX.Godot"
+
+[application]
+
+config/name="PKHeX.Godot"
+run/main_scene="res://box.tscn"
+config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/aspect="expand"
+
+[dotnet]
+
+project/assembly_name="PKHeX.Godot"
+
+[editor]
+
+movie_writer/disable_vsync=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
