@@ -28,8 +28,10 @@ public record FormDefinition(ushort Id, string Name)
 {
     public byte ByteId => (byte)Id;
 
+    public bool IsNormal => Name.Equals("Normal", StringComparison.InvariantCultureIgnoreCase);
     public bool IsAlolan => Name.Equals("Alola", StringComparison.InvariantCultureIgnoreCase);
     public bool IsGalarian => Name.Equals("Galar", StringComparison.InvariantCultureIgnoreCase);
-    
+    public bool IsHisuian => Name.Equals("Hisui", StringComparison.InvariantCultureIgnoreCase);
+
     public static readonly FormDefinition Default = new(0, string.Empty);
 }
