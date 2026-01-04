@@ -48,8 +48,5 @@ public partial class HeldItemMenuButton : MenuButton
 
         foreach (var gameItem in _itemRepository.GameItems)
             popup.AddItem(gameItem.Name);
-
-        if (!_gameData.CurrentPokemon.HeldItem.IsNone)
-            Text = _gameData.CurrentPokemon.HeldItem.Name;
     }
 }
