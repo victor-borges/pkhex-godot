@@ -19,10 +19,16 @@ run/main_scene="res://box.tscn"
 config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://Scripts/SignalBus.cs"
+GameData="*res://Scripts/GameData.cs"
+
 [display]
 
 window/size/viewport_width=960
 window/size/viewport_height=540
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [dotnet]
