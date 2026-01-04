@@ -1,21 +1,30 @@
 using Godot;
-using PKHeX.Core;
+using PKHeX.Facade.Pokemons;
+using PKHeX.Godot.Scripts.Extensions;
 
 namespace PKHeX.Godot.Scripts;
 
 public partial class Slot : Button
 {
-    private TextureRect _pokemonSprite;
-    private TextureRect _shinySprite;
-    private TextureRect _markerSprite;
-    private TextureRect _heldItemSprite;
+    [Export] public int SlotIndex { get; set; }
 
-    private Panel _shinyPanel;
-    private Panel _markerPanel;
-    private Panel _heldItemPanel;
+    private SignalBus _signalBus = null!;
+    private GameData _gameData = null!;
+
+    private TextureRect _pokemonSprite = null!;
+    private TextureRect _shinySprite = null!;
+    private TextureRect _markerSprite = null!;
+    private TextureRect _heldItemSprite = null!;
+
+    private Panel _shinyPanel = null!;
+    private Panel _markerPanel = null!;
+    private Panel _heldItemPanel = null!;
 
     public override void _Ready()
     {
+        _signalBus = GetNode<SignalBus>("/root/SignalBus");
+        _gameData = GetNode<GameData>("/root/GameData");
+
         _pokemonSprite = GetNode<TextureRect>("%PokemonSprite");
         _shinySprite = GetNode<TextureRect>("%ShinySprite");
         _markerSprite = GetNode<TextureRect>("%MarkerSprite");
@@ -26,11 +35,14 @@ public partial class Slot : Button
         _heldItemPanel = GetNode<Panel>("%HeldItemPanel");
     }
 
-    public void LoadSprites(PKM pkm)
+    private void OnButtonPressed()
     {
-        var species = pkm?.Species ?? 0;
+        _signalBus.EmitSignal(SignalBus.SignalName.BoxPokemonSelected, SlotIndex);
+    }
 
-        if (species == 0)
+    public void LoadSprites(Pokemon? pokemon)
+    {
+        if (pokemon is null || pokemon.Species.Id is 0)
         {
             _pokemonSprite.Visible = false;
             _shinyPanel.Visible = false;
@@ -39,14 +51,8 @@ public partial class Slot : Button
             return;
         }
 
-        var isShiny = pkm?.IsShiny ?? false;
-        _shinyPanel.Visible = isShiny;
-
-        var pokemonTexture = GD.Load<Texture2D>(isShiny
-            ? $"res://Assets/Sprites/Pokemon/Shiny/{species}.png"
-            : $"res://Assets/Sprites/Pokemon/{species}.png");
-
-        _pokemonSprite.Texture = pokemonTexture;
+        _shinyPanel.Visible = pokemon.IsShiny;
+        _pokemonSprite.Texture = GD.Load<Texture2D>(pokemon.GetSpritePath());
         _pokemonSprite.Visible = true;
     }
 }

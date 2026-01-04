@@ -4,7 +4,7 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class NextBoxButton : Button
 {
-    private GameData _gameData;
+    private GameData _gameData = null!;
 
     public override void _Ready()
     {

@@ -1,3 +1,4 @@
+using System.IO;
 using Godot;
 using PKHeX.Facade;
 
@@ -5,9 +6,9 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class OpenFileButton : Button
 {
-	private SignalBus _signalBus;
-	private FileDialog _openFileDialog;
-	private Label _gameLabel;
+	private SignalBus _signalBus = null!;
+	private FileDialog _openFileDialog = null!;
+	private Label _gameLabel = null!;
 
 	public override void _Ready()
 	{

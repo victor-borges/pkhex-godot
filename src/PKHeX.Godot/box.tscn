@@ -1,10 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://pt02x0donl1j"]
+[gd_scene load_steps=17 format=3 uid="uid://pt02x0donl1j"]
 
 [ext_resource type="Script" uid="uid://cjdn17oxibavb" path="res://Scripts/Box.cs" id="1_jjbh2"]
 [ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://slot.tscn" id="1_oq5cr"]
 [ext_resource type="Script" uid="uid://rp7efqxhodq1" path="res://Scripts/OpenFileButton.cs" id="2_bqn3j"]
 [ext_resource type="Script" uid="uid://d3adw81k7s1a4" path="res://Scripts/PreviousBoxButton.cs" id="4_amiuo"]
 [ext_resource type="Script" uid="uid://bakw6mtl0m7" path="res://Scripts/NextBoxButton.cs" id="5_wj1a8"]
+[ext_resource type="Script" uid="uid://c676w3wo8kajt" path="res://Scripts/CurrentPokemon/PIDLineEdit.cs" id="6_bk3la"]
+[ext_resource type="Texture2D" uid="uid://cb1uck8mr6te2" path="res://Assets/Sprites/Gender/gender_2.svg" id="7_fitc7"]
+[ext_resource type="Script" uid="uid://bjdu0ilaxavq1" path="res://Scripts/CurrentPokemon/GenderButton.cs" id="8_1e45e"]
+[ext_resource type="Script" uid="uid://kolo3mv4im17" path="res://Scripts/CurrentPokemon/SpeciesMenuButton.cs" id="9_gjv1c"]
+[ext_resource type="Script" uid="uid://dhxiotmixftn3" path="res://Scripts/CurrentPokemon/NicknameCheckBox.cs" id="10_7jpco"]
+[ext_resource type="Script" uid="uid://dtq0px8lrcncs" path="res://Scripts/CurrentPokemon/NicknameLineEdit.cs" id="11_y154k"]
+[ext_resource type="Script" uid="uid://ccy53loccgyyk" path="res://Scripts/CurrentPokemon/EXPLineEdit.cs" id="12_fitc7"]
+[ext_resource type="Script" uid="uid://bm5u5ej726qx2" path="res://Scripts/CurrentPokemon/LevelLineEdit.cs" id="13_vsnq7"]
+[ext_resource type="Script" uid="uid://dm1jyb8p4q5df" path="res://Scripts/CurrentPokemon/NatureMenuButton.cs" id="14_ufrmy"]
+[ext_resource type="Script" uid="uid://c7n1aj6fuy62b" path="res://Scripts/CurrentPokemon/StatNatureMenuButton.cs" id="15_owi30"]
+[ext_resource type="Script" uid="uid://byj74rqbmwnoy" path="res://Scripts/CurrentPokemon/FormMenuButton.cs" id="16_fitc7"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -36,7 +47,7 @@ anchor_bottom = 0.21111111
 text = "Game: N/A"
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="BoxVBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = -1
 anchor_left = 0.35416666
 anchor_top = 0.07777778
@@ -48,10 +59,10 @@ offset_right = 47.0
 offset_bottom = 61.0
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxVBoxContainer"]
 layout_mode = 2
 
-[node name="PreviousBoxButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="PreviousBoxButton" type="Button" parent="BoxVBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -60,156 +71,327 @@ text = "<"
 script = ExtResource("4_amiuo")
 metadata/_edit_use_anchors_ = true
 
-[node name="BoxButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="BoxButton" type="Button" parent="BoxVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Box 1"
 metadata/_edit_use_anchors_ = true
 
-[node name="NextBoxButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="NextBoxButton" type="Button" parent="BoxVBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 text = ">"
 script = ExtResource("5_wj1a8")
 metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="BoxVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Box" type="GridContainer" parent="VBoxContainer/PanelContainer"]
+[node name="Box" type="GridContainer" parent="BoxVBoxContainer/PanelContainer"]
 layout_mode = 2
 columns = 6
 script = ExtResource("1_jjbh2")
 
-[node name="BoxSlot1" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot0" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="BoxSlot2" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot1" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 1
 
-[node name="BoxSlot3" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot2" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 2
 
-[node name="BoxSlot4" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot3" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 3
 
-[node name="BoxSlot5" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot4" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 4
 
-[node name="BoxSlot6" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot5" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 5
 
-[node name="BoxSlot7" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot6" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 6
 
-[node name="BoxSlot8" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot7" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 7
 
-[node name="BoxSlot9" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot8" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 8
 
-[node name="BoxSlot10" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot9" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 9
 
-[node name="BoxSlot11" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot10" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 10
 
-[node name="BoxSlot12" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot11" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 11
 
-[node name="BoxSlot13" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot12" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 12
 
-[node name="BoxSlot14" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot13" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 13
 
-[node name="BoxSlot15" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot14" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 14
 
-[node name="BoxSlot16" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot15" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 15
 
-[node name="BoxSlot17" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot16" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 16
 
-[node name="BoxSlot18" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot17" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 17
 
-[node name="BoxSlot19" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot18" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 18
 
-[node name="BoxSlot20" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot19" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 19
 
-[node name="BoxSlot21" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot20" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 20
 
-[node name="BoxSlot22" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot21" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 21
 
-[node name="BoxSlot23" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot22" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 22
 
-[node name="BoxSlot24" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot23" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 23
 
-[node name="BoxSlot25" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot24" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 24
 
-[node name="BoxSlot26" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot25" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 25
 
-[node name="BoxSlot27" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot26" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 26
 
-[node name="BoxSlot28" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot27" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 27
 
-[node name="BoxSlot29" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot28" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 28
 
-[node name="BoxSlot30" parent="VBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
+[node name="BoxSlot29" parent="BoxVBoxContainer/PanelContainer/Box" instance=ExtResource("1_oq5cr")]
 unique_name_in_owner = true
 layout_mode = 2
+SlotIndex = 29
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-offset_left = 48.0
-offset_top = 142.0
-offset_right = 88.0
-offset_bottom = 182.0
+[node name="CurrentPokemonVBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.036458332
+anchor_top = 0.24814814
+anchor_right = 0.35104167
+anchor_bottom = 0.9203704
+offset_bottom = -3.0517578e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="PIDHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="PIDLabel" type="Label" parent="CurrentPokemonVBoxContainer/PIDHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PID:"
+
+[node name="PIDLineEdit" type="LineEdit" parent="CurrentPokemonVBoxContainer/PIDHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_bk3la")
+
+[node name="GenderButton" type="TextureButton" parent="CurrentPokemonVBoxContainer/PIDHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+texture_normal = ExtResource("7_fitc7")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("8_1e45e")
+
+[node name="RerollPIDButton" type="Button" parent="CurrentPokemonVBoxContainer/PIDHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reroll"
+
+[node name="SpeciesHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="SpeciesLabel" type="Label" parent="CurrentPokemonVBoxContainer/SpeciesHBoxContainer"]
+layout_mode = 2
+text = "Species:"
+
+[node name="SpeciesMenuButton" type="MenuButton" parent="CurrentPokemonVBoxContainer/SpeciesHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+flat = false
+script = ExtResource("9_gjv1c")
+
+[node name="NicknameHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="NicknameCheckBox" type="CheckBox" parent="CurrentPokemonVBoxContainer/NicknameHBoxContainer"]
+layout_mode = 2
+script = ExtResource("10_7jpco")
+
+[node name="NicknameLabel" type="Label" parent="CurrentPokemonVBoxContainer/NicknameHBoxContainer"]
+layout_mode = 2
+text = "Nickname:"
+
+[node name="NicknameLineEdit" type="LineEdit" parent="CurrentPokemonVBoxContainer/NicknameHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("11_y154k")
+
+[node name="EXPHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="EXPLabel" type="Label" parent="CurrentPokemonVBoxContainer/EXPHBoxContainer"]
+layout_mode = 2
+text = "EXP:"
+
+[node name="EXPLineEdit" type="LineEdit" parent="CurrentPokemonVBoxContainer/EXPHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("12_fitc7")
+
+[node name="Spacer" type="Control" parent="CurrentPokemonVBoxContainer/EXPHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="LevelLabel" type="Label" parent="CurrentPokemonVBoxContainer/EXPHBoxContainer"]
+layout_mode = 2
+text = "Level:"
+
+[node name="LevelLineEdit" type="LineEdit" parent="CurrentPokemonVBoxContainer/EXPHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("13_vsnq7")
+
+[node name="NatureHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="NatureLabel" type="Label" parent="CurrentPokemonVBoxContainer/NatureHBoxContainer"]
+layout_mode = 2
+text = "Nature:"
+
+[node name="NatureMenuButton" type="MenuButton" parent="CurrentPokemonVBoxContainer/NatureHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+flat = false
+script = ExtResource("14_ufrmy")
+
+[node name="StatNatureHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="StatNatureLabel" type="Label" parent="CurrentPokemonVBoxContainer/StatNatureHBoxContainer"]
+layout_mode = 2
+text = "Stat Nature:"
+
+[node name="StatNatureMenuButton" type="MenuButton" parent="CurrentPokemonVBoxContainer/StatNatureHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+flat = false
+script = ExtResource("15_owi30")
+
+[node name="FormHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="FormLabel" type="Label" parent="CurrentPokemonVBoxContainer/FormHBoxContainer"]
+layout_mode = 2
+text = "Form:"
+
+[node name="FormMenuButton" type="MenuButton" parent="CurrentPokemonVBoxContainer/FormHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+flat = false
+script = ExtResource("16_fitc7")
+
+[node name="HeldItemHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="HeldItemLabel" type="Label" parent="CurrentPokemonVBoxContainer/HeldItemHBoxContainer"]
+layout_mode = 2
+text = "Held Item:"
+
+[node name="HeldItemMenuButton" type="MenuButton" parent="CurrentPokemonVBoxContainer/HeldItemHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+flat = false
 
 [connection signal="file_selected" from="OpenFileDialog" to="OpenFileButton" method="OnOpenFileDialogFileSelected"]
 [connection signal="pressed" from="OpenFileButton" to="OpenFileButton" method="OnButtonPressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/PreviousBoxButton" to="VBoxContainer/HBoxContainer/PreviousBoxButton" method="OnButtonPressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/NextBoxButton" to="VBoxContainer/HBoxContainer/NextBoxButton" method="OnButtonPressed"]
+[connection signal="pressed" from="BoxVBoxContainer/HBoxContainer/PreviousBoxButton" to="BoxVBoxContainer/HBoxContainer/PreviousBoxButton" method="OnButtonPressed"]
+[connection signal="pressed" from="BoxVBoxContainer/HBoxContainer/NextBoxButton" to="BoxVBoxContainer/HBoxContainer/NextBoxButton" method="OnButtonPressed"]
