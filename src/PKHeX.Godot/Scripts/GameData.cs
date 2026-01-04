@@ -23,14 +23,16 @@ public partial class GameData : Node
     public override void _Ready()
     {
         _signalBus = GetNode<SignalBus>("/root/SignalBus");
-        _signalBus.FileLoaded += OnFileLoaded;
+        _signalBus.FileLoading += OnFileLoading;
         _signalBus.BoxPokemonSelected += OnBoxPokemonSelected;
     }
 
-    private void OnFileLoaded(string path)
+    private void OnFileLoading(string path)
     {
         Game = Game.LoadFrom(path);
         CurrentBoxIndex = 0;
+
+        _signalBus.EmitSignal(SignalBus.SignalName.FileLoaded, path);
     }
 
     private void OnBoxPokemonSelected(int slotIndex)

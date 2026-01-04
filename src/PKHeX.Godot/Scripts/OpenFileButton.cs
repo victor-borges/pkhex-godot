@@ -26,6 +26,6 @@ public partial class OpenFileButton : Button
 		var game = Game.LoadFrom(path);
 		_gameLabel.Text = $"Game: {game.GameVersionApproximation.Name}";
 
-		_signalBus.EmitSignal(SignalBus.SignalName.FileLoaded, path);
+		_signalBus.EmitSignal(SignalBus.SignalName.FileLoading, path);
 	}
 }

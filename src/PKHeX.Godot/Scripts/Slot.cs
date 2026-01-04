@@ -52,6 +52,13 @@ public partial class Slot : Button
         }
 
         _shinyPanel.Visible = pokemon.IsShiny;
+
+        if (!pokemon.HeldItem.IsNone)
+        {
+            _heldItemSprite.Texture = GD.Load<Texture2D>($"res://Assets/Sprites/Items/item_{pokemon.HeldItem.Id:D4}.png");
+            _heldItemPanel.Visible = true;
+        }
+
         _pokemonSprite.Texture = GD.Load<Texture2D>(pokemon.GetSpritePath());
         _pokemonSprite.Visible = true;
     }

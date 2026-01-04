@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://pt02x0donl1j"]
+[gd_scene load_steps=18 format=3 uid="uid://pt02x0donl1j"]
 
 [ext_resource type="Script" uid="uid://cjdn17oxibavb" path="res://Scripts/Box.cs" id="1_jjbh2"]
 [ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://slot.tscn" id="1_oq5cr"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dm1jyb8p4q5df" path="res://Scripts/CurrentPokemon/NatureMenuButton.cs" id="14_ufrmy"]
 [ext_resource type="Script" uid="uid://c7n1aj6fuy62b" path="res://Scripts/CurrentPokemon/StatNatureMenuButton.cs" id="15_owi30"]
 [ext_resource type="Script" uid="uid://byj74rqbmwnoy" path="res://Scripts/CurrentPokemon/FormMenuButton.cs" id="16_fitc7"]
+[ext_resource type="Script" uid="uid://b4i3ukneysqi7" path="res://Scripts/CurrentPokemon/HeldItemMenuButton.cs" id="17_vsnq7"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -390,6 +391,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = " "
 flat = false
+script = ExtResource("17_vsnq7")
 
 [connection signal="file_selected" from="OpenFileDialog" to="OpenFileButton" method="OnOpenFileDialogFileSelected"]
 [connection signal="pressed" from="OpenFileButton" to="OpenFileButton" method="OnButtonPressed"]
