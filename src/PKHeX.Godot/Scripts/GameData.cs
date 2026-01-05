@@ -1,4 +1,5 @@
 using Godot;
+using PKHeX.Core;
 using PKHeX.Facade;
 using PKHeX.Facade.Pokemons;
 
@@ -7,7 +8,7 @@ namespace PKHeX.Godot.Scripts;
 public partial class GameData : Node
 {
     private SignalBus _signalBus = null!;
-    public Game? Game { get; private set; }
+    public Game? Game { get; set; }
     public Pokemon? CurrentPokemon { get; private set; }
 
     public int CurrentBoxIndex
@@ -22,6 +23,9 @@ public partial class GameData : Node
 
     public override void _Ready()
     {
+        var lang = GameInfo.CurrentLanguage;
+        LocalizeUtil.InitializeStrings(lang, FakeSaveFile.Default);
+
         _signalBus = GetNode<SignalBus>("/root/SignalBus");
         _signalBus.FileLoading += OnFileLoading;
         _signalBus.BoxPokemonSelected += OnBoxPokemonSelected;

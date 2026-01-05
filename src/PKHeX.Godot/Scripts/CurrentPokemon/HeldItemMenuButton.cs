@@ -1,4 +1,6 @@
+using System.IO;
 using System.Linq;
+using System.Text;
 using Godot;
 using PKHeX.Core;
 using PKHeX.Facade.Repositories;
@@ -41,12 +43,13 @@ public partial class HeldItemMenuButton : MenuButton
         Text = " ";
 
         if (_gameData.Game is null
-            || _gameData.CurrentPokemon is null
             || _itemRepository?.GameItems is null
             || !_itemRepository.GameItems.Any())
             return;
 
         foreach (var gameItem in _itemRepository.GameItems)
+        {
             popup.AddItem(gameItem.Name);
+        }
     }
 }

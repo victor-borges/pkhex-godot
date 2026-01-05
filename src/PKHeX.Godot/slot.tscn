@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5i72gvvrc56d"]
 
 [ext_resource type="Script" uid="uid://cjyj35b37vdht" path="res://Scripts/Slot.cs" id="1_uw6ar"]
-[ext_resource type="Texture2D" uid="uid://bukec06egtmxk" path="res://Assets/Sprites/Overlays/rare_icon.png" id="2_8ag6o"]
+[ext_resource type="Texture2D" uid="uid://3mohtwxhtk35" path="res://Assets/Sprites/Overlays/rare_icon.webp" id="2_khion"]
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(68, 56)
@@ -76,7 +76,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-texture = ExtResource("2_8ag6o")
+texture = ExtResource("2_khion")
 expand_mode = 1
 stretch_mode = 5
 
@@ -118,6 +118,8 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Spacer2" type="Control" parent="GridContainer"]
 layout_mode = 2

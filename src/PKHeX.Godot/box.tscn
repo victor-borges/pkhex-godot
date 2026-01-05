@@ -1,12 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://pt02x0donl1j"]
+[gd_scene load_steps=24 format=3 uid="uid://pt02x0donl1j"]
 
 [ext_resource type="Script" uid="uid://cjdn17oxibavb" path="res://Scripts/Box.cs" id="1_jjbh2"]
 [ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://slot.tscn" id="1_oq5cr"]
+[ext_resource type="Script" uid="uid://dedta6fhnkq1w" path="res://Scripts/ImportPCDataFileButton.cs" id="2_6uvgj"]
 [ext_resource type="Script" uid="uid://rp7efqxhodq1" path="res://Scripts/OpenFileButton.cs" id="2_bqn3j"]
 [ext_resource type="Script" uid="uid://d3adw81k7s1a4" path="res://Scripts/PreviousBoxButton.cs" id="4_amiuo"]
 [ext_resource type="Script" uid="uid://bakw6mtl0m7" path="res://Scripts/NextBoxButton.cs" id="5_wj1a8"]
 [ext_resource type="Script" uid="uid://c676w3wo8kajt" path="res://Scripts/CurrentPokemon/PIDLineEdit.cs" id="6_bk3la"]
-[ext_resource type="Texture2D" uid="uid://cb1uck8mr6te2" path="res://Assets/Sprites/Gender/gender_2.svg" id="7_fitc7"]
+[ext_resource type="Texture2D" uid="uid://bma0dky1d0tsw" path="res://Assets/Sprites/Gender/gender_2.webp" id="7_fitc7"]
 [ext_resource type="Script" uid="uid://bjdu0ilaxavq1" path="res://Scripts/CurrentPokemon/GenderButton.cs" id="8_1e45e"]
 [ext_resource type="Script" uid="uid://kolo3mv4im17" path="res://Scripts/CurrentPokemon/SpeciesMenuButton.cs" id="9_gjv1c"]
 [ext_resource type="Script" uid="uid://dhxiotmixftn3" path="res://Scripts/CurrentPokemon/NicknameCheckBox.cs" id="10_7jpco"]
@@ -17,6 +18,11 @@
 [ext_resource type="Script" uid="uid://c7n1aj6fuy62b" path="res://Scripts/CurrentPokemon/StatNatureMenuButton.cs" id="15_owi30"]
 [ext_resource type="Script" uid="uid://byj74rqbmwnoy" path="res://Scripts/CurrentPokemon/FormMenuButton.cs" id="16_fitc7"]
 [ext_resource type="Script" uid="uid://b4i3ukneysqi7" path="res://Scripts/CurrentPokemon/HeldItemMenuButton.cs" id="17_vsnq7"]
+[ext_resource type="Script" uid="uid://ctdtw8gifbthw" path="res://Scripts/CurrentPokemon/AbilityMenuButton.cs" id="18_erdut"]
+[ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/FriendshipLineEdit.cs" id="18_ufrmy"]
+[ext_resource type="Script" uid="uid://7ht4ioi0kwtq" path="res://Scripts/CurrentPokemon/IsEggCheckBox.cs" id="20_6uvgj"]
+[ext_resource type="Script" uid="uid://biwid7rqfe84i" path="res://Scripts/CurrentPokemon/InfectedCheckBox.cs" id="21_cqssq"]
+[ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/CuredCheckBox.cs" id="22_fts04"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -38,6 +44,25 @@ anchor_bottom = 0.13549624
 text = "Open File"
 script = ExtResource("2_bqn3j")
 metadata/_edit_use_anchors_ = true
+
+[node name="ImportPCDataFileButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.20833333
+anchor_top = 0.048148148
+anchor_right = 0.36458334
+anchor_bottom = 0.1388889
+text = "Import PC Data"
+script = ExtResource("2_6uvgj")
+metadata/_edit_use_anchors_ = true
+
+[node name="ImportPCDataFileDialog" type="FileDialog" parent="."]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 2
+size = Vector2i(925, 360)
+file_mode = 0
+access = 2
+use_native_dialog = true
 
 [node name="GameLabel" type="Label" parent="."]
 anchors_preset = -1
@@ -393,7 +418,56 @@ text = " "
 flat = false
 script = ExtResource("17_vsnq7")
 
+[node name="AbilityItemHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="AbilityLabel" type="Label" parent="CurrentPokemonVBoxContainer/AbilityItemHBoxContainer"]
+layout_mode = 2
+text = "Ability:"
+
+[node name="AbilityMenuButton" type="MenuButton" parent="CurrentPokemonVBoxContainer/AbilityItemHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " "
+flat = false
+script = ExtResource("18_erdut")
+
+[node name="AbilityLineEdit" type="LineEdit" parent="CurrentPokemonVBoxContainer/AbilityItemHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FriendshipHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="FriendshipLabel" type="Label" parent="CurrentPokemonVBoxContainer/FriendshipHBoxContainer"]
+layout_mode = 2
+text = "Friendship:"
+
+[node name="FriendshipLineEdit" type="LineEdit" parent="CurrentPokemonVBoxContainer/FriendshipHBoxContainer"]
+layout_mode = 2
+script = ExtResource("18_ufrmy")
+
+[node name="FlagsHBoxContainer" type="HBoxContainer" parent="CurrentPokemonVBoxContainer"]
+layout_mode = 2
+
+[node name="IsEggCheckBox" type="CheckBox" parent="CurrentPokemonVBoxContainer/FlagsHBoxContainer"]
+layout_mode = 2
+text = "Is Egg"
+script = ExtResource("20_6uvgj")
+
+[node name="InfectedCheckBox" type="CheckBox" parent="CurrentPokemonVBoxContainer/FlagsHBoxContainer"]
+layout_mode = 2
+text = "Infected"
+script = ExtResource("21_cqssq")
+
+[node name="CuredCheckBox" type="CheckBox" parent="CurrentPokemonVBoxContainer/FlagsHBoxContainer"]
+layout_mode = 2
+text = "Cured"
+script = ExtResource("22_fts04")
+
 [connection signal="file_selected" from="OpenFileDialog" to="OpenFileButton" method="OnOpenFileDialogFileSelected"]
 [connection signal="pressed" from="OpenFileButton" to="OpenFileButton" method="OnButtonPressed"]
+[connection signal="pressed" from="ImportPCDataFileButton" to="ImportPCDataFileButton" method="OnButtonPressed"]
+[connection signal="file_selected" from="ImportPCDataFileDialog" to="ImportPCDataFileButton" method="OnImportPCDataFileDialogFileSelected"]
 [connection signal="pressed" from="BoxVBoxContainer/HBoxContainer/PreviousBoxButton" to="BoxVBoxContainer/HBoxContainer/PreviousBoxButton" method="OnButtonPressed"]
 [connection signal="pressed" from="BoxVBoxContainer/HBoxContainer/NextBoxButton" to="BoxVBoxContainer/HBoxContainer/NextBoxButton" method="OnButtonPressed"]

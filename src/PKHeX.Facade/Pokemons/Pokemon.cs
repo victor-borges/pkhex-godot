@@ -75,6 +75,8 @@ public class Pokemon(PKM pokemon, Game game)
 
     public bool IsShiny => pokemon.IsShiny;
 
+    public Shiny ShinyType => ShinyExtensions.GetType(pokemon);
+
     public ItemDefinition HeldItem
     {
         get => ItemRepository.GetItem(Convert.ToUInt16(pokemon.HeldItem));

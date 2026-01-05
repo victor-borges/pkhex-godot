@@ -17,6 +17,9 @@ public class Game
 
         Trainer = new Trainer(this);
         BattlePoints = BattlePoints.GetInstance(saveFile);
+
+        var lang = GameInfo.CurrentLanguage;
+        LocalizeUtil.InitializeStrings(lang, saveFile);
     }
 
     public SpeciesRepository SpeciesRepository { get; }
@@ -57,23 +60,18 @@ public class Game
 
     public static Game LoadFrom(string path)
     {
-        var saveFile = SaveUtil.GetSaveFile(path)
-                       ?? throw new GameNotLoadedException(path);
-
+        var saveFile = SaveUtil.GetSaveFile(path) ?? throw new GameNotLoadedException(path);
         return new Game(saveFile);
     }
 
     public static Game LoadFrom(byte[] bytes, string? path = null)
     {
-        var saveFile = SaveUtil.GetSaveFile(bytes, path)
-                       ?? throw new GameNotLoadedException(path);
-
+        var saveFile = SaveUtil.GetSaveFile(bytes, path) ?? throw new GameNotLoadedException(path);
         return new Game(saveFile);
     }
 
-    public static Game EmptyOf(
-        GameVersionDefinition version,
-        string? trainerName = null) => new(FakeSaveFile.Default);
+    public static Game EmptyOf(GameVersionDefinition version, string? trainerName = null) =>
+        new(FakeSaveFile.Default);
 }
 
 public class GameNotLoadedException(string? path = null)

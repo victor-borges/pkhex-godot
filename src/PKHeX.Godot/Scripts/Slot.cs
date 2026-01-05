@@ -1,4 +1,5 @@
 using Godot;
+using PKHeX.Core;
 using PKHeX.Facade.Pokemons;
 using PKHeX.Godot.Scripts.Extensions;
 
@@ -42,16 +43,34 @@ public partial class Slot : Button
 
     public void LoadSprites(Pokemon? pokemon)
     {
+        _pokemonSprite.Visible = false;
+        _shinyPanel.Visible = false;
+        _markerPanel.Visible = false;
+        _heldItemPanel.Visible = false;
+
         if (pokemon is null || pokemon.Species.Id is 0)
-        {
-            _pokemonSprite.Visible = false;
-            _shinyPanel.Visible = false;
-            _markerPanel.Visible = false;
-            _heldItemPanel.Visible = false;
             return;
+
+        if (pokemon.IsShiny)
+        {
+            _shinySprite.Texture = GD.Load<Texture2D>(pokemon.ShinyType switch
+            {
+                Shiny.AlwaysSquare => "res://Assets/Sprites/Overlays/rare_icon_2.webp",
+                Shiny.AlwaysStar or _ => "res://Assets/Sprites/Overlays/rare_icon.webp"
+            });
+
+            _shinyPanel.Visible = true;
+        }
+        else
+        {
+            _shinyPanel.Visible = false;
         }
 
-        _shinyPanel.Visible = pokemon.IsShiny;
+        if (pokemon.Pkm is IAlpha { IsAlpha: true })
+        {
+            _markerSprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Overlays/alpha.webp");
+            _markerPanel.Visible = true;
+        }
 
         if (!pokemon.HeldItem.IsNone)
         {

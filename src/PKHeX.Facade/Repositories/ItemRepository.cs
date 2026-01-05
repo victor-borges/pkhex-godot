@@ -18,9 +18,9 @@ public class ItemRepository
 
     public ItemRepository(SaveFile saveFile)
     {
-        _gameItems = GameInfo.Strings.GetItemStrings(saveFile.Context, saveFile.Version)
-            .Select((itemName, id) => (id: Convert.ToUInt16(id), itemName))
-            .ToDictionary(x => Convert.ToUInt16(x.id), x => new ItemDefinition(Convert.ToUInt16(x.id), x.itemName));
+        _gameItems = GameInfo.FilteredSources.Items
+            .DistinctBy(item => item.Value) // duplicates exist in some games
+            .ToDictionary(item => Convert.ToUInt16(item.Value), item => new ItemDefinition(Convert.ToUInt16(item.Value), item.Text));
 
         if (saveFile.Version == GameVersion.C)
         {
