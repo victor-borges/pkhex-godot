@@ -23,20 +23,17 @@ public partial class NicknameCheckBox : CheckBox
         if (_gameData.Game is null || _gameData.CurrentPokemon is null)
         {
             ButtonPressed = false;
-            _nicknameLineEdit.Editable = false;
         }
         else
         {
             var isNicknamed = _gameData.CurrentPokemon.Pkm.IsNicknamed;
 
             ButtonPressed = isNicknamed;
-            _nicknameLineEdit.Editable = isNicknamed;
         }
     }
 
     private void OnFileLoaded(string _)
     {
         ButtonPressed = false;
-        _nicknameLineEdit.Editable = false;
     }
 }

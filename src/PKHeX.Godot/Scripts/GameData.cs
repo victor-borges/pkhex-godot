@@ -9,7 +9,16 @@ public partial class GameData : Node
 {
     private SignalBus _signalBus = null!;
     public Game? Game { get; set; }
-    public Pokemon? CurrentPokemon { get; private set; }
+
+    public Pokemon? CurrentPokemon
+    {
+        get;
+        private set
+        {
+            field = value;
+            _signalBus.EmitSignal(SignalBus.SignalName.CurrentPokemonChanged);
+        }
+    }
 
     public int CurrentBoxIndex
     {
@@ -29,14 +38,17 @@ public partial class GameData : Node
         _signalBus = GetNode<SignalBus>("/root/SignalBus");
         _signalBus.FileLoading += OnFileLoading;
         _signalBus.BoxPokemonSelected += OnBoxPokemonSelected;
+        _signalBus.PartyPokemonSelected += OnPartyPokemonSelected;
     }
 
     private void OnFileLoading(string path)
     {
         Game = Game.LoadFrom(path);
-        CurrentBoxIndex = 0;
-
         _signalBus.EmitSignal(SignalBus.SignalName.FileLoaded, path);
+
+        CurrentBoxIndex = 0;
+        CurrentPokemon = null;
+        _signalBus.EmitSignal(SignalBus.SignalName.PartyChanged);
     }
 
     private void OnBoxPokemonSelected(int slotIndex)
@@ -46,8 +58,14 @@ public partial class GameData : Node
 
         var index = (CurrentBoxIndex * 30) + slotIndex;
         CurrentPokemon = Game?.Trainer.PokemonBox.All[index];
+    }
 
-        _signalBus.EmitSignal(SignalBus.SignalName.CurrentPokemonChanged);
+    private void OnPartyPokemonSelected(int slotIndex)
+    {
+        if (Game is null || slotIndex >= Game?.Trainer.Party.Pokemons.Count)
+            return;
+
+        CurrentPokemon = Game?.Trainer.Party.Pokemons[slotIndex];
     }
 
     public void GoToPreviousBox()

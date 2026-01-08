@@ -1,8 +1,9 @@
 using Godot;
+using PKHeX.Godot.Scripts.Extensions;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class SpeciesMenuButton : MenuButton
+public partial class CurrentPokemonSprite : TextureRect
 {
     private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
@@ -13,24 +14,17 @@ public partial class SpeciesMenuButton : MenuButton
         _signalBus = GetNode<SignalBus>("/root/SignalBus");
 
         _signalBus.CurrentPokemonChanged += CurrentPokemonChanged;
-        _signalBus.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_gameData.Game is null || _gameData.CurrentPokemon is null)
-        {
-            Text = " ";
-        }
-        else
-        {
-            var species = _gameData.CurrentPokemon.Species;
-            Text = $"{species.Name} [{species.Id}]";
-        }
+        Texture = _gameData.CurrentPokemon != null && _gameData.CurrentPokemon.Species.Id != 0
+            ? GD.Load<Texture2D>(_gameData.CurrentPokemon.GetSpritePath())
+            : null;
     }
 
     private void OnFileLoaded(string _)
     {
-        Text = " ";
+        Texture = null;
     }
 }

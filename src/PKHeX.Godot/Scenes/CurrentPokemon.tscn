@@ -1,0 +1,283 @@
+[gd_scene load_steps=22 format=3 uid="uid://3le34m4t3vpu"]
+
+[ext_resource type="Texture2D" uid="uid://d2yovffgxdoi2" path="res://Assets/Sprites/Overlays/invalid.webp" id="1_o0fyj"]
+[ext_resource type="Script" uid="uid://c676w3wo8kajt" path="res://Scripts/CurrentPokemon/PIDLineEdit.cs" id="1_xg4bv"]
+[ext_resource type="Script" uid="uid://dwagvn2a6t6tw" path="res://Scripts/CurrentPokemon/CurrentPokemonSprite.cs" id="1_yagxa"]
+[ext_resource type="Script" uid="uid://b7b4o7hpfmk2r" path="res://Scripts/CurrentPokemon/InvalidSprite.cs" id="2_pm8xo"]
+[ext_resource type="Texture2D" uid="uid://bma0dky1d0tsw" path="res://Assets/Sprites/Gender/gender_2.webp" id="2_yagxa"]
+[ext_resource type="Script" uid="uid://bjdu0ilaxavq1" path="res://Scripts/CurrentPokemon/GenderButton.cs" id="3_o0fyj"]
+[ext_resource type="Script" uid="uid://cpqgbnggdhj7c" path="res://Scripts/CurrentPokemon/LegalityDialog.cs" id="3_ojqgt"]
+[ext_resource type="Script" uid="uid://kolo3mv4im17" path="res://Scripts/CurrentPokemon/SpeciesMenuButton.cs" id="4_pm8xo"]
+[ext_resource type="Script" uid="uid://dhxiotmixftn3" path="res://Scripts/CurrentPokemon/NicknameCheckBox.cs" id="5_ojqgt"]
+[ext_resource type="Script" uid="uid://dtq0px8lrcncs" path="res://Scripts/CurrentPokemon/NicknameLineEdit.cs" id="6_voh30"]
+[ext_resource type="Script" uid="uid://ccy53loccgyyk" path="res://Scripts/CurrentPokemon/EXPLineEdit.cs" id="7_wq63x"]
+[ext_resource type="Script" uid="uid://bm5u5ej726qx2" path="res://Scripts/CurrentPokemon/LevelLineEdit.cs" id="8_ivqbr"]
+[ext_resource type="Script" uid="uid://dm1jyb8p4q5df" path="res://Scripts/CurrentPokemon/NatureMenuButton.cs" id="9_lkom8"]
+[ext_resource type="Script" uid="uid://c7n1aj6fuy62b" path="res://Scripts/CurrentPokemon/StatNatureMenuButton.cs" id="10_jay0n"]
+[ext_resource type="Script" uid="uid://byj74rqbmwnoy" path="res://Scripts/CurrentPokemon/FormMenuButton.cs" id="11_yw50q"]
+[ext_resource type="Script" uid="uid://b4i3ukneysqi7" path="res://Scripts/CurrentPokemon/HeldItemMenuButton.cs" id="12_ut2yo"]
+[ext_resource type="Script" uid="uid://ctdtw8gifbthw" path="res://Scripts/CurrentPokemon/AbilityMenuButton.cs" id="13_tajsu"]
+[ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/FriendshipLineEdit.cs" id="14_0pun1"]
+[ext_resource type="Script" uid="uid://7ht4ioi0kwtq" path="res://Scripts/CurrentPokemon/IsEggCheckBox.cs" id="15_te52t"]
+[ext_resource type="Script" uid="uid://biwid7rqfe84i" path="res://Scripts/CurrentPokemon/InfectedCheckBox.cs" id="16_8r36q"]
+[ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/CuredCheckBox.cs" id="17_3gdpy"]
+
+[node name="CurrentPokemonVBoxContainer" type="VBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.25729167
+anchor_bottom = 0.70555556
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="InvalidButton" type="TextureButton" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("1_o0fyj")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_pm8xo")
+
+[node name="LegalityDialog" type="AcceptDialog" parent="HBoxContainer/InvalidButton"]
+oversampling_override = 1.0
+title = "Legality"
+initial_position = 2
+size = Vector2i(512, 100)
+unresizable = true
+always_on_top = true
+popup_window = true
+content_scale_mode = 1
+content_scale_aspect = 2
+dialog_autowrap = true
+script = ExtResource("3_ojqgt")
+
+[node name="CurrentPokemonSprite" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("1_yagxa")
+
+[node name="PIDHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PIDLabel" type="Label" parent="PIDHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "PID:"
+
+[node name="PIDLineEdit" type="LineEdit" parent="PIDHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+script = ExtResource("1_xg4bv")
+
+[node name="GenderButton" type="TextureButton" parent="PIDHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+disabled = true
+texture_normal = ExtResource("2_yagxa")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_o0fyj")
+
+[node name="RerollPIDButton" type="Button" parent="PIDHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Reroll"
+
+[node name="SpeciesHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SpeciesLabel" type="Label" parent="SpeciesHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Species:"
+
+[node name="SpeciesMenuButton" type="MenuButton" parent="SpeciesHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = " "
+flat = false
+script = ExtResource("4_pm8xo")
+
+[node name="NicknameHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NicknameCheckBox" type="CheckBox" parent="NicknameHBoxContainer"]
+layout_mode = 2
+disabled = true
+script = ExtResource("5_ojqgt")
+
+[node name="NicknameLabel" type="Label" parent="NicknameHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Nickname:"
+
+[node name="NicknameLineEdit" type="LineEdit" parent="NicknameHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+clear_button_enabled = true
+script = ExtResource("6_voh30")
+
+[node name="EXPHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="EXPLabel" type="Label" parent="EXPHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "EXP:"
+
+[node name="EXPLineEdit" type="LineEdit" parent="EXPHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+script = ExtResource("7_wq63x")
+
+[node name="Spacer" type="Control" parent="EXPHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="LevelLabel" type="Label" parent="EXPHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Level:"
+
+[node name="LevelLineEdit" type="LineEdit" parent="EXPHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+script = ExtResource("8_ivqbr")
+
+[node name="NatureHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NatureLabel" type="Label" parent="NatureHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Nature:"
+
+[node name="NatureMenuButton" type="MenuButton" parent="NatureHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = " "
+flat = false
+script = ExtResource("9_lkom8")
+
+[node name="StatNatureHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="StatNatureLabel" type="Label" parent="StatNatureHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Stat Nature:"
+
+[node name="StatNatureMenuButton" type="MenuButton" parent="StatNatureHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = " "
+flat = false
+script = ExtResource("10_jay0n")
+
+[node name="FormHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="FormLabel" type="Label" parent="FormHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Form:"
+
+[node name="FormMenuButton" type="MenuButton" parent="FormHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = " "
+flat = false
+script = ExtResource("11_yw50q")
+
+[node name="HeldItemHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HeldItemLabel" type="Label" parent="HeldItemHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Held Item:"
+
+[node name="HeldItemMenuButton" type="MenuButton" parent="HeldItemHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = " "
+flat = false
+script = ExtResource("12_ut2yo")
+
+[node name="AbilityItemHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="AbilityLabel" type="Label" parent="AbilityItemHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Ability:"
+
+[node name="AbilityMenuButton" type="MenuButton" parent="AbilityItemHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = " "
+flat = false
+script = ExtResource("13_tajsu")
+
+[node name="AbilityLineEdit" type="LineEdit" parent="AbilityItemHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+editable = false
+
+[node name="FriendshipHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="FriendshipLabel" type="Label" parent="FriendshipHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Friendship:"
+
+[node name="FriendshipLineEdit" type="LineEdit" parent="FriendshipHBoxContainer"]
+layout_mode = 2
+editable = false
+script = ExtResource("14_0pun1")
+
+[node name="FlagsHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="IsEggCheckBox" type="CheckBox" parent="FlagsHBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Is Egg"
+script = ExtResource("15_te52t")
+
+[node name="InfectedCheckBox" type="CheckBox" parent="FlagsHBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Infected"
+script = ExtResource("16_8r36q")
+
+[node name="CuredCheckBox" type="CheckBox" parent="FlagsHBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Cured"
+script = ExtResource("17_3gdpy")
+
+[connection signal="pressed" from="HBoxContainer/InvalidButton" to="HBoxContainer/InvalidButton/LegalityDialog" method="OnButtonPressed"]

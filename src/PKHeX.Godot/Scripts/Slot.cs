@@ -1,5 +1,6 @@
 using Godot;
 using PKHeX.Core;
+using PKHeX.Facade.Extensions;
 using PKHeX.Facade.Pokemons;
 using PKHeX.Godot.Scripts.Extensions;
 
@@ -8,6 +9,7 @@ namespace PKHeX.Godot.Scripts;
 public partial class Slot : Button
 {
     [Export] public int SlotIndex { get; set; }
+    [Export] public bool IsPartySlot { get; set; }
 
     private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
@@ -16,6 +18,7 @@ public partial class Slot : Button
     private TextureRect _shinySprite = null!;
     private TextureRect _markerSprite = null!;
     private TextureRect _heldItemSprite = null!;
+    private TextureRect _invalidSprite = null!;
 
     private Panel _shinyPanel = null!;
     private Panel _markerPanel = null!;
@@ -30,23 +33,47 @@ public partial class Slot : Button
         _shinySprite = GetNode<TextureRect>("%ShinySprite");
         _markerSprite = GetNode<TextureRect>("%MarkerSprite");
         _heldItemSprite = GetNode<TextureRect>("%HeldItemSprite");
+        _invalidSprite = GetNode<TextureRect>("%InvalidSprite");
 
         _shinyPanel = GetNode<Panel>("%ShinyPanel");
         _markerPanel = GetNode<Panel>("%MarkerPanel");
         _heldItemPanel = GetNode<Panel>("%HeldItemPanel");
+
+        if (IsPartySlot) _signalBus.PartyChanged += OnPartyChanged;
+        else _signalBus.BoxChanged += OnBoxChanged;
     }
 
     private void OnButtonPressed()
     {
-        _signalBus.EmitSignal(SignalBus.SignalName.BoxPokemonSelected, SlotIndex);
+        _signalBus.EmitSignal(IsPartySlot
+            ? SignalBus.SignalName.PartyPokemonSelected
+            : SignalBus.SignalName.BoxPokemonSelected,
+            SlotIndex);
     }
 
-    public void LoadSprites(Pokemon? pokemon)
+    private void OnPartyChanged()
+    {
+        if (SlotIndex >= _gameData.Game?.Trainer.Party.Pokemons.Count)
+            return;
+
+        var pokemon = _gameData.Game?.Trainer.Party.Pokemons[SlotIndex];
+        LoadSprites(pokemon);
+    }
+
+    private void OnBoxChanged(int boxIndex)
+    {
+        var index = (boxIndex * 30) + SlotIndex;
+        var pokemon = _gameData.Game?.Trainer.PokemonBox.All[index];
+        LoadSprites(pokemon);
+    }
+
+    private void LoadSprites(Pokemon? pokemon)
     {
         _pokemonSprite.Visible = false;
         _shinyPanel.Visible = false;
         _markerPanel.Visible = false;
         _heldItemPanel.Visible = false;
+        _invalidSprite.Visible = false;
 
         if (pokemon is null || pokemon.Species.Id is 0)
             return;
@@ -77,6 +104,8 @@ public partial class Slot : Button
             _heldItemSprite.Texture = GD.Load<Texture2D>($"res://Assets/Sprites/Items/item_{pokemon.HeldItem.Id:D4}.png");
             _heldItemPanel.Visible = true;
         }
+
+        _invalidSprite.Visible = pokemon.Species.Id != 0 && !pokemon.Legality().Valid;
 
         _pokemonSprite.Texture = GD.Load<Texture2D>(pokemon.GetSpritePath());
         _pokemonSprite.Visible = true;

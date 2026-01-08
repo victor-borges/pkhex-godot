@@ -33,7 +33,6 @@ public partial class FormMenuButton : MenuButton
         if (_gameData.Game is null || _gameData.CurrentPokemon is null || !_gameData.CurrentPokemon.Form.HasForm)
         {
             Text = " ";
-            Disabled = true;
             return;
         }
 
@@ -42,7 +41,6 @@ public partial class FormMenuButton : MenuButton
         if (forms.Length is 0 || forms is [{ ByteId: 0 }])
         {
             Text = " ";
-            Disabled = true;
         }
         else
         {
@@ -52,13 +50,11 @@ public partial class FormMenuButton : MenuButton
             }
 
             Text = _gameData.CurrentPokemon.Form.Form.Name;
-            Disabled = false;
         }
     }
 
     private void OnFileLoaded(string _)
     {
         Text = " ";
-        Disabled = true;
     }
 }

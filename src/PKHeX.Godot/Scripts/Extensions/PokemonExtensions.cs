@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using PKHeX.Core;
 using PKHeX.Facade.Extensions;
@@ -8,32 +9,34 @@ namespace PKHeX.Godot.Scripts.Extensions;
 
 public static class PokemonExtensions
 {
+    private const string BasePath = "res://Assets/Sprites/Pokemon";
+    private static string NormalPath(string id) => $"{BasePath}/{id}.png";
+    private static string FemalePath(string id) => $"{BasePath}/Female/{id}.png";
+    private static string ShinyPath(string id) => $"{BasePath}/Shiny/{id}.png";
+    private static string ShinyFemalePath(string id) => $"{BasePath}/Shiny/Female/{id}.png";
+
     public static string GetSpritePath(this Pokemon pokemon)
     {
         var pkm = pokemon.Pkm;
-        var species = pokemon.Species.Id;
 
-        var isFemale = pkm.Gender is (int)Gender.Female;
-        var isShiny = pkm.IsShiny;
-
-        var basePath = isShiny
-            ? "res://Assets/Sprites/Pokemon/Shiny"
-            : "res://Assets/Sprites/Pokemon";
-
-        var femaleSpriteId = pokemon.GetFemaleSpriteId();
-
-        if (isFemale && femaleSpriteId is not null)
-            return $"{basePath}/Female/{species}.png";
-
-        var path = $"{basePath}/{species}.png";
-
-        if (!pokemon.Form.HasForm)
-            return path;
+        if (pkm.IsEgg)
+            return NormalPath("0");
 
         var mappedSpriteId = GetMappedSpriteId(pokemon);
-        var formPath = $"{basePath}/{mappedSpriteId}.png";
 
-        return ResourceLoader.Exists(formPath) ? formPath : path;
+        var isShiny = pkm.IsShiny;
+        var isFemale = pkm.Gender is (int)Gender.Female && SpeciesWithFemaleSprites.Contains(pokemon.Species.Species);
+
+        if (isShiny && isFemale && ResourceLoader.Exists(ShinyFemalePath(mappedSpriteId)))
+            return ShinyFemalePath(mappedSpriteId);
+
+        if (isShiny && !isFemale && ResourceLoader.Exists(ShinyPath(mappedSpriteId)))
+            return ShinyPath(mappedSpriteId);
+
+        if (!isShiny && isFemale && ResourceLoader.Exists(FemalePath(mappedSpriteId)))
+            return FemalePath(mappedSpriteId);
+
+        return NormalPath(mappedSpriteId);
     }
 
     private static string GetMappedSpriteId(Pokemon pokemon)
@@ -123,7 +126,7 @@ public static class PokemonExtensions
             (Vivillon, "Modern") => "666-modern",
             (Vivillon, "Monsoon") => "666-monsoon",
             (Vivillon, "Ocean") => "666-ocean",
-            (Vivillon, "Pok? Ball") => "666-poke-ball",
+            (Vivillon, "Poké Ball") => "666-poke-ball",
             (Vivillon, "Polar") => "666-polar",
             (Vivillon, "River") => "666-river",
             (Vivillon, "Sandstorm") => "666-sandstorm",
@@ -302,7 +305,7 @@ public static class PokemonExtensions
             (Gumshoos, "Large") => "10121",
             (Vikavolt, "Large") => "10122",
             (Oricorio, "Pom-Pom") => "10123",
-            (Oricorio, "Pa?u") => "10124",
+            (Oricorio, "Pa’u") => "10124",
             (Oricorio, "Sensu") => "10125",
             (Lycanroc, "Midnight") => "10126",
             (Wishiwashi, "School") => "10127",
@@ -471,7 +474,7 @@ public static class PokemonExtensions
 
     private static string GetAlcremieSprite(Pokemon pokemon)
     {
-        if (pokemon.Pkm is not IFormArgument f)
+        if (pokemon.Species.Species is not Alcremie || pokemon.Pkm is not IFormArgument f)
             return Alcremie.Id().ToString();
 
         var formArgument = f.FormArgument;
@@ -508,27 +511,16 @@ public static class PokemonExtensions
         return $"{flavor}-{topping}";
     }
 
-    private static string? GetFemaleSpriteId(this Pokemon pokemon)
-    {
-        var species = pokemon.Species.Species;
-
-        return species switch
-        {
-            Venusaur or Butterfree or Rattata or Raticate or Pikachu or Raichu or Zubat or Golbat or Gloom or Vileplume
-                or Kadabra or Alakazam or Doduo or Hypno or Rhyhorn or Rhydon or Goldeen or Seaking or Scyther
-                or Magikarp or Gyarados or Eevee or Meganium or Ledyba or Ledian or Xatu or Sudowoodo or Politoed
-                or Aipom or Wooper or Quagsire or Murkrow or Wobbuffet or Girafarig or Gligar or Steelix or Scizor
-                or Heracross or Sneasel or Ursaring or Piloswine or Octillery or Houndoom or Donphan or Torchic
-                or Combusken or Blaziken or Beautifly or Dustox or Ludicolo or Nuzleaf or Shiftry or Meditite
-                or Medicham or Roselia or Gulpin or Swalot or Numel or Camerupt or Cacturne or Milotic or Relicanth
-                or Starly or Staravia or Staraptor or Bidoof or Bibarel or Kricketot or Kricketune or Shinx or Luxio
-                or Luxray or Roserade or Combee or Pachirisu or Buizel or Floatzel or Ambipom or Gible or Gabite
-                or Garchomp or Hippopotas or Hippowdon or Croagunk or Toxicroak or Finneon or Lumineon or Snover
-                or Abomasnow or Weavile or Rhyperior or Tangrowth or Mamoswine or Unfezant or Frillish or Jellicent
-                or Pyroar or Espurr or Indeedee or Basculegion or Oinkologne
-                when pokemon.Form.Form.IsNormal => species.Id().ToString(),
-            Sneasel when pokemon.Form.Form.IsHisuian => "10235",
-            _ => null
-        };
-    }
+    private static Species[] SpeciesWithFemaleSprites =
+    [
+        Venusaur, Butterfree, Rattata, Raticate, Pikachu, Raichu, Zubat, Golbat, Gloom, Vileplume, Kadabra, Alakazam,
+        Doduo, Hypno, Rhyhorn, Rhydon, Goldeen, Seaking, Scyther, Magikarp, Gyarados, Eevee, Meganium, Ledyba, Ledian,
+        Xatu, Sudowoodo, Politoed, Aipom, Wooper, Quagsire, Murkrow, Wobbuffet, Girafarig, Gligar, Steelix, Scizor,
+        Heracross, Sneasel, Ursaring, Piloswine, Octillery, Houndoom, Donphan, Torchic, Combusken, Blaziken, Beautifly,
+        Dustox, Ludicolo, Nuzleaf, Shiftry, Meditite, Medicham, Roselia, Gulpin, Swalot, Numel, Camerupt, Cacturne,
+        Milotic, Relicanth, Starly, Staravia, Staraptor, Bidoof, Bibarel, Kricketot, Kricketune, Shinx, Luxio, Luxray,
+        Roserade, Combee, Pachirisu, Buizel, Floatzel, Ambipom, Gible, Gabite, Garchomp, Hippopotas, Hippowdon,
+        Croagunk, Toxicroak, Finneon, Lumineon, Snover, Abomasnow, Weavile, Rhyperior, Tangrowth, Mamoswine, Unfezant,
+        Frillish, Jellicent, Pyroar, Espurr, Indeedee, Basculegion, Oinkologne
+    ];
 }

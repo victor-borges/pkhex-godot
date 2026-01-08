@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmtktjvxbuxfb"]
+
+[ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="4_0y1sn"]
+
+[node name="PartyPanelContainer" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 0.2326389
+anchor_bottom = 0.55864197
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Party" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="PartySlot0" parent="Party" instance=ExtResource("4_0y1sn")]
+unique_name_in_owner = true
+layout_mode = 2
+IsPartySlot = true
+
+[node name="PartySlot1" parent="Party" instance=ExtResource("4_0y1sn")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 1
+IsPartySlot = true
+
+[node name="PartySlot2" parent="Party" instance=ExtResource("4_0y1sn")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 2
+IsPartySlot = true
+
+[node name="PartySlot3" parent="Party" instance=ExtResource("4_0y1sn")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 3
+IsPartySlot = true
+
+[node name="PartySlot4" parent="Party" instance=ExtResource("4_0y1sn")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 4
+IsPartySlot = true
+
+[node name="PartySlot5" parent="Party" instance=ExtResource("4_0y1sn")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 5
+IsPartySlot = true

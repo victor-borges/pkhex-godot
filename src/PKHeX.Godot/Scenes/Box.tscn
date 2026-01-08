@@ -1,0 +1,216 @@
+[gd_scene load_steps=9 format=3 uid="uid://igkio8ea5ydg"]
+
+[ext_resource type="Script" uid="uid://biyk02s7veelk" path="res://Scripts/Box/BoxButton.cs" id="2_cmh7u"]
+[ext_resource type="Script" uid="uid://d3adw81k7s1a4" path="res://Scripts/Box/PreviousBoxButton.cs" id="3_hnn65"]
+[ext_resource type="Script" uid="uid://bakw6mtl0m7" path="res://Scripts/Box/NextBoxButton.cs" id="4_lkyty"]
+[ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="6_lyd2v"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_6uvgj"]
+button_index = 9
+
+[sub_resource type="Shortcut" id="Shortcut_cqssq"]
+events = [SubResource("InputEventJoypadButton_6uvgj")]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_fts04"]
+button_index = 10
+
+[sub_resource type="Shortcut" id="Shortcut_rquxj"]
+events = [SubResource("InputEventJoypadButton_fts04")]
+
+[node name="BoxVBoxContainer" type="VBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.3715278
+anchor_bottom = 0.5555556
+offset_bottom = -3.0517578e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PreviousBoxButton" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+shortcut_context = NodePath("../..")
+shortcut = SubResource("Shortcut_cqssq")
+text = "<"
+script = ExtResource("3_hnn65")
+metadata/_edit_use_anchors_ = true
+
+[node name="BoxButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Box 1"
+script = ExtResource("2_cmh7u")
+metadata/_edit_use_anchors_ = true
+
+[node name="NextBoxButton" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+shortcut_context = NodePath("../..")
+shortcut = SubResource("Shortcut_rquxj")
+text = ">"
+script = ExtResource("4_lkyty")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Box" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+columns = 6
+
+[node name="BoxSlot0" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BoxSlot1" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 1
+
+[node name="BoxSlot2" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 2
+
+[node name="BoxSlot3" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 3
+
+[node name="BoxSlot4" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 4
+
+[node name="BoxSlot5" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 5
+
+[node name="BoxSlot6" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 6
+
+[node name="BoxSlot7" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 7
+
+[node name="BoxSlot8" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 8
+
+[node name="BoxSlot9" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 9
+
+[node name="BoxSlot10" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 10
+
+[node name="BoxSlot11" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 11
+
+[node name="BoxSlot12" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 12
+
+[node name="BoxSlot13" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 13
+
+[node name="BoxSlot14" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 14
+
+[node name="BoxSlot15" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 15
+
+[node name="BoxSlot16" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 16
+
+[node name="BoxSlot17" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 17
+
+[node name="BoxSlot18" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 18
+
+[node name="BoxSlot19" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 19
+
+[node name="BoxSlot20" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 20
+
+[node name="BoxSlot21" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 21
+
+[node name="BoxSlot22" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 22
+
+[node name="BoxSlot23" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 23
+
+[node name="BoxSlot24" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 24
+
+[node name="BoxSlot25" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 25
+
+[node name="BoxSlot26" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 26
+
+[node name="BoxSlot27" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 27
+
+[node name="BoxSlot28" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 28
+
+[node name="BoxSlot29" parent="PanelContainer/Box" instance=ExtResource("6_lyd2v")]
+unique_name_in_owner = true
+layout_mode = 2
+SlotIndex = 29
+
+[connection signal="pressed" from="HBoxContainer/PreviousBoxButton" to="HBoxContainer/PreviousBoxButton" method="OnButtonPressed"]
+[connection signal="pressed" from="HBoxContainer/NextBoxButton" to="HBoxContainer/NextBoxButton" method="OnButtonPressed"]

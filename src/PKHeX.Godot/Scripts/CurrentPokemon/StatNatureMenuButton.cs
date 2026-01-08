@@ -27,7 +27,6 @@ public partial class StatNatureMenuButton : MenuButton
         if (_gameData.Game is null || _gameData.CurrentPokemon is null)
         {
             Text = " ";
-            Disabled = true;
         }
         else
         {

@@ -1,8 +1,8 @@
 using Godot;
 
-namespace PKHeX.Godot.Scripts;
+namespace PKHeX.Godot.Scripts.Box;
 
-public partial class NextBoxButton : Button
+public partial class PreviousBoxButton : Button
 {
     private GameData _gameData = null!;
 
@@ -13,6 +13,6 @@ public partial class NextBoxButton : Button
 
     private void OnButtonPressed()
     {
-        _gameData.GoToNextBox();
+        _gameData.GoToPreviousBox();
     }
 }

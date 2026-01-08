@@ -15,7 +15,7 @@ general/name="PKHeX.Godot"
 [application]
 
 config/name="PKHeX.Godot"
-run/main_scene="res://box.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -26,11 +26,11 @@ GameData="*res://Scripts/GameData.cs"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="uid://c6cihvj610iuv"
+mouse_cursor/custom_image_hotspot=Vector2(16, 14)
 
 [dotnet]
 
