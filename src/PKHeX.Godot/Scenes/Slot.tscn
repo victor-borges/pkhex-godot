@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjyj35b37vdht" path="res://Scripts/Slot.cs" id="1_uw6ar"]
 [ext_resource type="Texture2D" uid="uid://3mohtwxhtk35" path="res://Assets/Sprites/Overlays/rare_icon.webp" id="2_khion"]
-[ext_resource type="Texture2D" uid="uid://d2yovffgxdoi2" path="res://Assets/Sprites/Overlays/invalid.webp" id="3_hiqfk"]
+[ext_resource type="Texture2D" uid="uid://cmbhv7ddw86gf" path="res://Assets/Sprites/Overlays/illegal.webp" id="3_ncnge"]
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(68, 56)
@@ -136,14 +136,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="InvalidControl" type="Control" parent="GridContainer"]
+[node name="LegalityControl" type="Control" parent="GridContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="InvalidSprite" type="TextureRect" parent="GridContainer/InvalidControl"]
+[node name="LegalitySprite" type="TextureRect" parent="GridContainer/LegalityControl"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(20, 20)
@@ -162,7 +162,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-texture = ExtResource("3_hiqfk")
+texture = ExtResource("3_ncnge")
 expand_mode = 1
 stretch_mode = 5
 

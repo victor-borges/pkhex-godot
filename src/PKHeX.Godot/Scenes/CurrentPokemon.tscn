@@ -1,9 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://3le34m4t3vpu"]
+[gd_scene load_steps=21 format=3 uid="uid://3le34m4t3vpu"]
 
-[ext_resource type="Texture2D" uid="uid://d2yovffgxdoi2" path="res://Assets/Sprites/Overlays/invalid.webp" id="1_o0fyj"]
+[ext_resource type="Script" uid="uid://b7b4o7hpfmk2r" path="res://Scripts/CurrentPokemon/LegalityButton.cs" id="1_pm8xo"]
 [ext_resource type="Script" uid="uid://c676w3wo8kajt" path="res://Scripts/CurrentPokemon/PIDLineEdit.cs" id="1_xg4bv"]
 [ext_resource type="Script" uid="uid://dwagvn2a6t6tw" path="res://Scripts/CurrentPokemon/CurrentPokemonSprite.cs" id="1_yagxa"]
-[ext_resource type="Script" uid="uid://b7b4o7hpfmk2r" path="res://Scripts/CurrentPokemon/InvalidSprite.cs" id="2_pm8xo"]
 [ext_resource type="Texture2D" uid="uid://bma0dky1d0tsw" path="res://Assets/Sprites/Gender/gender_2.webp" id="2_yagxa"]
 [ext_resource type="Script" uid="uid://bjdu0ilaxavq1" path="res://Scripts/CurrentPokemon/GenderButton.cs" id="3_o0fyj"]
 [ext_resource type="Script" uid="uid://cpqgbnggdhj7c" path="res://Scripts/CurrentPokemon/LegalityDialog.cs" id="3_ojqgt"]
@@ -32,16 +31,15 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 alignment = 2
 
-[node name="InvalidButton" type="TextureButton" parent="HBoxContainer"]
+[node name="LegalityButton" type="TextureButton" parent="HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture_normal = ExtResource("1_o0fyj")
 ignore_texture_size = true
 stretch_mode = 5
-script = ExtResource("2_pm8xo")
+script = ExtResource("1_pm8xo")
 
-[node name="LegalityDialog" type="AcceptDialog" parent="HBoxContainer/InvalidButton"]
+[node name="LegalityDialog" type="AcceptDialog" parent="HBoxContainer/LegalityButton"]
 oversampling_override = 1.0
 title = "Legality"
 initial_position = 2
@@ -280,4 +278,4 @@ disabled = true
 text = "Cured"
 script = ExtResource("17_3gdpy")
 
-[connection signal="pressed" from="HBoxContainer/InvalidButton" to="HBoxContainer/InvalidButton/LegalityDialog" method="OnButtonPressed"]
+[connection signal="pressed" from="HBoxContainer/LegalityButton" to="HBoxContainer/LegalityButton/LegalityDialog" method="OnButtonPressed"]

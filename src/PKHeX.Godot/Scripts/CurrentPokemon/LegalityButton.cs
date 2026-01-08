@@ -3,11 +3,11 @@ using PKHeX.Facade.Extensions;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class InvalidSprite : TextureButton
+public partial class LegalityButton : TextureButton
 {
     private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
-    private AcceptDialog _legalityDialog = null;
+    private AcceptDialog _legalityDialog = null!;
 
     public override void _Ready()
     {
@@ -21,10 +21,16 @@ public partial class InvalidSprite : TextureButton
 
     private void CurrentPokemonChanged()
     {
-        Visible =
-            _gameData.CurrentPokemon is not null
-            && _gameData.CurrentPokemon.Species.Id != 0
-            && !_gameData.CurrentPokemon.Legality().Valid;
+        if (_gameData.CurrentPokemon is null)
+        {
+            Visible = false;
+            return;
+        }
+
+        Visible = _gameData.CurrentPokemon.Species.Id != 0;
+        TextureNormal = GD.Load<Texture2D>(_gameData.CurrentPokemon.Legality().Valid
+            ? "res://Assets/Sprites/Overlays/legal.webp"
+            : "res://Assets/Sprites/Overlays/illegal.webp");
     }
 
     private void OnFileLoaded(string _)
