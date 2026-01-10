@@ -45,10 +45,10 @@ metadata/_tab_index = 1
 
 [node name="Box" parent="TabContainer/Box" instance=ExtResource("2_pbw6q")]
 layout_mode = 1
-anchor_left = 0.052785926
-anchor_top = 0.07432431
-anchor_right = 0.6803519
-anchor_bottom = 0.88513523
+anchor_left = 0.02785928
+anchor_top = 0.06217847
+anchor_right = 0.97668636
+anchor_bottom = 0.95996416
 
 [node name="OpenFileDialog" type="FileDialog" parent="."]
 oversampling_override = 1.0
@@ -65,7 +65,7 @@ anchor_left = 0.029166667
 anchor_top = 0.046296295
 anchor_right = 0.19717331
 anchor_bottom = 0.13549624
-mouse_default_cursor_shape = 2
+mouse_default_cursor_shape = 6
 text = "Open File"
 script = ExtResource("3_v1gob")
 metadata/_edit_use_anchors_ = true
@@ -76,7 +76,7 @@ anchor_left = 0.20833333
 anchor_top = 0.048148148
 anchor_right = 0.36458334
 anchor_bottom = 0.1388889
-mouse_default_cursor_shape = 2
+mouse_default_cursor_shape = 7
 text = "Import PC Data"
 script = ExtResource("4_jw32o")
 metadata/_edit_use_anchors_ = true

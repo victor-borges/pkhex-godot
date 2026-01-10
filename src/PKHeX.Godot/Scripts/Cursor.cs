@@ -23,25 +23,21 @@ public partial class Cursor: Node
 
     private static void SetCursors(float scaleFactor)
     {
-        SetMouseCursor(Resources.Cursors.Arrow, Input.CursorShape.Arrow, new Vector2(10, 8), scaleFactor);
+        SetMouseCursor(Resources.Cursors.Arrow, Input.CursorShape.Arrow, new Vector2(8, 6), scaleFactor);
         SetMouseCursor(Resources.Cursors.Beam, Input.CursorShape.Ibeam, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.PointingHand, Input.CursorShape.PointingHand, new Vector2(0, 0), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Cross, Input.CursorShape.Cross, new Vector2(0, 0), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Wait, Input.CursorShape.Wait, new Vector2(0, 0), scaleFactor);
-
-        Wait
-        Busy
-        Drag
-        CanDrop
-        Forbidden
-        Vsize
-        Hsize
-        Bdiagsize
-        Fdiagsize
-        Move
-        Vsplit
-        Hsplit
-        Help
+        SetMouseCursor(Resources.Cursors.PointingHand, Input.CursorShape.PointingHand, new Vector2(8, 6), scaleFactor);
+        SetMouseCursor(Resources.Cursors.Cross, Input.CursorShape.Cross, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.Drag, Input.CursorShape.Drag, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.CanDrop, Input.CursorShape.CanDrop, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.Forbidden, Input.CursorShape.Forbidden, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.ResizeVertical, Input.CursorShape.Vsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.ResizeHorizontal, Input.CursorShape.Hsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.ResizeMainDiagonal, Input.CursorShape.Fdiagsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.ResizeSecondayDiagonal, Input.CursorShape.Bdiagsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.Move, Input.CursorShape.Move, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.Help, Input.CursorShape.Help, new Vector2(5, 1), scaleFactor);
+        SetMouseCursor(Resources.Cursors.SplitVertical, Input.CursorShape.Vsplit, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.SplitHorizontal, Input.CursorShape.Hsplit, new Vector2(16, 16), scaleFactor);
 
         static void SetMouseCursor(string cursorPath, Input.CursorShape cursorShape, Vector2 hotSpot, float scaleFactor)
         {
