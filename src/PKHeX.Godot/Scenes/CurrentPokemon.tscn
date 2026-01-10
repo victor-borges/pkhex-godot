@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://3le34m4t3vpu"]
+[gd_scene load_steps=23 format=3 uid="uid://3le34m4t3vpu"]
 
 [ext_resource type="Script" uid="uid://b7b4o7hpfmk2r" path="res://Scripts/CurrentPokemon/LegalityButton.cs" id="1_pm8xo"]
 [ext_resource type="Script" uid="uid://c676w3wo8kajt" path="res://Scripts/CurrentPokemon/PIDLineEdit.cs" id="1_xg4bv"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bma0dky1d0tsw" path="res://Assets/Sprites/Gender/gender_2.webp" id="2_yagxa"]
 [ext_resource type="Script" uid="uid://bjdu0ilaxavq1" path="res://Scripts/CurrentPokemon/GenderButton.cs" id="3_o0fyj"]
 [ext_resource type="Script" uid="uid://cpqgbnggdhj7c" path="res://Scripts/CurrentPokemon/LegalityDialog.cs" id="3_ojqgt"]
+[ext_resource type="Texture2D" uid="uid://bp6qykvqhfr1b" path="res://Assets/Sprites/Overlays/shiny-black.png" id="4_ojqgt"]
 [ext_resource type="Script" uid="uid://kolo3mv4im17" path="res://Scripts/CurrentPokemon/SpeciesMenuButton.cs" id="4_pm8xo"]
 [ext_resource type="Script" uid="uid://dhxiotmixftn3" path="res://Scripts/CurrentPokemon/NicknameCheckBox.cs" id="5_ojqgt"]
+[ext_resource type="Script" uid="uid://c5xe3272qn56m" path="res://Scripts/CurrentPokemon/ShinyButton.cs" id="5_voh30"]
 [ext_resource type="Script" uid="uid://dtq0px8lrcncs" path="res://Scripts/CurrentPokemon/NicknameLineEdit.cs" id="6_voh30"]
 [ext_resource type="Script" uid="uid://ccy53loccgyyk" path="res://Scripts/CurrentPokemon/EXPLineEdit.cs" id="7_wq63x"]
 [ext_resource type="Script" uid="uid://bm5u5ej726qx2" path="res://Scripts/CurrentPokemon/LevelLineEdit.cs" id="8_ivqbr"]
@@ -47,7 +49,7 @@ size = Vector2i(512, 100)
 unresizable = true
 always_on_top = true
 popup_window = true
-content_scale_mode = 1
+min_size = Vector2i(512, 0)
 content_scale_aspect = 2
 dialog_autowrap = true
 script = ExtResource("3_ojqgt")
@@ -61,32 +63,43 @@ expand_mode = 1
 stretch_mode = 5
 script = ExtResource("1_yagxa")
 
-[node name="PIDHBoxContainer" type="HBoxContainer" parent="."]
+[node name="ShinyPIDGenderHBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="PIDLabel" type="Label" parent="PIDHBoxContainer"]
+[node name="ShinyButton" type="TextureButton" parent="ShinyPIDGenderHBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+toggle_mode = true
+texture_normal = ExtResource("4_ojqgt")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("5_voh30")
+
+[node name="PIDLabel" type="Label" parent="ShinyPIDGenderHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "PID:"
 
-[node name="PIDLineEdit" type="LineEdit" parent="PIDHBoxContainer"]
+[node name="PIDLineEdit" type="LineEdit" parent="ShinyPIDGenderHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
 script = ExtResource("1_xg4bv")
 
-[node name="GenderButton" type="TextureButton" parent="PIDHBoxContainer"]
+[node name="GenderButton" type="TextureButton" parent="ShinyPIDGenderHBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
+size_flags_stretch_ratio = 0.4
 disabled = true
 texture_normal = ExtResource("2_yagxa")
 ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("3_o0fyj")
 
-[node name="RerollPIDButton" type="Button" parent="PIDHBoxContainer"]
+[node name="RerollPIDButton" type="Button" parent="ShinyPIDGenderHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
@@ -279,3 +292,4 @@ text = "Cured"
 script = ExtResource("17_3gdpy")
 
 [connection signal="pressed" from="HBoxContainer/LegalityButton" to="HBoxContainer/LegalityButton/LegalityDialog" method="OnButtonPressed"]
+[connection signal="toggled" from="ShinyPIDGenderHBoxContainer/ShinyButton" to="ShinyPIDGenderHBoxContainer/ShinyButton" method="OnToggled"]

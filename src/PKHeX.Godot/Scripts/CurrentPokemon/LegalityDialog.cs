@@ -28,6 +28,7 @@ public partial class LegalityDialog : AcceptDialog
         var simpleReport = localizer.Report(false);
 
         DialogText = simpleReport;
+        ResetSize();
         PopupCentered();
     }
 
@@ -40,6 +41,7 @@ public partial class LegalityDialog : AcceptDialog
         var verboseReport = localizer.Report(true);
 
         DialogText = verboseReport;
+        ResetSize();
         PopupCentered();
     }
 }

@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5i72gvvrc56d"]
+[gd_scene load_steps=3 format=3 uid="uid://b5i72gvvrc56d"]
 
 [ext_resource type="Script" uid="uid://cjyj35b37vdht" path="res://Scripts/Slot.cs" id="1_uw6ar"]
-[ext_resource type="Texture2D" uid="uid://3mohtwxhtk35" path="res://Assets/Sprites/Overlays/rare_icon.webp" id="2_khion"]
 [ext_resource type="Texture2D" uid="uid://cmbhv7ddw86gf" path="res://Assets/Sprites/Overlays/illegal.webp" id="3_ncnge"]
 
 [node name="Button" type="Button"]
@@ -75,7 +74,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-texture = ExtResource("2_khion")
 expand_mode = 1
 stretch_mode = 5
 

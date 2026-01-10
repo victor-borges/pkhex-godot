@@ -2,6 +2,7 @@ using Godot;
 using PKHeX.Core;
 using PKHeX.Facade.Extensions;
 using PKHeX.Facade.Pokemons;
+using PKHeX.Godot.Scripts.Contants;
 using PKHeX.Godot.Scripts.Extensions;
 
 namespace PKHeX.Godot.Scripts;
@@ -80,11 +81,9 @@ public partial class Slot : Button
 
         if (pokemon.IsShiny)
         {
-            _shinySprite.Texture = GD.Load<Texture2D>(pokemon.ShinyType switch
-            {
-                Shiny.AlwaysSquare => "res://Assets/Sprites/Overlays/rare_icon_2.webp",
-                Shiny.AlwaysStar or _ => "res://Assets/Sprites/Overlays/rare_icon.webp"
-            });
+            _shinySprite.Texture = GD.Load<Texture2D>(pokemon.ShinyType is Shiny.AlwaysSquare
+                ? Resources.Sprites.Overlays.ShinySquare
+                : Resources.Sprites.Overlays.Shiny);
 
             _shinyPanel.Visible = true;
         }
@@ -95,13 +94,13 @@ public partial class Slot : Button
 
         if (pokemon.Pkm is IAlpha { IsAlpha: true })
         {
-            _markerSprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Overlays/alpha.webp");
+            _markerSprite.Texture = GD.Load<Texture2D>(Resources.Sprites.Overlays.Alpha);
             _markerPanel.Visible = true;
         }
 
         if (!pokemon.HeldItem.IsNone)
         {
-            _heldItemSprite.Texture = GD.Load<Texture2D>($"res://Assets/Sprites/Items/item_{pokemon.HeldItem.Id:D4}.png");
+            _heldItemSprite.Texture = GD.Load<Texture2D>(Resources.Sprites.HeldItem(pokemon.HeldItem.Id));
             _heldItemPanel.Visible = true;
         }
 

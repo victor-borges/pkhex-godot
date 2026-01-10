@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://igkio8ea5ydg"]
+[gd_scene load_steps=11 format=3 uid="uid://igkio8ea5ydg"]
 
+[ext_resource type="Texture2D" uid="uid://dkhfaahoiil6y" path="res://Assets/Cursor/navigation_w.svg" id="1_oh3st"]
 [ext_resource type="Script" uid="uid://biyk02s7veelk" path="res://Scripts/Box/BoxButton.cs" id="2_cmh7u"]
 [ext_resource type="Script" uid="uid://d3adw81k7s1a4" path="res://Scripts/Box/PreviousBoxButton.cs" id="3_hnn65"]
+[ext_resource type="Texture2D" uid="uid://c10p75apo8ukf" path="res://Assets/Cursor/navigation_e.svg" id="4_ao5ix"]
 [ext_resource type="Script" uid="uid://bakw6mtl0m7" path="res://Scripts/Box/NextBoxButton.cs" id="4_lkyty"]
 [ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="6_lyd2v"]
 
@@ -34,7 +36,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 shortcut_context = NodePath("../..")
 shortcut = SubResource("Shortcut_cqssq")
-text = "<"
+icon = ExtResource("1_oh3st")
+icon_alignment = 1
 script = ExtResource("3_hnn65")
 metadata/_edit_use_anchors_ = true
 
@@ -51,7 +54,8 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 shortcut_context = NodePath("../..")
 shortcut = SubResource("Shortcut_rquxj")
-text = ">"
+icon = ExtResource("4_ao5ix")
+icon_alignment = 1
 script = ExtResource("4_lkyty")
 metadata/_edit_use_anchors_ = true
 

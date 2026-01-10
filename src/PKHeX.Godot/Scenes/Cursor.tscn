@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4v1axt2ii226"]
+
+[ext_resource type="Script" uid="uid://3lwnjk4m7f3r" path="res://Scripts/Cursor.cs" id="1_5vcpq"]
+[ext_resource type="Texture2D" uid="uid://h4no6srhwgwr" path="res://Assets/Cursor/hand_point.svg" id="1_ri6lo"]
+
+[node name="Cursor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_5vcpq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -5.0
+offset_right = 30.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("1_ri6lo")
+expand_mode = 1
+stretch_mode = 5

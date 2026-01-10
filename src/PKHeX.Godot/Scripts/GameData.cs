@@ -20,10 +20,10 @@ public partial class GameData : Node
         }
     }
 
-    public int CurrentBoxIndex
+    private int CurrentBoxIndex
     {
         get;
-        private set
+        set
         {
             field = value;
             _signalBus.EmitSignal(SignalBus.SignalName.BoxChanged, value);
@@ -57,7 +57,7 @@ public partial class GameData : Node
             return;
 
         var index = (CurrentBoxIndex * 30) + slotIndex;
-        CurrentPokemon = Game?.Trainer.PokemonBox.All[index];
+        CurrentPokemon = Game?.Trainer.PokemonBox.All[index].Clone();
     }
 
     private void OnPartyPokemonSelected(int slotIndex)
@@ -65,7 +65,7 @@ public partial class GameData : Node
         if (Game is null || slotIndex >= Game?.Trainer.Party.Pokemons.Count)
             return;
 
-        CurrentPokemon = Game?.Trainer.Party.Pokemons[slotIndex];
+        CurrentPokemon = Game?.Trainer.Party.Pokemons[slotIndex].Clone();
     }
 
     public void GoToPreviousBox()
