@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmtktjvxbuxfb"]
+[gd_scene load_steps=3 format=3 uid="uid://cmtktjvxbuxfb"]
 
+[ext_resource type="Script" uid="uid://c632en318lvp0" path="res://Scripts/PartySlot.cs" id="2_0sxl4"]
 [ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="4_0y1sn"]
 
 [node name="PartyPanelContainer" type="PanelContainer"]
@@ -16,34 +17,34 @@ columns = 2
 [node name="PartySlot0" parent="Party" instance=ExtResource("4_0y1sn")]
 unique_name_in_owner = true
 layout_mode = 2
-IsPartySlot = true
+script = ExtResource("2_0sxl4")
 
 [node name="PartySlot1" parent="Party" instance=ExtResource("4_0y1sn")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("2_0sxl4")
 SlotIndex = 1
-IsPartySlot = true
 
 [node name="PartySlot2" parent="Party" instance=ExtResource("4_0y1sn")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("2_0sxl4")
 SlotIndex = 2
-IsPartySlot = true
 
 [node name="PartySlot3" parent="Party" instance=ExtResource("4_0y1sn")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("2_0sxl4")
 SlotIndex = 3
-IsPartySlot = true
 
 [node name="PartySlot4" parent="Party" instance=ExtResource("4_0y1sn")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("2_0sxl4")
 SlotIndex = 4
-IsPartySlot = true
 
 [node name="PartySlot5" parent="Party" instance=ExtResource("4_0y1sn")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("2_0sxl4")
 SlotIndex = 5
-IsPartySlot = true

@@ -14,6 +14,13 @@ public partial class IsEggCheckBox : CheckBox
 
         _signalBus.CurrentPokemonChanged += CurrentPokemonChanged;
         _signalBus.FileLoaded += OnFileLoaded;
+        Toggled += OnToggled;
+    }
+
+    private void OnToggled(bool toggled)
+    {
+        _gameData.CurrentPokemon?.Egg.IsEgg = toggled;
+        _signalBus.EmitSignal(SignalBus.SignalName.CurrentPokemonChanged);
     }
 
     private void CurrentPokemonChanged()

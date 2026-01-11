@@ -9,11 +9,10 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class Slot : Button
 {
-    [Export] public int SlotIndex { get; set; }
-    [Export] public bool IsPartySlot { get; set; }
+    protected Pokemon? Pokemon;
 
-    private SignalBus _signalBus = null!;
-    private GameData _gameData = null!;
+    protected SignalBus SignalBus = null!;
+    protected GameData GameData = null!;
 
     private TextureRect _pokemonSprite = null!;
     private TextureRect _shinySprite = null!;
@@ -27,8 +26,8 @@ public partial class Slot : Button
 
     public override void _Ready()
     {
-        _signalBus = GetNode<SignalBus>("/root/SignalBus");
-        _gameData = GetNode<GameData>("/root/GameData");
+        SignalBus = GetNode<SignalBus>("/root/SignalBus");
+        GameData = GetNode<GameData>("/root/GameData");
 
         _pokemonSprite = GetNode<TextureRect>("%PokemonSprite");
         _shinySprite = GetNode<TextureRect>("%ShinySprite");
@@ -39,37 +38,12 @@ public partial class Slot : Button
         _shinyPanel = GetNode<Panel>("%ShinyPanel");
         _markerPanel = GetNode<Panel>("%MarkerPanel");
         _heldItemPanel = GetNode<Panel>("%HeldItemPanel");
-
-        if (IsPartySlot) _signalBus.PartyChanged += OnPartyChanged;
-        else _signalBus.BoxChanged += OnBoxChanged;
     }
 
-    private void OnButtonPressed()
+    protected void SetPokemon(Pokemon? pokemon)
     {
-        _signalBus.EmitSignal(IsPartySlot
-            ? SignalBus.SignalName.PartyPokemonSelected
-            : SignalBus.SignalName.BoxPokemonSelected,
-            SlotIndex);
-    }
+        Pokemon = pokemon;
 
-    private void OnPartyChanged()
-    {
-        if (SlotIndex >= _gameData.Game?.Trainer.Party.Pokemons.Count)
-            return;
-
-        var pokemon = _gameData.Game?.Trainer.Party.Pokemons[SlotIndex];
-        LoadSprites(pokemon);
-    }
-
-    private void OnBoxChanged(int boxIndex)
-    {
-        var index = (boxIndex * 30) + SlotIndex;
-        var pokemon = _gameData.Game?.Trainer.PokemonBox.All[index];
-        LoadSprites(pokemon);
-    }
-
-    private void LoadSprites(Pokemon? pokemon)
-    {
         _pokemonSprite.Visible = false;
         _shinyPanel.Visible = false;
         _markerPanel.Visible = false;
@@ -98,7 +72,15 @@ public partial class Slot : Button
             _markerPanel.Visible = true;
         }
 
-        if (!pokemon.HeldItem.IsNone)
+        if (pokemon.Egg.IsEgg)
+        {
+            _heldItemSprite.Texture = GD.Load<Texture2D>(pokemon.GetSpritePath());
+            _heldItemPanel.Visible = true;
+
+            _pokemonSprite.Texture = GD.Load<Texture2D>(Resources.Sprites.Egg);
+            _pokemonSprite.Visible = true;
+        }
+        else if (!pokemon.HeldItem.IsNone)
         {
             _heldItemSprite.Texture = GD.Load<Texture2D>(Resources.Sprites.HeldItem(pokemon.HeldItem.Id));
             _heldItemPanel.Visible = true;
@@ -106,7 +88,10 @@ public partial class Slot : Button
 
         _legalitySprite.Visible = pokemon.Species.Id != 0 && !pokemon.Legality().Valid;
 
-        _pokemonSprite.Texture = GD.Load<Texture2D>(pokemon.GetSpritePath());
-        _pokemonSprite.Visible = true;
+        if (!pokemon.Egg.IsEgg)
+        {
+            _pokemonSprite.Texture = GD.Load<Texture2D>(pokemon.GetSpritePath());
+            _pokemonSprite.Visible = true;
+        }
     }
 }

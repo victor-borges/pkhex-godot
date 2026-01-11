@@ -24,7 +24,7 @@ public partial class Cursor: Node
     private static void SetCursors(float scaleFactor)
     {
         SetMouseCursor(Resources.Cursors.Arrow, Input.CursorShape.Arrow, new Vector2(8, 6), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Beam, Input.CursorShape.Ibeam, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.Beam, Input.CursorShape.Ibeam, new Vector2(16, 16), scaleFactor * 0.8f);
         SetMouseCursor(Resources.Cursors.PointingHand, Input.CursorShape.PointingHand, new Vector2(8, 6), scaleFactor);
         SetMouseCursor(Resources.Cursors.Cross, Input.CursorShape.Cross, new Vector2(16, 16), scaleFactor);
         SetMouseCursor(Resources.Cursors.Drag, Input.CursorShape.Drag, new Vector2(16, 16), scaleFactor);

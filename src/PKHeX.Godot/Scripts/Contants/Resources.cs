@@ -23,6 +23,8 @@ public static class Resources
 
     public static class Sprites
     {
+        public const string Egg = "res://Assets/Sprites/Pokemon/0.png";
+
         public static string HeldItem(int id) => $"res://Assets/Sprites/Items/item_{id:D4}.png";
 
         public static class Overlays

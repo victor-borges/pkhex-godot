@@ -57,7 +57,7 @@ public partial class GameData : Node
             return;
 
         var index = (CurrentBoxIndex * 30) + slotIndex;
-        CurrentPokemon = Game?.Trainer.PokemonBox.All[index].Clone();
+        CurrentPokemon = Game?.Trainer.PokemonBox.All[index];
     }
 
     private void OnPartyPokemonSelected(int slotIndex)
@@ -65,7 +65,7 @@ public partial class GameData : Node
         if (Game is null || slotIndex >= Game?.Trainer.Party.Pokemons.Count)
             return;
 
-        CurrentPokemon = Game?.Trainer.Party.Pokemons[slotIndex].Clone();
+        CurrentPokemon = Game?.Trainer.Party.Pokemons[slotIndex];
     }
 
     public void GoToPreviousBox()

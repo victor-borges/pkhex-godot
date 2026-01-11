@@ -7,16 +7,13 @@ public partial class LegalityButton : TextureButton
 {
     private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
-    private AcceptDialog _legalityDialog = null!;
 
     public override void _Ready()
     {
         _gameData = GetNode<GameData>("/root/GameData");
         _signalBus = GetNode<SignalBus>("/root/SignalBus");
-        _legalityDialog = GetNode<AcceptDialog>("LegalityDialog");
 
         _signalBus.CurrentPokemonChanged += CurrentPokemonChanged;
-        _legalityDialog.AddButton("Full Report", action: "FullReport");
     }
 
     private void CurrentPokemonChanged()

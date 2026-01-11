@@ -14,7 +14,7 @@ public partial class ImportPCDataFileButton : Button
     {
         _signalBus = GetNode<SignalBus>("/root/SignalBus");
         _gameData = GetNode<GameData>("/root/GameData");
-        _importPCDataFileDialog = GetNode<FileDialog>("../ImportPCDataFileDialog");
+        _importPCDataFileDialog = GetNode<FileDialog>("%ImportPCDataFileDialog");
     }
 
     private void OnButtonPressed()

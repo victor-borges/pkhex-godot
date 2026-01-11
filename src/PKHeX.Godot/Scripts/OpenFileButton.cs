@@ -12,8 +12,8 @@ public partial class OpenFileButton : Button
 	public override void _Ready()
 	{
 		_signalBus = GetNode<SignalBus>("/root/SignalBus");
-		_openFileDialog = GetNode<FileDialog>("../OpenFileDialog");
-		_gameLabel = GetNode<Label>("../GameLabel");
+		_openFileDialog = GetNode<FileDialog>("%OpenFileDialog");
+		_gameLabel = GetNode<Label>("%GameLabel");
 	}
 
 	private void OnButtonPressed()

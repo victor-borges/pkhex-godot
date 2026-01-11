@@ -2,7 +2,7 @@ using Godot;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class FriendshipLineEdit : LineEdit
+public partial class FriendshipSpinBox : SpinBox
 {
     private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
@@ -20,16 +20,16 @@ public partial class FriendshipLineEdit : LineEdit
     {
         if (_gameData.Game is null || _gameData.CurrentPokemon is null)
         {
-            Text = string.Empty;
+            Value = 0;
         }
         else
         {
-            Text = _gameData.CurrentPokemon.Friendship.ToString();
+            Value = _gameData.CurrentPokemon.Friendship;
         }
     }
 
     private void OnFileLoaded(string _)
     {
-        Text = string.Empty;
+        Value = 0;
     }
 }

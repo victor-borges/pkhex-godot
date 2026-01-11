@@ -9,17 +9,21 @@
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="CurrentPokemon" parent="." instance=ExtResource("1_rgh2o")]
-anchor_left = 0.0234375
-anchor_top = 0.2175926
-anchor_right = 0.36718747
-anchor_bottom = 0.91049385
+anchor_left = 0.01875
+anchor_top = 0.09861111
+anchor_right = 0.35625
+anchor_bottom = 0.8111111
+offset_left = -13.0
+offset_top = 19.0
+offset_right = -13.0
+offset_bottom = 19.0
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchors_preset = -1
-anchor_left = 0.38975695
-anchor_top = 0.22376543
-anchor_right = 0.9817708
-anchor_bottom = 0.95679015
+anchor_left = 0.3734375
+anchor_top = 0.07083333
+anchor_right = 0.96545136
+anchor_bottom = 0.8038581
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
@@ -50,7 +54,19 @@ anchor_top = 0.06217847
 anchor_right = 0.97668636
 anchor_bottom = 0.95996416
 
-[node name="OpenFileDialog" type="FileDialog" parent="."]
+[node name="OpenFileButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.01171875
+anchor_top = 0.015277778
+anchor_right = 0.1797254
+anchor_bottom = 0.10447773
+mouse_default_cursor_shape = 2
+text = "Open File"
+script = ExtResource("3_v1gob")
+metadata/_edit_use_anchors_ = true
+
+[node name="OpenFileDialog" type="FileDialog" parent="OpenFileButton"]
+unique_name_in_owner = true
 oversampling_override = 1.0
 title = "Open a File"
 initial_position = 2
@@ -59,29 +75,19 @@ file_mode = 0
 access = 2
 use_native_dialog = true
 
-[node name="OpenFileButton" type="Button" parent="."]
-anchors_preset = -1
-anchor_left = 0.029166667
-anchor_top = 0.046296295
-anchor_right = 0.19717331
-anchor_bottom = 0.13549624
-mouse_default_cursor_shape = 6
-text = "Open File"
-script = ExtResource("3_v1gob")
-metadata/_edit_use_anchors_ = true
-
 [node name="ImportPCDataFileButton" type="Button" parent="."]
 anchors_preset = -1
-anchor_left = 0.20833333
-anchor_top = 0.048148148
-anchor_right = 0.36458334
-anchor_bottom = 0.1388889
-mouse_default_cursor_shape = 7
+anchor_left = 0.18828125
+anchor_top = 0.016666668
+anchor_right = 0.34453127
+anchor_bottom = 0.10740742
+mouse_default_cursor_shape = 2
 text = "Import PC Data"
 script = ExtResource("4_jw32o")
 metadata/_edit_use_anchors_ = true
 
-[node name="ImportPCDataFileDialog" type="FileDialog" parent="."]
+[node name="ImportPCDataFileDialog" type="FileDialog" parent="ImportPCDataFileButton"]
+unique_name_in_owner = true
 oversampling_override = 1.0
 title = "Open a File"
 initial_position = 2
@@ -91,15 +97,16 @@ access = 2
 use_native_dialog = true
 
 [node name="GameLabel" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = -1
-anchor_left = 0.409375
-anchor_top = 0.06481481
-anchor_right = 0.496875
-anchor_bottom = 0.107407406
+anchor_left = 0.3625
+anchor_top = 0.016666668
+anchor_right = 0.45
+anchor_bottom = 0.059259266
 text = "Game: N/A"
 metadata/_edit_use_anchors_ = true
 
-[connection signal="file_selected" from="OpenFileDialog" to="OpenFileButton" method="OnOpenFileDialogFileSelected"]
 [connection signal="pressed" from="OpenFileButton" to="OpenFileButton" method="OnButtonPressed"]
+[connection signal="file_selected" from="OpenFileButton/OpenFileDialog" to="OpenFileButton" method="OnOpenFileDialogFileSelected"]
 [connection signal="pressed" from="ImportPCDataFileButton" to="ImportPCDataFileButton" method="OnButtonPressed"]
-[connection signal="file_selected" from="ImportPCDataFileDialog" to="ImportPCDataFileButton" method="OnImportPCDataFileDialogFileSelected"]
+[connection signal="file_selected" from="ImportPCDataFileButton/ImportPCDataFileDialog" to="ImportPCDataFileButton" method="OnImportPCDataFileDialogFileSelected"]

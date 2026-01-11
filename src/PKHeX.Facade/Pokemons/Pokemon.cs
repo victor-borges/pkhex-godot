@@ -198,6 +198,11 @@ public class Pokemon(PKM pokemon, Game game)
         return new Pokemon(pkm, game ?? Game.EmptyOf(version));
     }
 
+    public void RerollPID()
+    {
+        Pkm.SetPIDGender(Pkm.Gender);
+    }
+
     public class File
     {
         public required string Name { get; init; }

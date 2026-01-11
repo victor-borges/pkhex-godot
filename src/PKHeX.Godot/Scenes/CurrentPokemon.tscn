@@ -1,27 +1,29 @@
-[gd_scene load_steps=23 format=3 uid="uid://3le34m4t3vpu"]
+[gd_scene load_steps=25 format=3 uid="uid://3le34m4t3vpu"]
 
 [ext_resource type="Script" uid="uid://b7b4o7hpfmk2r" path="res://Scripts/CurrentPokemon/LegalityButton.cs" id="1_pm8xo"]
 [ext_resource type="Script" uid="uid://c676w3wo8kajt" path="res://Scripts/CurrentPokemon/PIDLineEdit.cs" id="1_xg4bv"]
-[ext_resource type="Script" uid="uid://dwagvn2a6t6tw" path="res://Scripts/CurrentPokemon/CurrentPokemonSprite.cs" id="1_yagxa"]
 [ext_resource type="Texture2D" uid="uid://bma0dky1d0tsw" path="res://Assets/Sprites/Gender/gender_2.webp" id="2_yagxa"]
 [ext_resource type="Script" uid="uid://bjdu0ilaxavq1" path="res://Scripts/CurrentPokemon/GenderButton.cs" id="3_o0fyj"]
 [ext_resource type="Script" uid="uid://cpqgbnggdhj7c" path="res://Scripts/CurrentPokemon/LegalityDialog.cs" id="3_ojqgt"]
+[ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="3_voh30"]
 [ext_resource type="Texture2D" uid="uid://bp6qykvqhfr1b" path="res://Assets/Sprites/Overlays/shiny-black.png" id="4_ojqgt"]
 [ext_resource type="Script" uid="uid://kolo3mv4im17" path="res://Scripts/CurrentPokemon/SpeciesMenuButton.cs" id="4_pm8xo"]
+[ext_resource type="Script" uid="uid://b1cdft6baxlts" path="res://Scripts/CurrentPokemon/CurrentPokemonSlot.cs" id="4_wq63x"]
 [ext_resource type="Script" uid="uid://dhxiotmixftn3" path="res://Scripts/CurrentPokemon/NicknameCheckBox.cs" id="5_ojqgt"]
 [ext_resource type="Script" uid="uid://c5xe3272qn56m" path="res://Scripts/CurrentPokemon/ShinyButton.cs" id="5_voh30"]
 [ext_resource type="Script" uid="uid://dtq0px8lrcncs" path="res://Scripts/CurrentPokemon/NicknameLineEdit.cs" id="6_voh30"]
-[ext_resource type="Script" uid="uid://ccy53loccgyyk" path="res://Scripts/CurrentPokemon/EXPLineEdit.cs" id="7_wq63x"]
-[ext_resource type="Script" uid="uid://bm5u5ej726qx2" path="res://Scripts/CurrentPokemon/LevelLineEdit.cs" id="8_ivqbr"]
 [ext_resource type="Script" uid="uid://dm1jyb8p4q5df" path="res://Scripts/CurrentPokemon/NatureMenuButton.cs" id="9_lkom8"]
+[ext_resource type="Script" uid="uid://03t7at3fqfbe" path="res://Scripts/CurrentPokemon/RerollButton.cs" id="10_ivqbr"]
 [ext_resource type="Script" uid="uid://c7n1aj6fuy62b" path="res://Scripts/CurrentPokemon/StatNatureMenuButton.cs" id="10_jay0n"]
 [ext_resource type="Script" uid="uid://byj74rqbmwnoy" path="res://Scripts/CurrentPokemon/FormMenuButton.cs" id="11_yw50q"]
 [ext_resource type="Script" uid="uid://b4i3ukneysqi7" path="res://Scripts/CurrentPokemon/HeldItemMenuButton.cs" id="12_ut2yo"]
 [ext_resource type="Script" uid="uid://ctdtw8gifbthw" path="res://Scripts/CurrentPokemon/AbilityMenuButton.cs" id="13_tajsu"]
-[ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/FriendshipLineEdit.cs" id="14_0pun1"]
+[ext_resource type="Script" uid="uid://ccy53loccgyyk" path="res://Scripts/CurrentPokemon/EXPSpinBox.cs" id="13_wq63x"]
+[ext_resource type="Script" uid="uid://bm5u5ej726qx2" path="res://Scripts/CurrentPokemon/LevelSpinBox.cs" id="14_ivqbr"]
 [ext_resource type="Script" uid="uid://7ht4ioi0kwtq" path="res://Scripts/CurrentPokemon/IsEggCheckBox.cs" id="15_te52t"]
 [ext_resource type="Script" uid="uid://biwid7rqfe84i" path="res://Scripts/CurrentPokemon/InfectedCheckBox.cs" id="16_8r36q"]
 [ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/CuredCheckBox.cs" id="17_3gdpy"]
+[ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/FriendshipSpinBox.cs" id="20_wq63x"]
 
 [node name="CurrentPokemonVBoxContainer" type="VBoxContainer"]
 anchors_preset = -1
@@ -45,23 +47,69 @@ script = ExtResource("1_pm8xo")
 oversampling_override = 1.0
 title = "Legality"
 initial_position = 2
-size = Vector2i(512, 100)
-unresizable = true
+size = Vector2i(600, 400)
 always_on_top = true
 popup_window = true
-min_size = Vector2i(512, 0)
+min_size = Vector2i(300, 200)
 content_scale_aspect = 2
-dialog_autowrap = true
 script = ExtResource("3_ojqgt")
 
-[node name="CurrentPokemonSprite" type="TextureRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Control" type="Control" parent="HBoxContainer/LegalityButton/LegalityDialog"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="SimpleReportLabel" type="Label" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-expand_mode = 1
-stretch_mode = 5
-script = ExtResource("1_yagxa")
+size_flags_vertical = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FoldableContainer" type="FoldableContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+folded = true
+title = "Full Report"
+
+[node name="FullReportLabel" type="Label" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer/ScrollContainer/FoldableContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="CurrentPokemonSlot" parent="HBoxContainer" instance=ExtResource("3_voh30")]
+custom_minimum_size = Vector2(120, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+script = ExtResource("4_wq63x")
 
 [node name="ShinyPIDGenderHBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -102,8 +150,8 @@ script = ExtResource("3_o0fyj")
 [node name="RerollPIDButton" type="Button" parent="ShinyPIDGenderHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 text = "Reroll"
+script = ExtResource("10_ivqbr")
 
 [node name="SpeciesHBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -150,11 +198,13 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "EXP:"
 
-[node name="EXPLineEdit" type="LineEdit" parent="EXPHBoxContainer"]
+[node name="EXPSpinBox" type="SpinBox" parent="EXPHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+max_value = 4294967295.0
+rounded = true
 editable = false
-script = ExtResource("7_wq63x")
+script = ExtResource("13_wq63x")
 
 [node name="Spacer" type="Control" parent="EXPHBoxContainer"]
 layout_mode = 2
@@ -166,11 +216,12 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Level:"
 
-[node name="LevelLineEdit" type="LineEdit" parent="EXPHBoxContainer"]
+[node name="LevelSpinBox" type="SpinBox" parent="EXPHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+rounded = true
 editable = false
-script = ExtResource("8_ivqbr")
+script = ExtResource("14_ivqbr")
 
 [node name="NatureHBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -265,17 +316,18 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Friendship:"
 
-[node name="FriendshipLineEdit" type="LineEdit" parent="FriendshipHBoxContainer"]
+[node name="FriendshipSpinBox" type="SpinBox" parent="FriendshipHBoxContainer"]
 layout_mode = 2
+max_value = 255.0
+rounded = true
 editable = false
-script = ExtResource("14_0pun1")
+script = ExtResource("20_wq63x")
 
 [node name="FlagsHBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="IsEggCheckBox" type="CheckBox" parent="FlagsHBoxContainer"]
 layout_mode = 2
-disabled = true
 text = "Is Egg"
 script = ExtResource("15_te52t")
 

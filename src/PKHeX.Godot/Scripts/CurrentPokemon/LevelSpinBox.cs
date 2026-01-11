@@ -2,7 +2,7 @@ using Godot;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class LevelLineEdit : LineEdit
+public partial class LevelSpinBox : SpinBox
 {
     private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
@@ -20,16 +20,16 @@ public partial class LevelLineEdit : LineEdit
     {
         if (_gameData.Game is null || _gameData.CurrentPokemon is null)
         {
-            Text = string.Empty;
+            Value = 0;
         }
         else
         {
-            Text = _gameData.CurrentPokemon.Level.ToString();
+            Value = _gameData.CurrentPokemon.Level;
         }
     }
 
     private void OnFileLoaded(string _)
     {
-        Text = string.Empty;
+        Value = 0;
     }
 }

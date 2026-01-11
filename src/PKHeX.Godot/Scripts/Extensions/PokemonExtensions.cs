@@ -18,10 +18,6 @@ public static class PokemonExtensions
     public static string GetSpritePath(this Pokemon pokemon)
     {
         var pkm = pokemon.Pkm;
-
-        if (pkm.IsEgg)
-            return NormalPath("0");
-
         var mappedSpriteId = GetMappedSpriteId(pokemon);
 
         var isShiny = pkm.IsShiny;
