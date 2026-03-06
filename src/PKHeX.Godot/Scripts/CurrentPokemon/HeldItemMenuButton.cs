@@ -7,28 +7,28 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class HeldItemMenuButton : MenuButton
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
     private ItemRepository? _itemRepository;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
 
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
-        _gameData.FileLoaded += OnFileLoaded;
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
-        Text = _gameData.CurrentPokemon?.HeldItem.IsNone is false
-            ? _gameData.CurrentPokemon.HeldItem.Name
+        Text = _application.CurrentPokemon?.HeldItem.IsNone is false
+            ? _application.CurrentPokemon.HeldItem.Name
             : " ";
     }
 
-    private void OnFileLoaded(string path)
+    private void OnFileLoaded()
     {
         Text = " ";
-        _itemRepository = new ItemRepository(_gameData.Game?.SaveFile ?? FakeSaveFile.Default);
+        _itemRepository = new ItemRepository(_application.Game?.SaveFile ?? FakeSaveFile.Default);
         PopulateHeldItemMenu();
     }
 
@@ -38,7 +38,7 @@ public partial class HeldItemMenuButton : MenuButton
         popup.Clear(freeSubmenus: true);
         Text = " ";
 
-        if (_gameData.Game is null
+        if (_application.Game is null
             || _itemRepository?.GameItems is null
             || !_itemRepository.GameItems.Any())
             return;

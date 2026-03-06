@@ -5,30 +5,30 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class LegalityButton : TextureButton
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
 
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_gameData.CurrentPokemon is null)
+        if (_application.CurrentPokemon is null)
         {
             Visible = false;
             return;
         }
 
-        Visible = _gameData.CurrentPokemon.Species.Id != 0;
-        TextureNormal = GD.Load<Texture2D>(_gameData.CurrentPokemon.Legality().Valid
+        Visible = _application.CurrentPokemon.Species.Id != 0;
+        TextureNormal = GD.Load<Texture2D>(_application.CurrentPokemon.Legality().Valid
             ? "res://Assets/Sprites/Overlays/legal.webp"
             : "res://Assets/Sprites/Overlays/illegal.webp");
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         Visible = false;
     }

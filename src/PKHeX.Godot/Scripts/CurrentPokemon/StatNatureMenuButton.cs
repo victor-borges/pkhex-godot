@@ -5,14 +5,14 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class StatNatureMenuButton : MenuButton
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
 
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
-        _gameData.FileLoaded += OnFileLoaded;
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
 
         var popup = GetPopup();
 
@@ -22,18 +22,18 @@ public partial class StatNatureMenuButton : MenuButton
 
     private void CurrentPokemonChanged()
     {
-        if (_gameData.Game is null || _gameData.CurrentPokemon is null)
+        if (_application.Game is null || _application.CurrentPokemon is null)
         {
             Text = " ";
         }
         else
         {
-            var statNature = _gameData.CurrentPokemon.Natures.StatNature;
+            var statNature = _application.CurrentPokemon.Natures.StatNature;
             Text = GameInfo.Strings.Natures[(int)statNature];
         }
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         Text = " ";
     }

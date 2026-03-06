@@ -4,15 +4,15 @@ namespace PKHeX.Godot.Scripts.Box;
 
 public partial class NextBoxButton : Button
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
     }
 
     private void OnButtonPressed()
     {
-        _gameData.GoToNextBox();
+        _application.GoToNextBox();
     }
 }

@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/CuredCheckBox.cs" id="17_3gdpy"]
 [ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/FriendshipSpinBox.cs" id="20_wq63x"]
 [ext_resource type="Script" uid="uid://dl8ox8ca2dogt" path="res://Scripts/CurrentPokemon/InfectedHBoxContainer.cs" id="25_lkom8"]
+[ext_resource type="Script" uid="uid://dba61re4o4d6c" path="res://Scripts/CurrentPokemon/PkRsSpinBox.cs" id="26_jay0n"]
 
 [node name="CurrentPokemonVBoxContainer" type="VBoxContainer" unique_id=894197332]
 anchors_preset = -1
@@ -344,6 +345,7 @@ text = "Cured"
 script = ExtResource("17_3gdpy")
 
 [node name="InfectedHBoxContainer" type="HBoxContainer" parent="." unique_id=1702231932]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("25_lkom8")
 
@@ -356,6 +358,7 @@ layout_mode = 2
 max_value = 15.0
 rounded = true
 editable = false
+script = ExtResource("26_jay0n")
 
 [node name="dLabel" type="Label" parent="InfectedHBoxContainer" unique_id=631175149]
 layout_mode = 2

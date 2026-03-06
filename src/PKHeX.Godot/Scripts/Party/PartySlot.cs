@@ -1,6 +1,6 @@
 using Godot;
 
-namespace PKHeX.Godot.Scripts;
+namespace PKHeX.Godot.Scripts.Party;
 
 public partial class PartySlot : Slot
 {
@@ -10,20 +10,20 @@ public partial class PartySlot : Slot
     {
         base._Ready();
         Pressed += OnButtonPressed;
-        GameData.PartyChanged += OnPartyChanged;
+        Application.PartyChanged += OnPartyChanged;
     }
 
     private void OnPartyChanged()
     {
-        if (SlotIndex >= GameData.Game?.Trainer.Party.Pokemons.Count)
+        if (SlotIndex >= Application.Game?.Trainer.Party.Pokemons.Count)
             return;
 
-        var pokemon = GameData.Game?.Trainer.Party.Pokemons[SlotIndex];
+        var pokemon = Application.Game?.Trainer.Party.Pokemons[SlotIndex];
         SetPokemon(pokemon);
     }
 
     private void OnButtonPressed()
     {
-        GameData.CurrentPokemon = Pokemon?.Clone();
+        Application.CurrentPokemon = Pokemon?.Clone();
     }
 }

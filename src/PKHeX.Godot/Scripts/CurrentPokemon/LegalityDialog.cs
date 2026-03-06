@@ -6,7 +6,7 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class LegalityDialog : AcceptDialog
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
     private FoldableContainer _foldableContainer = null!;
     private Label _simpleReportLabel = null!;
     private Label _fullReportLabel = null!;
@@ -14,7 +14,7 @@ public partial class LegalityDialog : AcceptDialog
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
         _simpleReportLabel = GetNode<Label>("%SimpleReportLabel");
         _fullReportLabel = GetNode<Label>("%FullReportLabel");
         _foldableContainer = GetNode<FoldableContainer>("%FoldableContainer");
@@ -25,12 +25,12 @@ public partial class LegalityDialog : AcceptDialog
 
     private void OnButtonPressed()
     {
-        if (_gameData.CurrentPokemon is null)
+        if (_application.CurrentPokemon is null)
             return;
 
         _foldableContainer.Folded = true;
 
-        var legalityAnalysis = _gameData.CurrentPokemon.Legality();
+        var legalityAnalysis = _application.CurrentPokemon.Legality();
         var localizer = LegalityLocalizationContext.Create(legalityAnalysis, GameInfo.CurrentLanguage);
         var simpleReport = localizer.Report(false);
         var fullReport = localizer.Report(true);
@@ -51,15 +51,15 @@ public partial class LegalityDialog : AcceptDialog
 
     private void OnCopyToClipboardButtonPressed()
     {
-        if (_gameData.CurrentPokemon is null)
+        if (_application.CurrentPokemon is null)
             return;
 
-        var legalityAnalysis = _gameData.CurrentPokemon.Legality();
+        var legalityAnalysis = _application.CurrentPokemon.Legality();
         var localizer = LegalityLocalizationContext.Create(legalityAnalysis, GameInfo.CurrentLanguage);
         var fullReport = localizer.Report(true);
         fullReport = fullReport.Replace("===\n", "");
 
-        var encounterTextLines = _gameData.CurrentPokemon.Legality().EncounterOriginal.GetTextLines();
+        var encounterTextLines = _application.CurrentPokemon.Legality().EncounterOriginal.GetTextLines();
         var clipboardContent = fullReport + System.Environment.NewLine + System.Environment.NewLine +
                   string.Join(System.Environment.NewLine, encounterTextLines);
 

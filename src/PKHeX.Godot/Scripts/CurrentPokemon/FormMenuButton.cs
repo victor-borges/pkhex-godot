@@ -6,14 +6,14 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class FormMenuButton : MenuButton
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
 
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
-        _gameData.FileLoaded += OnFileLoaded;
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
 
         PopulateFormsMenu();
     }
@@ -28,13 +28,13 @@ public partial class FormMenuButton : MenuButton
         var popup = GetPopup();
         popup.Clear(freeSubmenus: true);
 
-        if (_gameData.Game is null || _gameData.CurrentPokemon is null || !_gameData.CurrentPokemon.Form.HasForm)
+        if (_application.Game is null || _application.CurrentPokemon is null || !_application.CurrentPokemon.Form.HasForm)
         {
             Text = " ";
             return;
         }
 
-        var forms = FormRepository.GetFor(_gameData.CurrentPokemon).ToArray();
+        var forms = FormRepository.GetFor(_application.CurrentPokemon).ToArray();
 
         if (forms.Length is 0 || forms is [{ ByteId: 0 }])
         {
@@ -47,11 +47,11 @@ public partial class FormMenuButton : MenuButton
                 popup.AddItem(formDefinition.Name);
             }
 
-            Text = _gameData.CurrentPokemon.Form.Form.Name;
+            Text = _application.CurrentPokemon.Form.Form.Name;
         }
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         Text = " ";
     }

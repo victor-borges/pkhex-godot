@@ -4,18 +4,18 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class RerollButton : Button
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
 
         Pressed += OnButtonPressed;
     }
 
     private void OnButtonPressed()
     {
-        _gameData.CurrentPokemon?.RerollPID();
-        _gameData.TriggerCurrentPokemonChanged();
+        _application.CurrentPokemon?.RerollPID();
+        _application.TriggerCurrentPokemonChanged();
     }
 }

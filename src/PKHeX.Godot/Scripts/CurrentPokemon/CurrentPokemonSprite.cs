@@ -5,22 +5,24 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class CurrentPokemonSprite : TextureRect
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application = GetNode<Application>("/root/Application");
+
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
-        Texture = _gameData.CurrentPokemon != null && _gameData.CurrentPokemon.Species.Id != 0
-            ? GD.Load<Texture2D>(_gameData.CurrentPokemon.GetSpritePath())
+        Texture = _application.CurrentPokemon != null && _application.CurrentPokemon.Species.Id != 0
+            ? GD.Load<Texture2D>(_application.CurrentPokemon.GetSpritePath())
             : null;
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         Texture = null;
     }

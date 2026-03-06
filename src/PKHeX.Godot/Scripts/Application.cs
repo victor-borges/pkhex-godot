@@ -7,9 +7,17 @@ using PKHeX.Facade.Pokemons;
 
 namespace PKHeX.Godot.Scripts;
 
-public partial class GameData : Node
+public partial class Application : Node
 {
-    public Game? Game { get; private set; }
+    public Game? Game
+    {
+        get;
+        private set
+        {
+            field = value;
+            FileLoaded?.Invoke();
+        }
+    }
 
     public Pokemon? CurrentPokemon
     {
@@ -65,11 +73,10 @@ public partial class GameData : Node
     public void LoadSave(string path)
     {
         Game = Game.LoadFrom(path);
-        FileLoaded?.Invoke(path);
 
+        PartyChanged?.Invoke();
         CurrentBoxIndex = 0;
         CurrentPokemon = null;
-        PartyChanged?.Invoke();
     }
 
     public void LoadPCData(string path)
@@ -87,7 +94,7 @@ public partial class GameData : Node
         CurrentBoxIndex = 0;
     }
 
-    public event Action<string>? FileLoaded;
+    public event Action? FileLoaded;
     public event Action? PartyChanged;
     public event Action<int>? BoxChanged;
     public event Action? CurrentPokemonChanged;

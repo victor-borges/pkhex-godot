@@ -5,23 +5,23 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class GenderButton : TextureButton
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
 
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
-        _gameData.FileLoaded += OnFileLoaded;
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
-        var genderIndex = _gameData.CurrentPokemon?.Gender.Id ?? (int)Gender.Male;
+        var genderIndex = _application.CurrentPokemon?.Gender.Id ?? (int)Gender.Male;
         TextureNormal = GD.Load<Texture2D>($"res://Assets/Sprites/Gender/gender_{genderIndex}.webp");
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         TextureNormal = GD.Load<Texture2D>($"res://Assets/Sprites/Gender/gender_2.webp");
     }

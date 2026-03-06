@@ -5,16 +5,16 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class AbilityMenuButton : MenuButton
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
     private LineEdit _abilityLineEdit = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
         _abilityLineEdit = GetNode<LineEdit>("%AbilityLineEdit");
 
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
-        _gameData.FileLoaded += OnFileLoaded;
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
@@ -22,20 +22,20 @@ public partial class AbilityMenuButton : MenuButton
         var popup = GetPopup();
         popup.Clear();
 
-        if (_gameData.Game is null || _gameData.CurrentPokemon is null || _gameData.CurrentPokemon.Pkm.Format < 3)
+        if (_application.Game is null || _application.CurrentPokemon is null || _application.CurrentPokemon.Pkm.Format < 3)
         {
             _abilityLineEdit.Text = " ";
             Text = " ";
         }
         else
         {
-            var pi = _gameData.CurrentPokemon.Pkm.PersonalInfo;
+            var pi = _application.CurrentPokemon.Pkm.PersonalInfo;
             var abilities = GameInfo.FilteredSources.GetAbilityList(pi);
 
             foreach (var ability in abilities)
                 popup.AddItem(ability.Text);
 
-            _abilityLineEdit.Text = pi.GetIndexOfAbility(_gameData.CurrentPokemon.Ability.Id) switch
+            _abilityLineEdit.Text = pi.GetIndexOfAbility(_application.CurrentPokemon.Ability.Id) switch
             {
                 0 => "[1]",
                 1 => "[2]",
@@ -44,11 +44,11 @@ public partial class AbilityMenuButton : MenuButton
                 _ => " ",
             };
 
-            Text = _gameData.CurrentPokemon.Ability.Name;
+            Text = _application.CurrentPokemon.Ability.Name;
         }
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         var popup = GetPopup();
         popup.Clear();

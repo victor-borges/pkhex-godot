@@ -4,28 +4,28 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class CuredCheckBox : CheckBox
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
-        _gameData.FileLoaded += OnFileLoaded;
+        _application = GetNode<Application>("/root/Application");
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_gameData.Game is null || _gameData.CurrentPokemon is null)
+        if (_application.Game is null || _application.CurrentPokemon is null)
         {
             ButtonPressed = false;
         }
         else
         {
-            ButtonPressed = _gameData.CurrentPokemon.Pkm.IsPokerusCured;
+            ButtonPressed = _application.CurrentPokemon.Pkm.IsPokerusCured;
         }
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         ButtonPressed = false;
     }

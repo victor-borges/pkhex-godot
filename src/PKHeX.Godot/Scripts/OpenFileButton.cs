@@ -5,13 +5,13 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class OpenFileButton : Button
 {
-	private GameData _gameData = null!;
+	private Application _application = null!;
 	private FileDialog _openFileDialog = null!;
 	private Label _gameLabel = null!;
 
 	public override void _Ready()
 	{
-		_gameData = GetNode<GameData>("/root/GameData");
+		_application = GetNode<Application>("/root/Application");
 		_openFileDialog = GetNode<FileDialog>("%OpenFileDialog");
 		_gameLabel = GetNode<Label>("%GameLabel");
 	}
@@ -23,7 +23,7 @@ public partial class OpenFileButton : Button
 
 	private void OnOpenFileDialogFileSelected(string path)
 	{
-		_gameData.LoadSave(path);
-		_gameLabel.Text = $"Game: {_gameData.Game?.GameVersionApproximation.Name}";
+		_application.LoadSave(path);
+		_gameLabel.Text = $"Game: {_application.Game?.GameVersionApproximation.Name}";
 	}
 }

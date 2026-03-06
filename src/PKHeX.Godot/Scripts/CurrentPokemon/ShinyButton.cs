@@ -6,33 +6,33 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class ShinyButton : TextureButton
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
 
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
-        _gameData.FileLoaded += OnFileLoaded;
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
-        TexturePressed = GD.Load<Texture2D>(_gameData.CurrentPokemon?.ShinyType is Shiny.AlwaysSquare
+        TexturePressed = GD.Load<Texture2D>(_application.CurrentPokemon?.ShinyType is Shiny.AlwaysSquare
             ? Resources.Sprites.Overlays.ShinySquare
             : Resources.Sprites.Overlays.Shiny);
 
-        SetPressedNoSignal(_gameData.CurrentPokemon?.IsShiny ?? false);
+        SetPressedNoSignal(_application.CurrentPokemon?.IsShiny ?? false);
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         ButtonPressed = false;
     }
 
     private void OnToggled(bool toggled)
     {
-        _gameData.CurrentPokemon?.SetShiny(toggled);
-        _gameData.TriggerCurrentPokemonChanged();
+        _application.CurrentPokemon?.SetShiny(toggled);
+        _application.TriggerCurrentPokemonChanged();
     }
 }

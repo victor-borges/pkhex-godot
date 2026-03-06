@@ -5,6 +5,6 @@ public partial class CurrentPokemonSlot : Slot
     public override void _Ready()
     {
         base._Ready();
-        GameData.CurrentPokemonChanged += () => SetPokemon(GameData.CurrentPokemon);
+        Application.CurrentPokemonChanged += () => SetPokemon(Application.CurrentPokemon);
     }
 }

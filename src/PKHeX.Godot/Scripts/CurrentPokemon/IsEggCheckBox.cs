@@ -4,36 +4,36 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class IsEggCheckBox : CheckBox
 {
-    private GameData _gameData = null!;
+    private Application _application = null!;
 
     public override void _Ready()
     {
-        _gameData = GetNode<GameData>("/root/GameData");
+        _application = GetNode<Application>("/root/Application");
 
-        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
-        _gameData.FileLoaded += OnFileLoaded;
+        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        _application.FileLoaded += OnFileLoaded;
         Toggled += OnToggled;
     }
 
     private void OnToggled(bool toggled)
     {
-        _gameData.CurrentPokemon?.Egg.IsEgg = toggled;
-        _gameData.TriggerCurrentPokemonChanged();
+        _application.CurrentPokemon?.Egg.IsEgg = toggled;
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_gameData.Game is null || _gameData.CurrentPokemon is null)
+        if (_application.Game is null || _application.CurrentPokemon is null)
         {
             ButtonPressed = false;
         }
         else
         {
-            ButtonPressed = _gameData.CurrentPokemon.Pkm.IsEgg;
+            ButtonPressed = _application.CurrentPokemon.Pkm.IsEgg;
         }
     }
 
-    private void OnFileLoaded(string _)
+    private void OnFileLoaded()
     {
         ButtonPressed = false;
     }
