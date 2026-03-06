@@ -10,7 +10,6 @@ public partial class InfectedCheckBox : CheckBox
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         Toggled += OnButtonPressed;
     }
@@ -25,16 +24,13 @@ public partial class InfectedCheckBox : CheckBox
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
+            Disabled = true;
             SetPressedNoSignal(false);
         }
         else
         {
+            Disabled = false;
             SetPressedNoSignal(_application.CurrentPokemon.Pkm.IsPokerusInfected);
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        SetPressedNoSignal(false);
     }
 }

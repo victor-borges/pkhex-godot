@@ -11,7 +11,6 @@ public partial class NatureMenuButton : MenuButton
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         var popup = GetPopup();
 
@@ -23,17 +22,14 @@ public partial class NatureMenuButton : MenuButton
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
+            Disabled = true;
             Text = " ";
         }
         else
         {
+            Disabled = false;
             var nature = _application.CurrentPokemon.Natures.Nature;
             Text = GameInfo.Strings.Natures[(int)nature];
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        Text = " ";
     }
 }

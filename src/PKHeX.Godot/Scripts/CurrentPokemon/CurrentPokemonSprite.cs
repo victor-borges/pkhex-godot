@@ -10,7 +10,6 @@ public partial class CurrentPokemonSprite : TextureRect
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
@@ -18,10 +17,5 @@ public partial class CurrentPokemonSprite : TextureRect
         Texture = _application.CurrentPokemon != null && _application.CurrentPokemon.Species.Id != 0
             ? GD.Load<Texture2D>(Assets.PokemonSprite(_application.CurrentPokemon))
             : null;
-    }
-
-    private void OnFileLoaded()
-    {
-        Texture = null;
     }
 }

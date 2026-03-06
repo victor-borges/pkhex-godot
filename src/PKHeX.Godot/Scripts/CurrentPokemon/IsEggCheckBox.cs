@@ -10,7 +10,6 @@ public partial class IsEggCheckBox : CheckBox
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         Toggled += OnToggled;
     }
@@ -25,16 +24,13 @@ public partial class IsEggCheckBox : CheckBox
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
+            Disabled = true;
             SetPressedNoSignal(false);
         }
         else
         {
+            Disabled = false;
             SetPressedNoSignal(_application.CurrentPokemon.Pkm.IsEgg);
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        SetPressedNoSignal(false);
     }
 }

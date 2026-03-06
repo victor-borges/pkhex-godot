@@ -12,7 +12,6 @@ public partial class FormMenuButton : MenuButton
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         PopulateFormsMenu();
     }
@@ -29,10 +28,12 @@ public partial class FormMenuButton : MenuButton
 
         if (_application.Game is null || _application.CurrentPokemon is null || !_application.CurrentPokemon.Form.HasForm)
         {
+            Disabled = true;
             Text = " ";
             return;
         }
 
+        Disabled = false;
         var forms = FormRepository.GetFor(_application.CurrentPokemon).ToArray();
 
         if (forms.Length is 0 || forms is [{ ByteId: 0 }])
@@ -48,10 +49,5 @@ public partial class FormMenuButton : MenuButton
 
             Text = _application.CurrentPokemon.Form.Form.Name;
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        Text = " ";
     }
 }

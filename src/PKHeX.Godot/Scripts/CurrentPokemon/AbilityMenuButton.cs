@@ -15,7 +15,6 @@ public partial class AbilityMenuButton : MenuButton
         _abilityLineEdit = GetNode<LineEdit>("%AbilityLineEdit");
 
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
@@ -25,11 +24,13 @@ public partial class AbilityMenuButton : MenuButton
 
         if (_application.Game is null || _application.CurrentPokemon is null || _application.CurrentPokemon.Pkm.Format < 3)
         {
+            Disabled = true;
             _abilityLineEdit.Text = " ";
             Text = " ";
         }
         else
         {
+            Disabled = false;
             var pi = _application.CurrentPokemon.Pkm.PersonalInfo;
             var abilities = GameInfo.FilteredSources.GetAbilityList(pi);
 
@@ -47,13 +48,5 @@ public partial class AbilityMenuButton : MenuButton
 
             Text = _application.CurrentPokemon.Ability.Name;
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        var popup = GetPopup();
-        popup.Clear();
-        _abilityLineEdit.Text = " ";
-        Text = " ";
     }
 }

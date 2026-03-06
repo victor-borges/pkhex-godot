@@ -200,7 +200,9 @@ public class Pokemon(PKM pokemon, Game game)
 
     public void RerollPID()
     {
+        var isShiny = Pkm.IsShiny;
         Pkm.SetPIDGender(Pkm.Gender);
+        Pkm.SetIsShiny(isShiny);
     }
 
     public class File

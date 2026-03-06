@@ -10,7 +10,6 @@ public partial class InfectedHBoxContainer : HBoxContainer
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
@@ -23,10 +22,5 @@ public partial class InfectedHBoxContainer : HBoxContainer
         {
             Visible = _application.CurrentPokemon.Pkm.IsPokerusInfected;
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        Visible = false;
     }
 }

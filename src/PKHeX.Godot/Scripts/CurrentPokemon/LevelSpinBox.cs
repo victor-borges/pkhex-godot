@@ -10,23 +10,19 @@ public partial class LevelSpinBox : SpinBox
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
-            Value = 0;
+            Editable = false;
+            SetValueNoSignal(0);
         }
         else
         {
-            Value = _application.CurrentPokemon.Level;
+            Editable = true;
+            SetValueNoSignal(_application.CurrentPokemon.Level);
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        Value = 0;
     }
 }

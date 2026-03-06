@@ -11,26 +11,32 @@ public partial class ShinyButton : TextureButton
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
-        TexturePressed = GD.Load<Texture2D>(_application.CurrentPokemon?.ShinyType is Shiny.AlwaysSquare
-            ? Assets.Sprites.Overlays.ShinySquare
-            : Assets.Sprites.Overlays.Shiny);
+        if (_application.CurrentPokemon is null)
+        {
+            Disabled = true;
+        }
+        else
+        {
+            Disabled = false;
 
-        SetPressedNoSignal(_application.CurrentPokemon?.IsShiny ?? false);
-    }
+            TexturePressed = GD.Load<Texture2D>(_application.CurrentPokemon.ShinyType is Shiny.AlwaysSquare
+                ? Assets.Sprites.Overlays.ShinySquare
+                : Assets.Sprites.Overlays.Shiny);
 
-    private void OnFileLoaded()
-    {
-        ButtonPressed = false;
+            SetPressedNoSignal(_application.CurrentPokemon.IsShiny);
+        }
     }
 
     private void OnToggled(bool toggled)
     {
-        _application.CurrentPokemon?.SetShiny(toggled);
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.SetShiny(toggled);
         _application.TriggerCurrentPokemonChanged();
     }
 }

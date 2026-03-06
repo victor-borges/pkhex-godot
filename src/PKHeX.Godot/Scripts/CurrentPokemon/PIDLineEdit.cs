@@ -10,16 +10,10 @@ public partial class PIDLineEdit : LineEdit
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
         Text = _application.CurrentPokemon?.PID.ToString("X8") ?? string.Empty;
-    }
-
-    private void OnFileLoaded()
-    {
-        Text = string.Empty;
     }
 }

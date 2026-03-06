@@ -11,7 +11,6 @@ public partial class NicknameCheckBox : CheckBox
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         Toggled += OnButtonPressed;
     }
@@ -30,17 +29,14 @@ public partial class NicknameCheckBox : CheckBox
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
+            Disabled = true;
             SetPressedNoSignal(false);
         }
         else
         {
+            Disabled = false;
             var isNicknamed = _application.CurrentPokemon.Pkm.IsNicknamed;
             SetPressedNoSignal(isNicknamed);
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        SetPressedNoSignal(false);
     }
 }

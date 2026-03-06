@@ -11,7 +11,6 @@ public partial class NicknameLineEdit : LineEdit
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         TextChanged += OnTextChanged;
     }
@@ -22,22 +21,21 @@ public partial class NicknameLineEdit : LineEdit
             return;
 
         _application.CurrentPokemon.Pkm.SetNickname(text);
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
-            return;
+        {
+            Editable = false;
+        }
+        else
+        {
+            var isNicknamed = _application.CurrentPokemon.Pkm.IsNicknamed;
 
-        var isNicknamed = _application.CurrentPokemon.Pkm.IsNicknamed;
-
-        Text = isNicknamed ? _application.CurrentPokemon.Pkm.Nickname : string.Empty;
-        Editable = isNicknamed;
-    }
-
-    private void OnFileLoaded()
-    {
-        Text = string.Empty;
-        Editable = false;
+            Text = isNicknamed ? _application.CurrentPokemon.Pkm.Nickname : string.Empty;
+            Editable = isNicknamed;
+        }
     }
 }

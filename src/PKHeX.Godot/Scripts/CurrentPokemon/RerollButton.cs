@@ -9,7 +9,7 @@ public partial class RerollButton : Button
     public override void _Ready()
     {
         _application = GetNode<Application>(Application.NodePath);
-
+        _application.CurrentPokemonChanged += OnCurrentPokemonChanged;
         Pressed += OnButtonPressed;
     }
 
@@ -17,5 +17,10 @@ public partial class RerollButton : Button
     {
         _application.CurrentPokemon?.RerollPID();
         _application.TriggerCurrentPokemonChanged();
+    }
+
+    private void OnCurrentPokemonChanged()
+    {
+        Disabled = _application.CurrentPokemon is null;
     }
 }

@@ -10,7 +10,6 @@ public partial class PokerusStrainSpinBox : SpinBox
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         ValueChanged += OnValueChanged;
     }
@@ -25,16 +24,13 @@ public partial class PokerusStrainSpinBox : SpinBox
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
+            Editable = false;
             SetValueNoSignal(0);
         }
         else
         {
+            Editable = _application.CurrentPokemon.Pkm.IsPokerusInfected;
             SetValueNoSignal(_application.CurrentPokemon.Pkm.PokerusStrain);
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        SetValueNoSignal(0);
     }
 }

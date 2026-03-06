@@ -113,6 +113,7 @@ size_flags_vertical = 1
 custom_minimum_size = Vector2(120, 100)
 layout_mode = 2
 size_flags_horizontal = 1
+disabled = true
 script = ExtResource("4_wq63x")
 
 [node name="ShinyPIDGenderHBoxContainer" type="HBoxContainer" parent="." unique_id=2107254492]
@@ -123,6 +124,7 @@ custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+disabled = true
 toggle_mode = true
 texture_normal = ExtResource("4_ojqgt")
 ignore_texture_size = true
@@ -154,6 +156,7 @@ script = ExtResource("3_o0fyj")
 [node name="RerollPIDButton" type="Button" parent="ShinyPIDGenderHBoxContainer" unique_id=887098311]
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 text = "Reroll"
 script = ExtResource("10_ivqbr")
 
@@ -168,6 +171,7 @@ text = "Species:"
 [node name="SpeciesMenuButton" type="MenuButton" parent="SpeciesHBoxContainer" unique_id=487540535]
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 text = " "
 flat = false
 script = ExtResource("4_pm8xo")
@@ -331,16 +335,19 @@ layout_mode = 2
 
 [node name="IsEggCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=833870975]
 layout_mode = 2
+disabled = true
 text = "Is Egg"
 script = ExtResource("15_te52t")
 
 [node name="InfectedCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=1066573848]
 layout_mode = 2
+disabled = true
 text = "Infected"
 script = ExtResource("16_8r36q")
 
 [node name="CuredCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=1216507098]
 layout_mode = 2
+disabled = true
 text = "Cured"
 script = ExtResource("17_3gdpy")
 

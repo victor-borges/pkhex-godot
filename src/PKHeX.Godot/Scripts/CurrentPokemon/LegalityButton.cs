@@ -23,12 +23,7 @@ public partial class LegalityButton : TextureButton
 
         Visible = _application.CurrentPokemon.Species.Id != 0;
         TextureNormal = GD.Load<Texture2D>(_application.CurrentPokemon.Legality().Valid
-            ? "res://Assets/Sprites/Overlays/legal.webp"
-            : "res://Assets/Sprites/Overlays/illegal.webp");
-    }
-
-    private void OnFileLoaded()
-    {
-        Visible = false;
+            ? Assets.Sprites.Overlays.Legal
+            : Assets.Sprites.Overlays.Illegal);
     }
 }

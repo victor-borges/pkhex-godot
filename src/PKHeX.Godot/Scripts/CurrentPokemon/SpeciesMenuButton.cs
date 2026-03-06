@@ -10,24 +10,20 @@ public partial class SpeciesMenuButton : MenuButton
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
+            Disabled = true;
             Text = " ";
         }
         else
         {
+            Disabled = false;
             var species = _application.CurrentPokemon.Species;
             Text = $"{species.Name} [{species.Id}]";
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        Text = " ";
     }
 }

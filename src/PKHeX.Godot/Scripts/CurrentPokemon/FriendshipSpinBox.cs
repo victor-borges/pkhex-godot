@@ -11,7 +11,6 @@ public partial class FriendshipSpinBox : SpinBox
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         ValueChanged += OnValueChanged;
     }
@@ -26,19 +25,16 @@ public partial class FriendshipSpinBox : SpinBox
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
+            Editable = false;
             SetValueNoSignal(0);
         }
         else
         {
+            Editable = true;
             var pkm = _application.CurrentPokemon.Pkm;
 
             SetMax(Experience.GetEXP(pkm.CurrentLevel, pkm.PersonalInfo.EXPGrowth));
             SetValueNoSignal(_application.CurrentPokemon.Friendship);
         }
-    }
-
-    private void OnFileLoaded()
-    {
-        SetValueNoSignal(0);
     }
 }
