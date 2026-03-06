@@ -6,18 +6,18 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class Cursor: Node
 {
-    private readonly Vector2 _baseResolution = new(1280, 720);
+    private static readonly Vector2 BaseResolution = new(1280, 720);
 
     public override void _Ready()
     {
-        GetViewport().SizeChanged += OnSizeChanged;
-        SetCursors(1f);
+        // GetViewport().SizeChanged += OnSizeChanged;
+        SetCursors(2f);
     }
 
     private void OnSizeChanged()
     {
         var size = GetTree().GetRoot().Size;
-        var scale = MathF.Min(size.X / _baseResolution.X, size.Y / _baseResolution.Y);
+        var scale = MathF.Min(size.X / BaseResolution.X, size.Y / BaseResolution.Y);
         SetCursors(scale);
     }
 
@@ -33,18 +33,18 @@ public partial class Cursor: Node
         SetMouseCursor(Resources.Cursors.ResizeVertical, Input.CursorShape.Vsize, new Vector2(16, 16), scaleFactor);
         SetMouseCursor(Resources.Cursors.ResizeHorizontal, Input.CursorShape.Hsize, new Vector2(16, 16), scaleFactor);
         SetMouseCursor(Resources.Cursors.ResizeMainDiagonal, Input.CursorShape.Fdiagsize, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.ResizeSecondayDiagonal, Input.CursorShape.Bdiagsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Resources.Cursors.ResizeSecondaryDiagonal, Input.CursorShape.Bdiagsize, new Vector2(16, 16), scaleFactor);
         SetMouseCursor(Resources.Cursors.Move, Input.CursorShape.Move, new Vector2(16, 16), scaleFactor);
         SetMouseCursor(Resources.Cursors.Help, Input.CursorShape.Help, new Vector2(5, 1), scaleFactor);
         SetMouseCursor(Resources.Cursors.SplitVertical, Input.CursorShape.Vsplit, new Vector2(16, 16), scaleFactor);
         SetMouseCursor(Resources.Cursors.SplitHorizontal, Input.CursorShape.Hsplit, new Vector2(16, 16), scaleFactor);
+    }
 
-        static void SetMouseCursor(string cursorPath, Input.CursorShape cursorShape, Vector2 hotSpot, float scaleFactor)
-        {
-            var texture = GD.Load<DpiTexture>(cursorPath);
-            texture.BaseScale = scaleFactor * 1.5f;
+    private static void SetMouseCursor(string cursorPath, Input.CursorShape cursorShape, Vector2 hotSpot, float scaleFactor)
+    {
+        var texture = GD.Load<DpiTexture>(cursorPath);
+        texture.BaseScale = scaleFactor;
 
-            Input.SetCustomMouseCursor(texture, cursorShape, hotSpot * scaleFactor * 1.5f);
-        }
+        Input.SetCustomMouseCursor(texture, cursorShape, hotSpot * scaleFactor);
     }
 }

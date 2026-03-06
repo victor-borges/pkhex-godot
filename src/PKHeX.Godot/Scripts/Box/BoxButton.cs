@@ -4,12 +4,12 @@ namespace PKHeX.Godot.Scripts.Box;
 
 public partial class BoxButton : Button
 {
-    private SignalBus _signalBus = null!;
+    private GameData _gameData = null!;
 
     public override void _Ready()
     {
-        _signalBus = GetNode<SignalBus>("/root/SignalBus");
-        _signalBus.BoxChanged += OnBoxChanged;
+        _gameData = GetNode<GameData>("/root/GameData");
+        _gameData.BoxChanged += OnBoxChanged;
     }
 
     private void OnBoxChanged(int boxIndex)

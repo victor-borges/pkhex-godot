@@ -14,7 +14,7 @@ public static class Resources
         public const string ResizeVertical = "res://Assets/Cursor/resize_b_vertical.svg";
         public const string ResizeHorizontal = "res://Assets/Cursor/resize_b_horizontal.svg";
         public const string ResizeMainDiagonal = "res://Assets/Cursor/resize_b_diagonal_mirror.svg";
-        public const string ResizeSecondayDiagonal = "res://Assets/Cursor/resize_b_diagonal.svg";
+        public const string ResizeSecondaryDiagonal = "res://Assets/Cursor/resize_b_diagonal.svg";
         public const string Move = "res://Assets/Cursor/resize_b_cross.svg";
         public const string Help = "res://Assets/Cursor/mark_question_pointer_b.svg";
         public const string SplitVertical = "res://Assets/Cursor/resize_vertical.svg";

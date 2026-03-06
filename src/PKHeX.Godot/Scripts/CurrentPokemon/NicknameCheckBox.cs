@@ -4,18 +4,16 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class NicknameCheckBox : CheckBox
 {
-    private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
     private LineEdit _nicknameLineEdit = null!;
 
     public override void _Ready()
     {
         _gameData = GetNode<GameData>("/root/GameData");
-        _signalBus = GetNode<SignalBus>("/root/SignalBus");
         _nicknameLineEdit = GetNode<LineEdit>("%NicknameLineEdit");
 
-        _signalBus.CurrentPokemonChanged += CurrentPokemonChanged;
-        _signalBus.FileLoaded += OnFileLoaded;
+        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
+        _gameData.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()

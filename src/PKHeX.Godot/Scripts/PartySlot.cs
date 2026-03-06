@@ -10,7 +10,7 @@ public partial class PartySlot : Slot
     {
         base._Ready();
         Pressed += OnButtonPressed;
-        SignalBus.PartyChanged += OnPartyChanged;
+        GameData.PartyChanged += OnPartyChanged;
     }
 
     private void OnPartyChanged()
@@ -24,6 +24,6 @@ public partial class PartySlot : Slot
 
     private void OnButtonPressed()
     {
-        SignalBus.EmitSignal(SignalBus.SignalName.PartyPokemonSelected, SlotIndex);
+        GameData.CurrentPokemon = Pokemon?.Clone();
     }
 }

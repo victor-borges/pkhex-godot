@@ -10,7 +10,7 @@ public partial class BoxSlot : Slot
     {
         base._Ready();
         Pressed += OnButtonPressed;
-        SignalBus.BoxChanged += OnBoxChanged;
+        GameData.BoxChanged += OnBoxChanged;
     }
 
     private void OnBoxChanged(int boxIndex)
@@ -22,6 +22,6 @@ public partial class BoxSlot : Slot
 
     private void OnButtonPressed()
     {
-        SignalBus.EmitSignal(SignalBus.SignalName.BoxPokemonSelected, SlotIndex);
+        GameData.CurrentPokemon = Pokemon?.Clone();
     }
 }

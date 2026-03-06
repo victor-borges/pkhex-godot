@@ -11,7 +11,6 @@ public partial class Slot : Button
 {
     protected Pokemon? Pokemon;
 
-    protected SignalBus SignalBus = null!;
     protected GameData GameData = null!;
 
     private TextureRect _pokemonSprite = null!;
@@ -26,7 +25,6 @@ public partial class Slot : Button
 
     public override void _Ready()
     {
-        SignalBus = GetNode<SignalBus>("/root/SignalBus");
         GameData = GetNode<GameData>("/root/GameData");
 
         _pokemonSprite = GetNode<TextureRect>("%PokemonSprite");

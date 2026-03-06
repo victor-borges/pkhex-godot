@@ -53,7 +53,7 @@ public static class PokemonExtensions
             (Unown, "L") => "201-l",
             (Unown, "M") => "201-m",
             (Unown, "N") => "201-n",
-            (Unown, "O") => "201-p",
+            (Unown, "O") => "201-o",
             (Unown, "P") => "201-p",
             (Unown, "Q") => "201-q",
             (Unown, "R") => "201-r",
@@ -507,7 +507,7 @@ public static class PokemonExtensions
         return $"{flavor}-{topping}";
     }
 
-    private static Species[] SpeciesWithFemaleSprites =
+    private static readonly Species[] SpeciesWithFemaleSprites =
     [
         Venusaur, Butterfree, Rattata, Raticate, Pikachu, Raichu, Zubat, Golbat, Gloom, Vileplume, Kadabra, Alakazam,
         Doduo, Hypno, Rhyhorn, Rhydon, Goldeen, Seaking, Scyther, Magikarp, Gyarados, Eevee, Meganium, Ledyba, Ledian,

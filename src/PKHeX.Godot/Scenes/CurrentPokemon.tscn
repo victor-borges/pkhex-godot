@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://3le34m4t3vpu"]
+[gd_scene format=3 uid="uid://3le34m4t3vpu"]
 
 [ext_resource type="Script" uid="uid://b7b4o7hpfmk2r" path="res://Scripts/CurrentPokemon/LegalityButton.cs" id="1_pm8xo"]
 [ext_resource type="Script" uid="uid://c676w3wo8kajt" path="res://Scripts/CurrentPokemon/PIDLineEdit.cs" id="1_xg4bv"]
@@ -24,18 +24,19 @@
 [ext_resource type="Script" uid="uid://biwid7rqfe84i" path="res://Scripts/CurrentPokemon/InfectedCheckBox.cs" id="16_8r36q"]
 [ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/CuredCheckBox.cs" id="17_3gdpy"]
 [ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/FriendshipSpinBox.cs" id="20_wq63x"]
+[ext_resource type="Script" uid="uid://dl8ox8ca2dogt" path="res://Scripts/CurrentPokemon/InfectedHBoxContainer.cs" id="25_lkom8"]
 
-[node name="CurrentPokemonVBoxContainer" type="VBoxContainer"]
+[node name="CurrentPokemonVBoxContainer" type="VBoxContainer" unique_id=894197332]
 anchors_preset = -1
 anchor_right = 0.25729167
 anchor_bottom = 0.70555556
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1606253799]
 layout_mode = 2
 alignment = 2
 
-[node name="LegalityButton" type="TextureButton" parent="HBoxContainer"]
+[node name="LegalityButton" type="TextureButton" parent="HBoxContainer" unique_id=1297665973]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -43,7 +44,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("1_pm8xo")
 
-[node name="LegalityDialog" type="AcceptDialog" parent="HBoxContainer/LegalityButton"]
+[node name="LegalityDialog" type="AcceptDialog" parent="HBoxContainer/LegalityButton" unique_id=1509869462]
 oversampling_override = 1.0
 title = "Legality"
 initial_position = 2
@@ -51,10 +52,11 @@ size = Vector2i(600, 400)
 always_on_top = true
 popup_window = true
 min_size = Vector2i(300, 200)
+max_size = Vector2i(1280, 720)
 content_scale_aspect = 2
 script = ExtResource("3_ojqgt")
 
-[node name="Control" type="Control" parent="HBoxContainer/LegalityButton/LegalityDialog"]
+[node name="Control" type="Control" parent="HBoxContainer/LegalityButton/LegalityDialog" unique_id=1063112824]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control" unique_id=1954776942]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,20 +80,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="SimpleReportLabel" type="Label" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer"]
+[node name="SimpleReportLabel" type="Label" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer" unique_id=1964438437]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer" unique_id=1045559131]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer" unique_id=399607173]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FoldableContainer" type="FoldableContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer/ScrollContainer"]
+[node name="FoldableContainer" type="FoldableContainer" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer/ScrollContainer" unique_id=1340863022]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -99,22 +101,22 @@ size_flags_vertical = 3
 folded = true
 title = "Full Report"
 
-[node name="FullReportLabel" type="Label" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer/ScrollContainer/FoldableContainer"]
+[node name="FullReportLabel" type="Label" parent="HBoxContainer/LegalityButton/LegalityDialog/Control/VBoxContainer/ScrollContainer/FoldableContainer" unique_id=1680427557]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 1
 
-[node name="CurrentPokemonSlot" parent="HBoxContainer" instance=ExtResource("3_voh30")]
+[node name="CurrentPokemonSlot" parent="HBoxContainer" unique_id=1810034235 instance=ExtResource("3_voh30")]
 custom_minimum_size = Vector2(120, 100)
 layout_mode = 2
 size_flags_horizontal = 1
 script = ExtResource("4_wq63x")
 
-[node name="ShinyPIDGenderHBoxContainer" type="HBoxContainer" parent="."]
+[node name="ShinyPIDGenderHBoxContainer" type="HBoxContainer" parent="." unique_id=2107254492]
 layout_mode = 2
 
-[node name="ShinyButton" type="TextureButton" parent="ShinyPIDGenderHBoxContainer"]
+[node name="ShinyButton" type="TextureButton" parent="ShinyPIDGenderHBoxContainer" unique_id=1799933898]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -125,19 +127,19 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("5_voh30")
 
-[node name="PIDLabel" type="Label" parent="ShinyPIDGenderHBoxContainer"]
+[node name="PIDLabel" type="Label" parent="ShinyPIDGenderHBoxContainer" unique_id=1751591745]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "PID:"
 
-[node name="PIDLineEdit" type="LineEdit" parent="ShinyPIDGenderHBoxContainer"]
+[node name="PIDLineEdit" type="LineEdit" parent="ShinyPIDGenderHBoxContainer" unique_id=1747240899]
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
 script = ExtResource("1_xg4bv")
 
-[node name="GenderButton" type="TextureButton" parent="ShinyPIDGenderHBoxContainer"]
+[node name="GenderButton" type="TextureButton" parent="ShinyPIDGenderHBoxContainer" unique_id=499610742]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.4
@@ -147,21 +149,21 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("3_o0fyj")
 
-[node name="RerollPIDButton" type="Button" parent="ShinyPIDGenderHBoxContainer"]
+[node name="RerollPIDButton" type="Button" parent="ShinyPIDGenderHBoxContainer" unique_id=887098311]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Reroll"
 script = ExtResource("10_ivqbr")
 
-[node name="SpeciesHBoxContainer" type="HBoxContainer" parent="."]
+[node name="SpeciesHBoxContainer" type="HBoxContainer" parent="." unique_id=448538811]
 layout_mode = 2
 
-[node name="SpeciesLabel" type="Label" parent="SpeciesHBoxContainer"]
+[node name="SpeciesLabel" type="Label" parent="SpeciesHBoxContainer" unique_id=1516980501]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Species:"
 
-[node name="SpeciesMenuButton" type="MenuButton" parent="SpeciesHBoxContainer"]
+[node name="SpeciesMenuButton" type="MenuButton" parent="SpeciesHBoxContainer" unique_id=487540535]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
@@ -169,20 +171,20 @@ text = " "
 flat = false
 script = ExtResource("4_pm8xo")
 
-[node name="NicknameHBoxContainer" type="HBoxContainer" parent="."]
+[node name="NicknameHBoxContainer" type="HBoxContainer" parent="." unique_id=35059232]
 layout_mode = 2
 
-[node name="NicknameCheckBox" type="CheckBox" parent="NicknameHBoxContainer"]
+[node name="NicknameCheckBox" type="CheckBox" parent="NicknameHBoxContainer" unique_id=1356757306]
 layout_mode = 2
 disabled = true
 script = ExtResource("5_ojqgt")
 
-[node name="NicknameLabel" type="Label" parent="NicknameHBoxContainer"]
+[node name="NicknameLabel" type="Label" parent="NicknameHBoxContainer" unique_id=602685412]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Nickname:"
 
-[node name="NicknameLineEdit" type="LineEdit" parent="NicknameHBoxContainer"]
+[node name="NicknameLineEdit" type="LineEdit" parent="NicknameHBoxContainer" unique_id=1274732782]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -190,15 +192,15 @@ editable = false
 clear_button_enabled = true
 script = ExtResource("6_voh30")
 
-[node name="EXPHBoxContainer" type="HBoxContainer" parent="."]
+[node name="EXPHBoxContainer" type="HBoxContainer" parent="." unique_id=101249994]
 layout_mode = 2
 
-[node name="EXPLabel" type="Label" parent="EXPHBoxContainer"]
+[node name="EXPLabel" type="Label" parent="EXPHBoxContainer" unique_id=1327386968]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "EXP:"
 
-[node name="EXPSpinBox" type="SpinBox" parent="EXPHBoxContainer"]
+[node name="EXPSpinBox" type="SpinBox" parent="EXPHBoxContainer" unique_id=918153301]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 4294967295.0
@@ -206,32 +208,32 @@ rounded = true
 editable = false
 script = ExtResource("13_wq63x")
 
-[node name="Spacer" type="Control" parent="EXPHBoxContainer"]
+[node name="Spacer" type="Control" parent="EXPHBoxContainer" unique_id=725636908]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="LevelLabel" type="Label" parent="EXPHBoxContainer"]
+[node name="LevelLabel" type="Label" parent="EXPHBoxContainer" unique_id=704445168]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Level:"
 
-[node name="LevelSpinBox" type="SpinBox" parent="EXPHBoxContainer"]
+[node name="LevelSpinBox" type="SpinBox" parent="EXPHBoxContainer" unique_id=1817698956]
 layout_mode = 2
 size_flags_horizontal = 3
 rounded = true
 editable = false
 script = ExtResource("14_ivqbr")
 
-[node name="NatureHBoxContainer" type="HBoxContainer" parent="."]
+[node name="NatureHBoxContainer" type="HBoxContainer" parent="." unique_id=878514942]
 layout_mode = 2
 
-[node name="NatureLabel" type="Label" parent="NatureHBoxContainer"]
+[node name="NatureLabel" type="Label" parent="NatureHBoxContainer" unique_id=1443485347]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Nature:"
 
-[node name="NatureMenuButton" type="MenuButton" parent="NatureHBoxContainer"]
+[node name="NatureMenuButton" type="MenuButton" parent="NatureHBoxContainer" unique_id=21330782]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
@@ -239,15 +241,15 @@ text = " "
 flat = false
 script = ExtResource("9_lkom8")
 
-[node name="StatNatureHBoxContainer" type="HBoxContainer" parent="."]
+[node name="StatNatureHBoxContainer" type="HBoxContainer" parent="." unique_id=1420971210]
 layout_mode = 2
 
-[node name="StatNatureLabel" type="Label" parent="StatNatureHBoxContainer"]
+[node name="StatNatureLabel" type="Label" parent="StatNatureHBoxContainer" unique_id=825027022]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Stat Nature:"
 
-[node name="StatNatureMenuButton" type="MenuButton" parent="StatNatureHBoxContainer"]
+[node name="StatNatureMenuButton" type="MenuButton" parent="StatNatureHBoxContainer" unique_id=662409767]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
@@ -255,15 +257,15 @@ text = " "
 flat = false
 script = ExtResource("10_jay0n")
 
-[node name="FormHBoxContainer" type="HBoxContainer" parent="."]
+[node name="FormHBoxContainer" type="HBoxContainer" parent="." unique_id=1306871600]
 layout_mode = 2
 
-[node name="FormLabel" type="Label" parent="FormHBoxContainer"]
+[node name="FormLabel" type="Label" parent="FormHBoxContainer" unique_id=1238608775]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Form:"
 
-[node name="FormMenuButton" type="MenuButton" parent="FormHBoxContainer"]
+[node name="FormMenuButton" type="MenuButton" parent="FormHBoxContainer" unique_id=862606562]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
@@ -271,15 +273,15 @@ text = " "
 flat = false
 script = ExtResource("11_yw50q")
 
-[node name="HeldItemHBoxContainer" type="HBoxContainer" parent="."]
+[node name="HeldItemHBoxContainer" type="HBoxContainer" parent="." unique_id=621143090]
 layout_mode = 2
 
-[node name="HeldItemLabel" type="Label" parent="HeldItemHBoxContainer"]
+[node name="HeldItemLabel" type="Label" parent="HeldItemHBoxContainer" unique_id=591059280]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Held Item:"
 
-[node name="HeldItemMenuButton" type="MenuButton" parent="HeldItemHBoxContainer"]
+[node name="HeldItemMenuButton" type="MenuButton" parent="HeldItemHBoxContainer" unique_id=737216138]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
@@ -287,15 +289,15 @@ text = " "
 flat = false
 script = ExtResource("12_ut2yo")
 
-[node name="AbilityItemHBoxContainer" type="HBoxContainer" parent="."]
+[node name="AbilityItemHBoxContainer" type="HBoxContainer" parent="." unique_id=1532655404]
 layout_mode = 2
 
-[node name="AbilityLabel" type="Label" parent="AbilityItemHBoxContainer"]
+[node name="AbilityLabel" type="Label" parent="AbilityItemHBoxContainer" unique_id=564118704]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Ability:"
 
-[node name="AbilityMenuButton" type="MenuButton" parent="AbilityItemHBoxContainer"]
+[node name="AbilityMenuButton" type="MenuButton" parent="AbilityItemHBoxContainer" unique_id=83094614]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
@@ -303,45 +305,69 @@ text = " "
 flat = false
 script = ExtResource("13_tajsu")
 
-[node name="AbilityLineEdit" type="LineEdit" parent="AbilityItemHBoxContainer"]
+[node name="AbilityLineEdit" type="LineEdit" parent="AbilityItemHBoxContainer" unique_id=605612559]
 unique_name_in_owner = true
 layout_mode = 2
 editable = false
 
-[node name="FriendshipHBoxContainer" type="HBoxContainer" parent="."]
+[node name="FriendshipHBoxContainer" type="HBoxContainer" parent="." unique_id=1881088706]
 layout_mode = 2
 
-[node name="FriendshipLabel" type="Label" parent="FriendshipHBoxContainer"]
+[node name="FriendshipLabel" type="Label" parent="FriendshipHBoxContainer" unique_id=1218060798]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Friendship:"
 
-[node name="FriendshipSpinBox" type="SpinBox" parent="FriendshipHBoxContainer"]
+[node name="FriendshipSpinBox" type="SpinBox" parent="FriendshipHBoxContainer" unique_id=610908334]
 layout_mode = 2
 max_value = 255.0
 rounded = true
 editable = false
 script = ExtResource("20_wq63x")
 
-[node name="FlagsHBoxContainer" type="HBoxContainer" parent="."]
+[node name="FlagsHBoxContainer" type="HBoxContainer" parent="." unique_id=1652334427]
 layout_mode = 2
 
-[node name="IsEggCheckBox" type="CheckBox" parent="FlagsHBoxContainer"]
+[node name="IsEggCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=833870975]
 layout_mode = 2
 text = "Is Egg"
 script = ExtResource("15_te52t")
 
-[node name="InfectedCheckBox" type="CheckBox" parent="FlagsHBoxContainer"]
+[node name="InfectedCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=1066573848]
 layout_mode = 2
-disabled = true
 text = "Infected"
 script = ExtResource("16_8r36q")
 
-[node name="CuredCheckBox" type="CheckBox" parent="FlagsHBoxContainer"]
+[node name="CuredCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=1216507098]
 layout_mode = 2
-disabled = true
 text = "Cured"
 script = ExtResource("17_3gdpy")
+
+[node name="InfectedHBoxContainer" type="HBoxContainer" parent="." unique_id=1702231932]
+layout_mode = 2
+script = ExtResource("25_lkom8")
+
+[node name="PkRsLabel" type="Label" parent="InfectedHBoxContainer" unique_id=573154992]
+layout_mode = 2
+text = "PkRs: "
+
+[node name="PkRsSpinBox" type="SpinBox" parent="InfectedHBoxContainer" unique_id=1275438262]
+layout_mode = 2
+max_value = 15.0
+rounded = true
+editable = false
+
+[node name="dLabel" type="Label" parent="InfectedHBoxContainer" unique_id=631175149]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "d: "
+
+[node name="dSpinBox" type="SpinBox" parent="InfectedHBoxContainer" unique_id=1332210517]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 2.0
+rounded = true
+editable = false
 
 [connection signal="pressed" from="HBoxContainer/LegalityButton" to="HBoxContainer/LegalityButton/LegalityDialog" method="OnButtonPressed"]
 [connection signal="toggled" from="ShinyPIDGenderHBoxContainer/ShinyButton" to="ShinyPIDGenderHBoxContainer/ShinyButton" method="OnToggled"]

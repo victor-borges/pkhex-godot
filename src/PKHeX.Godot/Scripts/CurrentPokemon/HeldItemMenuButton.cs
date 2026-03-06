@@ -1,6 +1,4 @@
-using System.IO;
 using System.Linq;
-using System.Text;
 using Godot;
 using PKHeX.Core;
 using PKHeX.Facade.Repositories;
@@ -9,17 +7,15 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class HeldItemMenuButton : MenuButton
 {
-    private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
     private ItemRepository? _itemRepository;
 
     public override void _Ready()
     {
         _gameData = GetNode<GameData>("/root/GameData");
-        _signalBus = GetNode<SignalBus>("/root/SignalBus");
 
-        _signalBus.CurrentPokemonChanged += CurrentPokemonChanged;
-        _signalBus.FileLoaded += OnFileLoaded;
+        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
+        _gameData.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()

@@ -5,18 +5,16 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class AbilityMenuButton : MenuButton
 {
-    private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
     private LineEdit _abilityLineEdit = null!;
 
     public override void _Ready()
     {
         _gameData = GetNode<GameData>("/root/GameData");
-        _signalBus = GetNode<SignalBus>("/root/SignalBus");
         _abilityLineEdit = GetNode<LineEdit>("%AbilityLineEdit");
 
-        _signalBus.CurrentPokemonChanged += CurrentPokemonChanged;
-        _signalBus.FileLoaded += OnFileLoaded;
+        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
+        _gameData.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()

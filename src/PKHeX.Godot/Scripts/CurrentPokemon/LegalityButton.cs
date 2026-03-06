@@ -5,15 +5,13 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class LegalityButton : TextureButton
 {
-    private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
 
     public override void _Ready()
     {
         _gameData = GetNode<GameData>("/root/GameData");
-        _signalBus = GetNode<SignalBus>("/root/SignalBus");
 
-        _signalBus.CurrentPokemonChanged += CurrentPokemonChanged;
+        _gameData.CurrentPokemonChanged += CurrentPokemonChanged;
     }
 
     private void CurrentPokemonChanged()

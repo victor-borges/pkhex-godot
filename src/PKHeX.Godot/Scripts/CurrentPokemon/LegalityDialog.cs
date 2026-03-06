@@ -6,7 +6,6 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class LegalityDialog : AcceptDialog
 {
-    private SignalBus _signalBus = null!;
     private GameData _gameData = null!;
     private FoldableContainer _foldableContainer = null!;
     private Label _simpleReportLabel = null!;
@@ -16,7 +15,6 @@ public partial class LegalityDialog : AcceptDialog
     public override void _Ready()
     {
         _gameData = GetNode<GameData>("/root/GameData");
-        _signalBus = GetNode<SignalBus>("/root/SignalBus");
         _simpleReportLabel = GetNode<Label>("%SimpleReportLabel");
         _fullReportLabel = GetNode<Label>("%FullReportLabel");
         _foldableContainer = GetNode<FoldableContainer>("%FoldableContainer");

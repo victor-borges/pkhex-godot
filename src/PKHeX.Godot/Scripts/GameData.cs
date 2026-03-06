@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Godot;
 using PKHeX.Core;
 using PKHeX.Facade;
@@ -7,16 +9,15 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class GameData : Node
 {
-    private SignalBus _signalBus = null!;
-    public Game? Game { get; set; }
+    public Game? Game { get; private set; }
 
     public Pokemon? CurrentPokemon
     {
         get;
-        private set
+        set
         {
             field = value;
-            _signalBus.EmitSignal(SignalBus.SignalName.CurrentPokemonChanged);
+            CurrentPokemonChanged?.Invoke();
         }
     }
 
@@ -26,7 +27,7 @@ public partial class GameData : Node
         set
         {
             field = value;
-            _signalBus.EmitSignal(SignalBus.SignalName.BoxChanged, value);
+            BoxChanged?.Invoke(value);
         }
     }
 
@@ -34,38 +35,11 @@ public partial class GameData : Node
     {
         var lang = GameInfo.CurrentLanguage;
         LocalizeUtil.InitializeStrings(lang, FakeSaveFile.Default);
-
-        _signalBus = GetNode<SignalBus>("/root/SignalBus");
-        _signalBus.FileLoading += OnFileLoading;
-        _signalBus.BoxPokemonSelected += OnBoxPokemonSelected;
-        _signalBus.PartyPokemonSelected += OnPartyPokemonSelected;
     }
 
-    private void OnFileLoading(string path)
+    public void TriggerCurrentPokemonChanged()
     {
-        Game = Game.LoadFrom(path);
-        _signalBus.EmitSignal(SignalBus.SignalName.FileLoaded, path);
-
-        CurrentBoxIndex = 0;
-        CurrentPokemon = null;
-        _signalBus.EmitSignal(SignalBus.SignalName.PartyChanged);
-    }
-
-    private void OnBoxPokemonSelected(int slotIndex)
-    {
-        if (Game is null)
-            return;
-
-        var index = (CurrentBoxIndex * 30) + slotIndex;
-        CurrentPokemon = Game?.Trainer.PokemonBox.All[index];
-    }
-
-    private void OnPartyPokemonSelected(int slotIndex)
-    {
-        if (Game is null || slotIndex >= Game?.Trainer.Party.Pokemons.Count)
-            return;
-
-        CurrentPokemon = Game?.Trainer.Party.Pokemons[slotIndex];
+        CurrentPokemonChanged?.Invoke();
     }
 
     public void GoToPreviousBox()
@@ -87,4 +61,34 @@ public partial class GameData : Node
         var nextBoxIndex = (CurrentBoxIndex + 1) % totalBoxes;
         CurrentBoxIndex = nextBoxIndex;
     }
+
+    public void LoadSave(string path)
+    {
+        Game = Game.LoadFrom(path);
+        FileLoaded?.Invoke(path);
+
+        CurrentBoxIndex = 0;
+        CurrentPokemon = null;
+        PartyChanged?.Invoke();
+    }
+
+    public void LoadPCData(string path)
+    {
+        if (Game is null)
+            return;
+
+        var bytes = File.ReadAllBytes(path);
+        var didSet = Game.SaveFile.SetPCBinary(bytes);
+
+        if (!didSet)
+            return;
+
+        Game = new Game(Game.SaveFile);
+        CurrentBoxIndex = 0;
+    }
+
+    public event Action<string>? FileLoaded;
+    public event Action? PartyChanged;
+    public event Action<int>? BoxChanged;
+    public event Action? CurrentPokemonChanged;
 }
