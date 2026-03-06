@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using PKHeX.Core;
 
@@ -10,7 +11,7 @@ public partial class AbilityMenuButton : MenuButton
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
+        _application = GetNode<Application>(Application.NodePath);
         _abilityLineEdit = GetNode<LineEdit>("%AbilityLineEdit");
 
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
@@ -35,13 +36,13 @@ public partial class AbilityMenuButton : MenuButton
             foreach (var ability in abilities)
                 popup.AddItem(ability.Text);
 
-            _abilityLineEdit.Text = pi.GetIndexOfAbility(_application.CurrentPokemon.Ability.Id) switch
+            var abilityId = _application.CurrentPokemon.Ability.Id;
+            var abilityIndex = pi.GetIndexOfAbility(abilityId);
+
+            _abilityLineEdit.Text = Math.Clamp(abilityIndex, 0, abilities.Count - 1) switch
             {
-                0 => "[1]",
-                1 => "[2]",
                 2 => "[H]",
-                3 => "[2]",
-                _ => " ",
+                var i => $"[{i}]"
             };
 
             Text = _application.CurrentPokemon.Ability.Name;

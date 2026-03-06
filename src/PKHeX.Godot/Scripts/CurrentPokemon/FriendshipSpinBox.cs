@@ -1,4 +1,5 @@
 using Godot;
+using PKHeX.Core;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
@@ -8,26 +9,36 @@ public partial class FriendshipSpinBox : SpinBox
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
-
+        _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
         _application.FileLoaded += OnFileLoaded;
+
+        ValueChanged += OnValueChanged;
+    }
+
+    private void OnValueChanged(double value)
+    {
+        _application.CurrentPokemon?.Friendship = (int)value;
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
-            Value = 0;
+            SetValueNoSignal(0);
         }
         else
         {
-            Value = _application.CurrentPokemon.Friendship;
+            var pkm = _application.CurrentPokemon.Pkm;
+
+            SetMax(Experience.GetEXP(pkm.CurrentLevel, pkm.PersonalInfo.EXPGrowth));
+            SetValueNoSignal(_application.CurrentPokemon.Friendship);
         }
     }
 
     private void OnFileLoaded()
     {
-        Value = 0;
+        SetValueNoSignal(0);
     }
 }

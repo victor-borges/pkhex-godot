@@ -8,7 +8,7 @@ public partial class BoxButton : Button
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
+        _application = GetNode<Application>(Application.NodePath);
         _application.BoxChanged += OnBoxChanged;
     }
 

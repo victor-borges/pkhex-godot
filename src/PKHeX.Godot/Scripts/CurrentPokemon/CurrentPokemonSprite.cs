@@ -1,5 +1,4 @@
 using Godot;
-using PKHeX.Godot.Scripts.Extensions;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
@@ -9,8 +8,7 @@ public partial class CurrentPokemonSprite : TextureRect
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
-
+        _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
         _application.FileLoaded += OnFileLoaded;
     }
@@ -18,7 +16,7 @@ public partial class CurrentPokemonSprite : TextureRect
     private void CurrentPokemonChanged()
     {
         Texture = _application.CurrentPokemon != null && _application.CurrentPokemon.Species.Id != 0
-            ? GD.Load<Texture2D>(_application.CurrentPokemon.GetSpritePath())
+            ? GD.Load<Texture2D>(Assets.PokemonSprite(_application.CurrentPokemon))
             : null;
     }
 

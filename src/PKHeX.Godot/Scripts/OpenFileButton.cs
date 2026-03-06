@@ -11,7 +11,7 @@ public partial class OpenFileButton : Button
 
 	public override void _Ready()
 	{
-		_application = GetNode<Application>("/root/Application");
+		_application = GetNode<Application>(Application.NodePath);
 		_openFileDialog = GetNode<FileDialog>("%OpenFileDialog");
 		_gameLabel = GetNode<Label>("%GameLabel");
 	}

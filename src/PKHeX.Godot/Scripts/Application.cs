@@ -9,6 +9,8 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class Application : Node
 {
+    public static readonly NodePath NodePath = "/root/Application";
+
     public Game? Game
     {
         get;

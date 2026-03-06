@@ -8,10 +8,10 @@ public partial class IsEggCheckBox : CheckBox
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
-
+        _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
         _application.FileLoaded += OnFileLoaded;
+
         Toggled += OnToggled;
     }
 
@@ -25,16 +25,16 @@ public partial class IsEggCheckBox : CheckBox
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
-            ButtonPressed = false;
+            SetPressedNoSignal(false);
         }
         else
         {
-            ButtonPressed = _application.CurrentPokemon.Pkm.IsEgg;
+            SetPressedNoSignal(_application.CurrentPokemon.Pkm.IsEgg);
         }
     }
 
     private void OnFileLoaded()
     {
-        ButtonPressed = false;
+        SetPressedNoSignal(false);
     }
 }

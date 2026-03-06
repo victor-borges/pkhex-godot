@@ -14,7 +14,7 @@ public partial class LegalityDialog : AcceptDialog
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
+        _application = GetNode<Application>(Application.NodePath);
         _simpleReportLabel = GetNode<Label>("%SimpleReportLabel");
         _fullReportLabel = GetNode<Label>("%FullReportLabel");
         _foldableContainer = GetNode<FoldableContainer>("%FoldableContainer");

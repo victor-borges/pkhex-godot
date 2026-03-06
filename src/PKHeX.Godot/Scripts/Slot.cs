@@ -2,8 +2,6 @@ using Godot;
 using PKHeX.Core;
 using PKHeX.Facade.Extensions;
 using PKHeX.Facade.Pokemons;
-using PKHeX.Godot.Scripts.Contants;
-using PKHeX.Godot.Scripts.Extensions;
 
 namespace PKHeX.Godot.Scripts;
 
@@ -25,7 +23,7 @@ public partial class Slot : Button
 
     public override void _Ready()
     {
-        Application = GetNode<Application>("/root/Application");
+        Application = GetNode<Application>(Application.NodePath);
 
         _pokemonSprite = GetNode<TextureRect>("%PokemonSprite");
         _shinySprite = GetNode<TextureRect>("%ShinySprite");
@@ -51,11 +49,15 @@ public partial class Slot : Button
         if (pokemon is null || pokemon.Species.Id is 0)
             return;
 
+        var pokemonSprite = Assets.PokemonSprite(pokemon);
+
+        _legalitySprite.Visible = pokemon.Species.Id != 0 && !pokemon.Legality().Valid;
+
         if (pokemon.IsShiny)
         {
             _shinySprite.Texture = GD.Load<Texture2D>(pokemon.ShinyType is Shiny.AlwaysSquare
-                ? Resources.Sprites.Overlays.ShinySquare
-                : Resources.Sprites.Overlays.Shiny);
+                ? Assets.Sprites.Overlays.ShinySquare
+                : Assets.Sprites.Overlays.Shiny);
 
             _shinyPanel.Visible = true;
         }
@@ -66,29 +68,27 @@ public partial class Slot : Button
 
         if (pokemon.Pkm is IAlpha { IsAlpha: true })
         {
-            _markerSprite.Texture = GD.Load<Texture2D>(Resources.Sprites.Overlays.Alpha);
+            _markerSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Overlays.Alpha);
             _markerPanel.Visible = true;
         }
 
         if (pokemon.Egg.IsEgg)
         {
-            _heldItemSprite.Texture = GD.Load<Texture2D>(pokemon.GetSpritePath());
+            _heldItemSprite.Texture = GD.Load<Texture2D>(pokemonSprite);
             _heldItemPanel.Visible = true;
 
-            _pokemonSprite.Texture = GD.Load<Texture2D>(Resources.Sprites.Egg);
+            _pokemonSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Egg);
             _pokemonSprite.Visible = true;
         }
         else if (!pokemon.HeldItem.IsNone)
         {
-            _heldItemSprite.Texture = GD.Load<Texture2D>(Resources.Sprites.HeldItem(pokemon.HeldItem.Id));
+            _heldItemSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.HeldItem(pokemon.HeldItem.Id));
             _heldItemPanel.Visible = true;
         }
 
-        _legalitySprite.Visible = pokemon.Species.Id != 0 && !pokemon.Legality().Valid;
-
         if (!pokemon.Egg.IsEgg)
         {
-            _pokemonSprite.Texture = GD.Load<Texture2D>(pokemon.GetSpritePath());
+            _pokemonSprite.Texture = GD.Load<Texture2D>(pokemonSprite);
             _pokemonSprite.Visible = true;
         }
     }

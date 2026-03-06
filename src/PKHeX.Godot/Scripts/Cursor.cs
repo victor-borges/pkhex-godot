@@ -1,6 +1,5 @@
 using System;
 using Godot;
-using PKHeX.Godot.Scripts.Contants;
 
 namespace PKHeX.Godot.Scripts;
 
@@ -23,21 +22,21 @@ public partial class Cursor: Node
 
     private static void SetCursors(float scaleFactor)
     {
-        SetMouseCursor(Resources.Cursors.Arrow, Input.CursorShape.Arrow, new Vector2(8, 6), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Beam, Input.CursorShape.Ibeam, new Vector2(16, 16), scaleFactor * 0.8f);
-        SetMouseCursor(Resources.Cursors.PointingHand, Input.CursorShape.PointingHand, new Vector2(8, 6), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Cross, Input.CursorShape.Cross, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Drag, Input.CursorShape.Drag, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.CanDrop, Input.CursorShape.CanDrop, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Forbidden, Input.CursorShape.Forbidden, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.ResizeVertical, Input.CursorShape.Vsize, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.ResizeHorizontal, Input.CursorShape.Hsize, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.ResizeMainDiagonal, Input.CursorShape.Fdiagsize, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.ResizeSecondaryDiagonal, Input.CursorShape.Bdiagsize, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Move, Input.CursorShape.Move, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.Help, Input.CursorShape.Help, new Vector2(5, 1), scaleFactor);
-        SetMouseCursor(Resources.Cursors.SplitVertical, Input.CursorShape.Vsplit, new Vector2(16, 16), scaleFactor);
-        SetMouseCursor(Resources.Cursors.SplitHorizontal, Input.CursorShape.Hsplit, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.Arrow, Input.CursorShape.Arrow, new Vector2(8, 6), scaleFactor);
+        SetMouseCursor(Assets.Cursors.Beam, Input.CursorShape.Ibeam, new Vector2(16, 16), scaleFactor * 0.8f);
+        SetMouseCursor(Assets.Cursors.PointingHand, Input.CursorShape.PointingHand, new Vector2(8, 6), scaleFactor);
+        SetMouseCursor(Assets.Cursors.Cross, Input.CursorShape.Cross, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.Drag, Input.CursorShape.Drag, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.CanDrop, Input.CursorShape.CanDrop, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.Forbidden, Input.CursorShape.Forbidden, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.ResizeVertical, Input.CursorShape.Vsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.ResizeHorizontal, Input.CursorShape.Hsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.ResizeMainDiagonal, Input.CursorShape.Fdiagsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.ResizeSecondaryDiagonal, Input.CursorShape.Bdiagsize, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.Move, Input.CursorShape.Move, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.Help, Input.CursorShape.Help, new Vector2(5, 1), scaleFactor);
+        SetMouseCursor(Assets.Cursors.SplitVertical, Input.CursorShape.Vsplit, new Vector2(16, 16), scaleFactor);
+        SetMouseCursor(Assets.Cursors.SplitHorizontal, Input.CursorShape.Hsplit, new Vector2(16, 16), scaleFactor);
     }
 
     private static void SetMouseCursor(string cursorPath, Input.CursorShape cursorShape, Vector2 hotSpot, float scaleFactor)

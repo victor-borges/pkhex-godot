@@ -25,7 +25,8 @@
 [ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/CuredCheckBox.cs" id="17_3gdpy"]
 [ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/FriendshipSpinBox.cs" id="20_wq63x"]
 [ext_resource type="Script" uid="uid://dl8ox8ca2dogt" path="res://Scripts/CurrentPokemon/InfectedHBoxContainer.cs" id="25_lkom8"]
-[ext_resource type="Script" uid="uid://dba61re4o4d6c" path="res://Scripts/CurrentPokemon/PkRsSpinBox.cs" id="26_jay0n"]
+[ext_resource type="Script" uid="uid://dba61re4o4d6c" path="res://Scripts/CurrentPokemon/PokerusStrainSpinBox.cs" id="26_yw50q"]
+[ext_resource type="Script" uid="uid://b5itqlsl1q5wv" path="res://Scripts/CurrentPokemon/PokerusDaysSpinBox.cs" id="27_ut2yo"]
 
 [node name="CurrentPokemonVBoxContainer" type="VBoxContainer" unique_id=894197332]
 anchors_preset = -1
@@ -167,7 +168,6 @@ text = "Species:"
 [node name="SpeciesMenuButton" type="MenuButton" parent="SpeciesHBoxContainer" unique_id=487540535]
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 text = " "
 flat = false
 script = ExtResource("4_pm8xo")
@@ -204,7 +204,7 @@ text = "EXP:"
 [node name="EXPSpinBox" type="SpinBox" parent="EXPHBoxContainer" unique_id=918153301]
 layout_mode = 2
 size_flags_horizontal = 3
-max_value = 4294967295.0
+max_value = 1250000.0
 rounded = true
 editable = false
 script = ExtResource("13_wq63x")
@@ -346,31 +346,33 @@ script = ExtResource("17_3gdpy")
 
 [node name="InfectedHBoxContainer" type="HBoxContainer" parent="." unique_id=1702231932]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 script = ExtResource("25_lkom8")
 
-[node name="PkRsLabel" type="Label" parent="InfectedHBoxContainer" unique_id=573154992]
+[node name="PokerusStrainLabel" type="Label" parent="InfectedHBoxContainer" unique_id=573154992]
 layout_mode = 2
 text = "PkRs: "
 
-[node name="PkRsSpinBox" type="SpinBox" parent="InfectedHBoxContainer" unique_id=1275438262]
+[node name="PokerusStrainSpinBox" type="SpinBox" parent="InfectedHBoxContainer" unique_id=1275438262]
 layout_mode = 2
 max_value = 15.0
 rounded = true
 editable = false
-script = ExtResource("26_jay0n")
+script = ExtResource("26_yw50q")
 
-[node name="dLabel" type="Label" parent="InfectedHBoxContainer" unique_id=631175149]
+[node name="PokerusDaysLabel" type="Label" parent="InfectedHBoxContainer" unique_id=631175149]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "d: "
 
-[node name="dSpinBox" type="SpinBox" parent="InfectedHBoxContainer" unique_id=1332210517]
+[node name="PokerusDaysSpinBox" type="SpinBox" parent="InfectedHBoxContainer" unique_id=1332210517]
 layout_mode = 2
 size_flags_horizontal = 10
 max_value = 2.0
 rounded = true
 editable = false
+script = ExtResource("27_ut2yo")
 
 [connection signal="pressed" from="HBoxContainer/LegalityButton" to="HBoxContainer/LegalityButton/LegalityDialog" method="OnButtonPressed"]
 [connection signal="toggled" from="ShinyPIDGenderHBoxContainer/ShinyButton" to="ShinyPIDGenderHBoxContainer/ShinyButton" method="OnToggled"]

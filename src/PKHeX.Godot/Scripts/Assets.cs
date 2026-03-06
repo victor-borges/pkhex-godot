@@ -1,21 +1,58 @@
 using System;
 using Godot;
 using PKHeX.Core;
-using PKHeX.Facade.Extensions;
 using PKHeX.Facade.Pokemons;
 using static PKHeX.Core.Species;
 
-namespace PKHeX.Godot.Scripts.Extensions;
+namespace PKHeX.Godot.Scripts;
 
-public static class PokemonExtensions
+public static class Assets
 {
+    public static class Cursors
+    {
+        private const string Cursor = "res://Assets/Cursor";
+
+        public const string Arrow = $"{Cursor}/pointer_b.svg";
+        public const string PointingHand = $"{Cursor}/hand_small_point.svg";
+        public const string Beam = $"{Cursor}/bracket_b_vertical.svg";
+        public const string Cross = $"{Cursor}/cross_small.svg";
+        public const string Drag = $"{Cursor}/hand_small_open.svg";
+        public const string CanDrop = $"{Cursor}/hand_small_closed.svg";
+        public const string Forbidden = $"{Cursor}/disabled.svg";
+        public const string ResizeVertical = $"{Cursor}/resize_b_vertical.svg";
+        public const string ResizeHorizontal = $"{Cursor}/resize_b_horizontal.svg";
+        public const string ResizeMainDiagonal = $"{Cursor}/resize_b_diagonal_mirror.svg";
+        public const string ResizeSecondaryDiagonal = $"{Cursor}/resize_b_diagonal.svg";
+        public const string Move = $"{Cursor}/resize_b_cross.svg";
+        public const string Help = $"{Cursor}/mark_question_pointer_b.svg";
+        public const string SplitVertical = $"{Cursor}/resize_vertical.svg";
+        public const string SplitHorizontal = $"{Cursor}/resize_horizontal.svg";
+    }
+
+    public static class Sprites
+    {
+        public const string Egg = "res://Assets/Sprites/Pokemon/0.png";
+
+        public static string HeldItem(int id) => $"res://Assets/Sprites/Items/item_{id:D4}.png";
+        public static string Gender(byte genderIndex) => $"res://Assets/Sprites/Gender/gender_{genderIndex}.webp";
+
+        public static class Overlays
+        {
+            private const string Overlay = "res://Assets/Sprites/Overlays";
+
+            public const string Shiny = $"{Overlay}/shiny.png";
+            public const string ShinySquare = $"{Overlay}/shiny-square.png";
+            public const string Alpha = $"{Overlay}/alpha.webp";
+        }
+    }
+
     private const string BasePath = "res://Assets/Sprites/Pokemon";
     private static string NormalPath(string id) => $"{BasePath}/{id}.png";
     private static string FemalePath(string id) => $"{BasePath}/Female/{id}.png";
     private static string ShinyPath(string id) => $"{BasePath}/Shiny/{id}.png";
     private static string ShinyFemalePath(string id) => $"{BasePath}/Shiny/Female/{id}.png";
 
-    public static string GetSpritePath(this Pokemon pokemon)
+    public static string PokemonSprite(Pokemon pokemon)
     {
         var pkm = pokemon.Pkm;
         var mappedSpriteId = GetMappedSpriteId(pokemon);
@@ -471,7 +508,7 @@ public static class PokemonExtensions
     private static string GetAlcremieSprite(Pokemon pokemon)
     {
         if (pokemon.Species.Species is not Alcremie || pokemon.Pkm is not IFormArgument f)
-            return Alcremie.Id().ToString();
+            return ((int)Alcremie).ToString();
 
         var formArgument = f.FormArgument;
 
@@ -502,7 +539,7 @@ public static class PokemonExtensions
         };
 
         if (flavor is null || topping is null)
-            return Alcremie.Id().ToString();
+            return ((int)Alcremie).ToString();
 
         return $"{flavor}-{topping}";
     }

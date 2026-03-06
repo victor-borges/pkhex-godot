@@ -1,6 +1,5 @@
 using Godot;
 using PKHeX.Core;
-using PKHeX.Godot.Scripts.Contants;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
@@ -10,8 +9,7 @@ public partial class ShinyButton : TextureButton
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
-
+        _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
         _application.FileLoaded += OnFileLoaded;
     }
@@ -19,8 +17,8 @@ public partial class ShinyButton : TextureButton
     private void CurrentPokemonChanged()
     {
         TexturePressed = GD.Load<Texture2D>(_application.CurrentPokemon?.ShinyType is Shiny.AlwaysSquare
-            ? Resources.Sprites.Overlays.ShinySquare
-            : Resources.Sprites.Overlays.Shiny);
+            ? Assets.Sprites.Overlays.ShinySquare
+            : Assets.Sprites.Overlays.Shiny);
 
         SetPressedNoSignal(_application.CurrentPokemon?.IsShiny ?? false);
     }

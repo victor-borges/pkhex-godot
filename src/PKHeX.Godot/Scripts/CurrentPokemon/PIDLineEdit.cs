@@ -8,8 +8,7 @@ public partial class PIDLineEdit : LineEdit
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
-
+        _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
         _application.FileLoaded += OnFileLoaded;
     }

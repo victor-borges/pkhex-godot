@@ -8,25 +8,31 @@ public partial class CuredCheckBox : CheckBox
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
+        _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
         _application.FileLoaded += OnFileLoaded;
+    }
+
+    private void OnButtonPressed(bool pressed)
+    {
+        _application.CurrentPokemon?.Pkm.IsPokerusCured = pressed;
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
-            ButtonPressed = false;
+            SetPressedNoSignal(false);
         }
         else
         {
-            ButtonPressed = _application.CurrentPokemon.Pkm.IsPokerusCured;
+            SetPressedNoSignal(_application.CurrentPokemon.Pkm.IsPokerusCured);
         }
     }
 
     private void OnFileLoaded()
     {
-        ButtonPressed = false;
+        SetPressedNoSignal(false);
     }
 }

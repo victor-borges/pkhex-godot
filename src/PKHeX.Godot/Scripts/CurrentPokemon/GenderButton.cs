@@ -9,20 +9,19 @@ public partial class GenderButton : TextureButton
 
     public override void _Ready()
     {
-        _application = GetNode<Application>("/root/Application");
-
+        _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
         _application.FileLoaded += OnFileLoaded;
     }
 
     private void CurrentPokemonChanged()
     {
-        var genderIndex = _application.CurrentPokemon?.Gender.Id ?? (int)Gender.Male;
-        TextureNormal = GD.Load<Texture2D>($"res://Assets/Sprites/Gender/gender_{genderIndex}.webp");
+        var genderIndex = _application.CurrentPokemon?.Pkm.Gender ?? (byte)Gender.Male;
+        TextureNormal = GD.Load<Texture2D>(Assets.Sprites.Gender(genderIndex));
     }
 
     private void OnFileLoaded()
     {
-        TextureNormal = GD.Load<Texture2D>($"res://Assets/Sprites/Gender/gender_2.webp");
+        TextureNormal = GD.Load<Texture2D>(Assets.Sprites.Gender((byte)Gender.Genderless));
     }
 }

@@ -2,7 +2,7 @@ using Godot;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class LevelSpinBox : SpinBox
+public partial class PokerusStrainSpinBox : SpinBox
 {
     private Application _application = null!;
 
@@ -11,22 +11,30 @@ public partial class LevelSpinBox : SpinBox
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
         _application.FileLoaded += OnFileLoaded;
+
+        ValueChanged += OnValueChanged;
+    }
+
+    private void OnValueChanged(double value)
+    {
+        _application.CurrentPokemon?.Pkm.PokerusStrain = (int)value;
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
-            Value = 0;
+            SetValueNoSignal(0);
         }
         else
         {
-            Value = _application.CurrentPokemon.Level;
+            SetValueNoSignal(_application.CurrentPokemon.Pkm.PokerusStrain);
         }
     }
 
     private void OnFileLoaded()
     {
-        Value = 0;
+        SetValueNoSignal(0);
     }
 }
