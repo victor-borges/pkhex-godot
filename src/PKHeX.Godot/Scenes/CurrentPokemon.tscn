@@ -6,11 +6,11 @@
 [ext_resource type="Script" uid="uid://bjdu0ilaxavq1" path="res://Scripts/CurrentPokemon/GenderButton.cs" id="3_o0fyj"]
 [ext_resource type="Script" uid="uid://cpqgbnggdhj7c" path="res://Scripts/CurrentPokemon/LegalityDialog.cs" id="3_ojqgt"]
 [ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="3_voh30"]
-[ext_resource type="Texture2D" uid="uid://bp6qykvqhfr1b" path="res://Assets/Sprites/Overlays/shiny-black.png" id="4_ojqgt"]
 [ext_resource type="Script" uid="uid://kolo3mv4im17" path="res://Scripts/CurrentPokemon/SpeciesMenuButton.cs" id="4_pm8xo"]
 [ext_resource type="Script" uid="uid://b1cdft6baxlts" path="res://Scripts/CurrentPokemon/CurrentPokemonSlot.cs" id="4_wq63x"]
 [ext_resource type="Script" uid="uid://dhxiotmixftn3" path="res://Scripts/CurrentPokemon/NicknameCheckBox.cs" id="5_ojqgt"]
 [ext_resource type="Script" uid="uid://c5xe3272qn56m" path="res://Scripts/CurrentPokemon/ShinyButton.cs" id="5_voh30"]
+[ext_resource type="Texture2D" uid="uid://bpyn6cxiganvx" path="res://Assets/Sprites/Overlays/shiny-white.png" id="5_yw50q"]
 [ext_resource type="Script" uid="uid://dtq0px8lrcncs" path="res://Scripts/CurrentPokemon/NicknameLineEdit.cs" id="6_voh30"]
 [ext_resource type="Script" uid="uid://dm1jyb8p4q5df" path="res://Scripts/CurrentPokemon/NatureMenuButton.cs" id="9_lkom8"]
 [ext_resource type="Script" uid="uid://03t7at3fqfbe" path="res://Scripts/CurrentPokemon/RerollButton.cs" id="10_ivqbr"]
@@ -119,16 +119,15 @@ script = ExtResource("4_wq63x")
 [node name="ShinyPIDGenderHBoxContainer" type="HBoxContainer" parent="." unique_id=2107254492]
 layout_mode = 2
 
-[node name="ShinyButton" type="TextureButton" parent="ShinyPIDGenderHBoxContainer" unique_id=1799933898]
-custom_minimum_size = Vector2(24, 0)
+[node name="ShinyButton" type="Button" parent="ShinyPIDGenderHBoxContainer" unique_id=1434698114]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
+mouse_default_cursor_shape = 2
 disabled = true
 toggle_mode = true
-texture_normal = ExtResource("4_ojqgt")
-ignore_texture_size = true
-stretch_mode = 5
+icon = ExtResource("5_yw50q")
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("5_voh30")
 
 [node name="PIDLabel" type="Label" parent="ShinyPIDGenderHBoxContainer" unique_id=1751591745]
@@ -141,23 +140,28 @@ text = "PID:"
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
+emoji_menu_enabled = false
+middle_mouse_paste_enabled = false
+virtual_keyboard_enabled = false
 script = ExtResource("1_xg4bv")
 
-[node name="GenderButton" type="TextureButton" parent="ShinyPIDGenderHBoxContainer" unique_id=499610742]
-custom_minimum_size = Vector2(24, 0)
+[node name="GenderButton" type="Button" parent="ShinyPIDGenderHBoxContainer" unique_id=1175662345]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-size_flags_stretch_ratio = 0.4
+mouse_default_cursor_shape = 2
 disabled = true
-texture_normal = ExtResource("2_yagxa")
-ignore_texture_size = true
-stretch_mode = 5
+icon = ExtResource("2_yagxa")
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("3_o0fyj")
 
 [node name="RerollPIDButton" type="Button" parent="ShinyPIDGenderHBoxContainer" unique_id=887098311]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 disabled = true
 text = "Reroll"
+expand_icon = true
 script = ExtResource("10_ivqbr")
 
 [node name="SpeciesHBoxContainer" type="HBoxContainer" parent="." unique_id=448538811]
@@ -226,6 +230,8 @@ text = "Level:"
 [node name="LevelSpinBox" type="SpinBox" parent="EXPHBoxContainer" unique_id=1817698956]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
 rounded = true
 editable = false
 script = ExtResource("14_ivqbr")
@@ -376,10 +382,9 @@ text = "d: "
 [node name="PokerusDaysSpinBox" type="SpinBox" parent="InfectedHBoxContainer" unique_id=1332210517]
 layout_mode = 2
 size_flags_horizontal = 10
-max_value = 2.0
+max_value = 0.0
 rounded = true
 editable = false
 script = ExtResource("27_ut2yo")
 
 [connection signal="pressed" from="HBoxContainer/LegalityButton" to="HBoxContainer/LegalityButton/LegalityDialog" method="OnButtonPressed"]
-[connection signal="toggled" from="ShinyPIDGenderHBoxContainer/ShinyButton" to="ShinyPIDGenderHBoxContainer/ShinyButton" method="OnToggled"]

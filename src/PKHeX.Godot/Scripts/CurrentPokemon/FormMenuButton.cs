@@ -1,5 +1,4 @@
 using System.Linq;
-using Godot;
 using PKHeX.Facade.Repositories;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;

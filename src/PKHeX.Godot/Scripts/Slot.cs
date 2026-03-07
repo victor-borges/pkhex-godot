@@ -1,5 +1,3 @@
-using Godot;
-using PKHeX.Core;
 using PKHeX.Facade.Extensions;
 using PKHeX.Facade.Pokemons;
 

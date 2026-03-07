@@ -1,6 +1,3 @@
-using Godot;
-using PKHeX.Core;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class StatNatureMenuButton : MenuButton

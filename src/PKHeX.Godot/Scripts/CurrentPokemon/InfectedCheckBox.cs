@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class InfectedCheckBox : CheckBox
@@ -11,12 +9,12 @@ public partial class InfectedCheckBox : CheckBox
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
 
-        Toggled += OnButtonPressed;
+        Toggled += OnToggled;
     }
 
-    private void OnButtonPressed(bool pressed)
+    private void OnToggled(bool toggledOn)
     {
-        _application.CurrentPokemon?.Pkm.IsPokerusInfected = pressed;
+        _application.CurrentPokemon?.Pkm.IsPokerusInfected = toggledOn;
         _application.TriggerCurrentPokemonChanged();
     }
 

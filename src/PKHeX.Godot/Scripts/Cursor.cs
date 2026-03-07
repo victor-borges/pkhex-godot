@@ -1,6 +1,3 @@
-using System;
-using Godot;
-
 namespace PKHeX.Godot.Scripts;
 
 public partial class Cursor: Node

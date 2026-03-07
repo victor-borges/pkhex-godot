@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class IsEggCheckBox : CheckBox
@@ -14,9 +12,9 @@ public partial class IsEggCheckBox : CheckBox
         Toggled += OnToggled;
     }
 
-    private void OnToggled(bool toggled)
+    private void OnToggled(bool toggledOn)
     {
-        _application.CurrentPokemon?.Egg.IsEgg = toggled;
+        _application.CurrentPokemon?.Egg.IsEgg = toggledOn;
         _application.TriggerCurrentPokemonChanged();
     }
 

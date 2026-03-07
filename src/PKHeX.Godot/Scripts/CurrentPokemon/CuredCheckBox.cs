@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class CuredCheckBox : CheckBox

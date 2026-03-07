@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5i72gvvrc56d"]
+[gd_scene format=3 uid="uid://b5i72gvvrc56d"]
 
 [ext_resource type="Script" uid="uid://cjyj35b37vdht" path="res://Scripts/Slot.cs" id="1_uw6ar"]
 [ext_resource type="Texture2D" uid="uid://cmbhv7ddw86gf" path="res://Assets/Sprites/Overlays/illegal.webp" id="3_ncnge"]
 
-[node name="Button" type="Button"]
+[node name="Button" type="Button" unique_id=17806276]
 custom_minimum_size = Vector2(68, 56)
 anchors_preset = -1
 anchor_right = 0.071
@@ -16,7 +16,7 @@ mouse_default_cursor_shape = 6
 script = ExtResource("1_uw6ar")
 metadata/_edit_use_anchors_ = true
 
-[node name="PokemonSprite" type="TextureRect" parent="."]
+[node name="PokemonSprite" type="TextureRect" parent="." unique_id=729212379]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -32,7 +32,7 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=751537492]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,14 +42,14 @@ grow_vertical = 2
 mouse_filter = 2
 columns = 3
 
-[node name="ShinyControl" type="Control" parent="GridContainer"]
+[node name="ShinyControl" type="Control" parent="GridContainer" unique_id=59405116]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="ShinyPanel" type="Panel" parent="GridContainer/ShinyControl"]
+[node name="ShinyPanel" type="Panel" parent="GridContainer/ShinyControl" unique_id=1777549343]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(24, 24)
@@ -61,7 +61,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ShinySprite" type="TextureRect" parent="GridContainer/ShinyControl/ShinyPanel"]
+[node name="ShinySprite" type="TextureRect" parent="GridContainer/ShinyControl/ShinyPanel" unique_id=746904317]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 1
@@ -78,20 +78,20 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer" type="Control" parent="GridContainer"]
+[node name="Spacer" type="Control" parent="GridContainer" unique_id=258763098]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="MarkerControl" type="Control" parent="GridContainer"]
+[node name="MarkerControl" type="Control" parent="GridContainer" unique_id=1048583935]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="MarkerPanel" type="Panel" parent="GridContainer/MarkerControl"]
+[node name="MarkerPanel" type="Panel" parent="GridContainer/MarkerControl" unique_id=792344190]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(24, 24)
@@ -103,7 +103,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MarkerSprite" type="TextureRect" parent="GridContainer/MarkerControl/MarkerPanel"]
+[node name="MarkerSprite" type="TextureRect" parent="GridContainer/MarkerControl/MarkerPanel" unique_id=1762049021]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -117,32 +117,32 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer2" type="Control" parent="GridContainer"]
+[node name="Spacer2" type="Control" parent="GridContainer" unique_id=1570418932]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Spacer3" type="Control" parent="GridContainer"]
+[node name="Spacer3" type="Control" parent="GridContainer" unique_id=2049908637]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Spacer4" type="Control" parent="GridContainer"]
+[node name="Spacer4" type="Control" parent="GridContainer" unique_id=1495445525]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="LegalityControl" type="Control" parent="GridContainer"]
+[node name="LegalityControl" type="Control" parent="GridContainer" unique_id=1706964056]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="LegalitySprite" type="TextureRect" parent="GridContainer/LegalityControl"]
+[node name="LegalitySprite" type="TextureRect" parent="GridContainer/LegalityControl" unique_id=1586062176]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(20, 20)
@@ -165,20 +165,20 @@ texture = ExtResource("3_ncnge")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer6" type="Control" parent="GridContainer"]
+[node name="Spacer6" type="Control" parent="GridContainer" unique_id=276651909]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HeldItemControl" type="Control" parent="GridContainer"]
+[node name="HeldItemControl" type="Control" parent="GridContainer" unique_id=168221638]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HeldItemPanel" type="Panel" parent="GridContainer/HeldItemControl"]
+[node name="HeldItemPanel" type="Panel" parent="GridContainer/HeldItemControl" unique_id=1982233323]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(24, 24)
@@ -192,7 +192,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HeldItemSprite" type="TextureRect" parent="GridContainer/HeldItemControl/HeldItemPanel"]
+[node name="HeldItemSprite" type="TextureRect" parent="GridContainer/HeldItemControl/HeldItemPanel" unique_id=1190725938]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 1
@@ -208,5 +208,3 @@ size_flags_vertical = 3
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-
-[connection signal="pressed" from="." to="." method="OnButtonPressed"]

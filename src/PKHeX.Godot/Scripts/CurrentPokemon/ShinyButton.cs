@@ -1,9 +1,6 @@
-using Godot;
-using PKHeX.Core;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class ShinyButton : TextureButton
+public partial class ShinyButton : Button
 {
     private Application _application = null!;
 
@@ -11,6 +8,17 @@ public partial class ShinyButton : TextureButton
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
+
+        Toggled += OnToggled;
+    }
+
+    private void OnToggled(bool toggled)
+    {
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.SetShiny(toggled);
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
@@ -21,22 +29,23 @@ public partial class ShinyButton : TextureButton
         }
         else
         {
+            var isShiny = _application.CurrentPokemon.IsShiny;
+            var shinyType = _application.CurrentPokemon.ShinyType;
+            var squareShinyExist = ShinyExtensions.IsSquareShinyExist(_application.CurrentPokemon.Pkm);
+
             Disabled = false;
+            SetPressedNoSignal(isShiny);
 
-            TexturePressed = GD.Load<Texture2D>(_application.CurrentPokemon.ShinyType is Shiny.AlwaysSquare
-                ? Assets.Sprites.Overlays.ShinySquare
-                : Assets.Sprites.Overlays.Shiny);
-
-            SetPressedNoSignal(_application.CurrentPokemon.IsShiny);
+            if (!isShiny)
+            {
+                Icon = GD.Load<Texture2D>(Assets.Sprites.Overlays.ShinyFrame);
+            }
+            else
+            {
+                Icon = GD.Load<Texture2D>(shinyType is Shiny.AlwaysSquare && squareShinyExist
+                    ? Assets.Sprites.Overlays.ShinySquare
+                    : Assets.Sprites.Overlays.Shiny);
+            }
         }
-    }
-
-    private void OnToggled(bool toggled)
-    {
-        if (_application.CurrentPokemon is null)
-            return;
-
-        _application.CurrentPokemon.SetShiny(toggled);
-        _application.TriggerCurrentPokemonChanged();
     }
 }

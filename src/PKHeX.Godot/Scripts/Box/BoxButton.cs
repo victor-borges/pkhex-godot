@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.Box;
 
 public partial class BoxButton : Button
@@ -14,6 +12,11 @@ public partial class BoxButton : Button
 
     private void OnBoxChanged(int boxIndex)
     {
-        Text = $"Box {boxIndex + 1}";
+        if (_application.Game is null)
+            return;
+
+        Text = _application.Game.SaveFile.Version is GameVersion.PLA
+            ? $"Pasture {boxIndex + 1}"
+            : $"Box {boxIndex + 1}";
     }
 }

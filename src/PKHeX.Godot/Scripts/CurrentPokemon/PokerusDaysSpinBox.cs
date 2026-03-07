@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class PokerusDaysSpinBox : SpinBox
@@ -29,7 +27,10 @@ public partial class PokerusDaysSpinBox : SpinBox
         }
         else
         {
-            Editable = _application.CurrentPokemon.Pkm.IsPokerusInfected;
+            var pkm = _application.CurrentPokemon.Pkm;
+
+            Editable = pkm.IsPokerusInfected;
+            SetMax(Pokerus.GetMaxDuration(pkm.PokerusStrain));
             SetValueNoSignal(_application.CurrentPokemon.Pkm.PokerusDays);
         }
     }

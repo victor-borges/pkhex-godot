@@ -1,6 +1,3 @@
-using Godot;
-using PKHeX.Facade;
-
 namespace PKHeX.Godot.Scripts;
 
 public partial class OpenFileButton : Button

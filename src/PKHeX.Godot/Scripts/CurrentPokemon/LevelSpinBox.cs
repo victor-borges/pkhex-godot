@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class LevelSpinBox : SpinBox
@@ -10,6 +8,16 @@ public partial class LevelSpinBox : SpinBox
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        ValueChanged += OnValueChanged;
+    }
+
+    private void OnValueChanged(double value)
+    {
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.ChangeLevel((int)value);
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

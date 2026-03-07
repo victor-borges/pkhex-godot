@@ -1,9 +1,9 @@
-using Godot;
-using PKHeX.Core;
+using System.Linq;
+using PKHeX.Facade.Repositories;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class GenderButton : TextureButton
+public partial class GenderButton : Button
 {
     private Application _application = null!;
 
@@ -11,6 +11,49 @@ public partial class GenderButton : TextureButton
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
+
+        Pressed += OnButtonPressed;
+    }
+
+    private void OnButtonPressed()
+    {
+        if (_application.CurrentPokemon is null)
+            return;
+
+        var pkm = _application.CurrentPokemon.Pkm;
+        if (!pkm.PersonalInfo.IsDualGender)
+        {
+            Disabled = true;
+            var expect = pkm.PersonalInfo.FixedGender();
+            SetGenderIcon(expect);
+        }
+        else
+        {
+            var gender = pkm.Gender;
+            var canToggle = gender < 2;
+
+            if (!canToggle)
+                pkm.Gender = 0; // fix bad genders
+
+            if (pkm.Format <= 2)
+            {
+                //Stats.SetATKIVGender(gender);
+            }
+            else if (pkm.Format <= 4)
+            {
+                pkm.SetPIDGender(gender);
+            }
+
+            pkm.Gender = gender;
+
+            if (EntityGender.GetFromString(_application.CurrentPokemon.Form.Form.Name) < 2) // Gendered Forms
+            {
+                var formCount = FormRepository.GetFor(_application.CurrentPokemon).Count();
+                pkm.Form = (byte)Math.Min(gender, formCount - 1);
+            }
+        }
+
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
@@ -18,13 +61,24 @@ public partial class GenderButton : TextureButton
         if (_application.CurrentPokemon is null)
         {
             Disabled = true;
-            TextureNormal = GD.Load<Texture2D>(Assets.Sprites.Gender((byte)Gender.Genderless));
+            SetGenderIcon((byte)Gender.Genderless);
+            return;
+        }
+
+        var pkm = _application.CurrentPokemon.Pkm;
+        if (!pkm.PersonalInfo.IsDualGender)
+        {
+            Disabled = true;
+            SetGenderIcon(pkm.PersonalInfo.FixedGender());
         }
         else
         {
             Disabled = false;
             var genderIndex = _application.CurrentPokemon.Pkm.Gender;
-            TextureNormal = GD.Load<Texture2D>(Assets.Sprites.Gender(genderIndex));
+            SetGenderIcon(genderIndex);
         }
     }
+
+    private void SetGenderIcon(byte genderIndex) =>
+        Icon = GD.Load<Texture2D>(Assets.Sprites.Gender(genderIndex));
 }

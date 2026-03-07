@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.Party;
 
 public partial class PartySlot : Slot
@@ -9,8 +7,14 @@ public partial class PartySlot : Slot
     public override void _Ready()
     {
         base._Ready();
-        Pressed += OnButtonPressed;
         Application.PartyChanged += OnPartyChanged;
+
+        Pressed += OnButtonPressed;
+    }
+
+    private void OnButtonPressed()
+    {
+        Application.CurrentPokemon = Pokemon?.Clone();
     }
 
     private void OnPartyChanged()
@@ -20,10 +24,5 @@ public partial class PartySlot : Slot
 
         var pokemon = Application.Game?.Trainer.Party.Pokemons[SlotIndex];
         SetPokemon(pokemon);
-    }
-
-    private void OnButtonPressed()
-    {
-        Application.CurrentPokemon = Pokemon?.Clone();
     }
 }

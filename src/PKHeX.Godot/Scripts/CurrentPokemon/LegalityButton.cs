@@ -1,4 +1,3 @@
-using Godot;
 using PKHeX.Facade.Extensions;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;

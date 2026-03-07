@@ -1,6 +1,3 @@
-using Godot;
-using PKHeX.Core;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class NicknameCheckBox : CheckBox
@@ -12,12 +9,12 @@ public partial class NicknameCheckBox : CheckBox
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
 
-        Toggled += OnButtonPressed;
+        Toggled += OnToggled;
     }
 
-    private void OnButtonPressed(bool pressed)
+    private void OnToggled(bool toggledOn)
     {
-        if (pressed)
+        if (toggledOn)
             _application.CurrentPokemon?.Pkm.SetDefaultNickname();
         else
             _application.CurrentPokemon?.Pkm.ClearNickname();

@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.Box;
 
 public partial class PreviousBoxButton : Button
@@ -9,6 +7,7 @@ public partial class PreviousBoxButton : Button
     public override void _Ready()
     {
         _application = GetNode<Application>(Application.NodePath);
+        Pressed += OnButtonPressed;
     }
 
     private void OnButtonPressed()

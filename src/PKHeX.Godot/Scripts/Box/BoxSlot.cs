@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.Box;
 
 public partial class BoxSlot : Slot
@@ -9,19 +7,33 @@ public partial class BoxSlot : Slot
     public override void _Ready()
     {
         base._Ready();
-        Pressed += OnButtonPressed;
         Application.BoxChanged += OnBoxChanged;
-    }
+        Application.FileLoaded += OnFileLoaded;
 
-    private void OnBoxChanged(int boxIndex)
-    {
-        var index = (boxIndex * 30) + SlotIndex;
-        var pokemon = Application.Game?.Trainer.PokemonBox.All[index];
-        SetPokemon(pokemon);
+        Pressed += OnButtonPressed;
     }
 
     private void OnButtonPressed()
     {
         Application.CurrentPokemon = Pokemon?.Clone();
+    }
+
+    private void OnBoxChanged(int boxIndex)
+    {
+        if (Application.Game is null)
+        {
+            SetPokemon(null);
+        }
+        else
+        {
+            var index = (boxIndex * Application.Game.SaveFile.BoxSlotCount) + SlotIndex;
+            var pokemon = Application.Game.Trainer.PokemonBox.All[index];
+            SetPokemon(pokemon);
+        }
+    }
+
+    private void OnFileLoaded()
+    {
+        Visible = Application.Game is not null && SlotIndex < Application.Game.SaveFile.BoxSlotCount;
     }
 }

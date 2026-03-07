@@ -1,7 +1,3 @@
-using System;
-using Godot;
-using PKHeX.Core;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class AbilityMenuButton : MenuButton
@@ -38,14 +34,9 @@ public partial class AbilityMenuButton : MenuButton
                 popup.AddItem(ability.Text);
 
             var abilityId = _application.CurrentPokemon.Ability.Id;
-            var abilityIndex = pi.GetIndexOfAbility(abilityId);
+            var abilityIndex = Math.Clamp(pi.GetIndexOfAbility(abilityId) + 1, 1, abilities.Count);
 
-            _abilityLineEdit.Text = Math.Clamp(abilityIndex, 0, abilities.Count - 1) switch
-            {
-                2 => "[H]",
-                var i => $"[{i}]"
-            };
-
+            _abilityLineEdit.Text = $"[{(abilityIndex == 3 ? "H" : abilityIndex)}]";
             Text = _application.CurrentPokemon.Ability.Name;
         }
     }

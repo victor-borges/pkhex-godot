@@ -1,6 +1,3 @@
-using Godot;
-using PKHeX.Core;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class FriendshipSpinBox : SpinBox
@@ -17,7 +14,10 @@ public partial class FriendshipSpinBox : SpinBox
 
     private void OnValueChanged(double value)
     {
-        _application.CurrentPokemon?.Friendship = (int)value;
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.Friendship = (int)value;
         _application.TriggerCurrentPokemonChanged();
     }
 
@@ -31,9 +31,6 @@ public partial class FriendshipSpinBox : SpinBox
         else
         {
             Editable = true;
-            var pkm = _application.CurrentPokemon.Pkm;
-
-            SetMax(Experience.GetEXP(pkm.CurrentLevel, pkm.PersonalInfo.EXPGrowth));
             SetValueNoSignal(_application.CurrentPokemon.Friendship);
         }
     }

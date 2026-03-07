@@ -1,6 +1,3 @@
-using System;
-using Godot;
-using PKHeX.Core;
 using PKHeX.Facade.Pokemons;
 using static PKHeX.Core.Species;
 
@@ -40,6 +37,7 @@ public static class Assets
         {
             private const string Overlay = "res://Assets/Sprites/Overlays";
 
+            public const string ShinyFrame = $"{Overlay}/shiny-white.png";
             public const string Shiny = $"{Overlay}/shiny.png";
             public const string ShinySquare = $"{Overlay}/shiny-square.png";
             public const string Alpha = $"{Overlay}/alpha.webp";

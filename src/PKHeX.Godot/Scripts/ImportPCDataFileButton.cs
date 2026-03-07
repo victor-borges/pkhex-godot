@@ -1,7 +1,3 @@
-using System.IO;
-using Godot;
-using PKHeX.Facade;
-
 namespace PKHeX.Godot.Scripts;
 
 public partial class ImportPCDataFileButton : Button

@@ -1,5 +1,3 @@
-using Godot;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class EXPSpinBox : SpinBox
@@ -10,6 +8,17 @@ public partial class EXPSpinBox : SpinBox
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
+
+        ValueChanged += OnValueChanged;
+    }
+
+    private void OnValueChanged(double value)
+    {
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.Experience = (uint)value;
+        _application.TriggerCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
@@ -22,6 +31,10 @@ public partial class EXPSpinBox : SpinBox
         else
         {
             Editable = true;
+            var pkm = _application.CurrentPokemon.Pkm;
+
+            SetMax(Experience.GetEXP(Experience.MaxLevel, pkm.PersonalInfo.EXPGrowth));
+            SetMin(Experience.GetEXP(Experience.MinLevel, pkm.PersonalInfo.EXPGrowth));
             SetValueNoSignal(_application.CurrentPokemon.Experience);
         }
     }

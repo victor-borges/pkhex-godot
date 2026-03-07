@@ -27,10 +27,11 @@ anchor_bottom = 0.8038581
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
-current_tab = 0
+current_tab = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Party" type="Control" parent="TabContainer" unique_id=689722045]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -43,7 +44,6 @@ anchor_right = 0.4457478
 anchor_bottom = 0.8963964
 
 [node name="Box" type="Control" parent="TabContainer" unique_id=1487783007]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 

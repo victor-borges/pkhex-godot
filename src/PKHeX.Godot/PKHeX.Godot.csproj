@@ -8,4 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="..\PKHeX.Facade\PKHeX.Facade.csproj" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="Godot" />
+    <Using Include="PKHeX.Core" />
+  </ItemGroup>
 </Project>
