@@ -12,18 +12,18 @@
 [ext_resource type="Script" uid="uid://c5xe3272qn56m" path="res://Scripts/CurrentPokemon/ShinyButton.cs" id="5_voh30"]
 [ext_resource type="Texture2D" uid="uid://bpyn6cxiganvx" path="res://Assets/Sprites/Overlays/shiny-white.png" id="5_yw50q"]
 [ext_resource type="Script" uid="uid://dtq0px8lrcncs" path="res://Scripts/CurrentPokemon/NicknameLineEdit.cs" id="6_voh30"]
-[ext_resource type="Script" uid="uid://dm1jyb8p4q5df" path="res://Scripts/CurrentPokemon/NatureMenuButton.cs" id="9_lkom8"]
 [ext_resource type="Script" uid="uid://03t7at3fqfbe" path="res://Scripts/CurrentPokemon/RerollButton.cs" id="10_ivqbr"]
-[ext_resource type="Script" uid="uid://c7n1aj6fuy62b" path="res://Scripts/CurrentPokemon/StatNatureMenuButton.cs" id="10_jay0n"]
-[ext_resource type="Script" uid="uid://byj74rqbmwnoy" path="res://Scripts/CurrentPokemon/FormMenuButton.cs" id="11_yw50q"]
 [ext_resource type="Script" uid="uid://b4i3ukneysqi7" path="res://Scripts/CurrentPokemon/HeldItemMenuButton.cs" id="12_ut2yo"]
-[ext_resource type="Script" uid="uid://ctdtw8gifbthw" path="res://Scripts/CurrentPokemon/AbilityMenuButton.cs" id="13_tajsu"]
 [ext_resource type="Script" uid="uid://ccy53loccgyyk" path="res://Scripts/CurrentPokemon/EXPSpinBox.cs" id="13_wq63x"]
 [ext_resource type="Script" uid="uid://bm5u5ej726qx2" path="res://Scripts/CurrentPokemon/LevelSpinBox.cs" id="14_ivqbr"]
 [ext_resource type="Script" uid="uid://7ht4ioi0kwtq" path="res://Scripts/CurrentPokemon/IsEggCheckBox.cs" id="15_te52t"]
 [ext_resource type="Script" uid="uid://biwid7rqfe84i" path="res://Scripts/CurrentPokemon/InfectedCheckBox.cs" id="16_8r36q"]
+[ext_resource type="Script" uid="uid://dm1jyb8p4q5df" path="res://Scripts/CurrentPokemon/NatureOptionButton.cs" id="16_yw50q"]
 [ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/CuredCheckBox.cs" id="17_3gdpy"]
+[ext_resource type="Script" uid="uid://c7n1aj6fuy62b" path="res://Scripts/CurrentPokemon/StatNatureOptionButton.cs" id="17_ut2yo"]
+[ext_resource type="Script" uid="uid://byj74rqbmwnoy" path="res://Scripts/CurrentPokemon/FormOptionButton.cs" id="18_yw50q"]
 [ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/FriendshipSpinBox.cs" id="20_wq63x"]
+[ext_resource type="Script" uid="uid://ctdtw8gifbthw" path="res://Scripts/CurrentPokemon/AbilityOptionButton.cs" id="20_yw50q"]
 [ext_resource type="Script" uid="uid://dl8ox8ca2dogt" path="res://Scripts/CurrentPokemon/InfectedHBoxContainer.cs" id="25_lkom8"]
 [ext_resource type="Script" uid="uid://dba61re4o4d6c" path="res://Scripts/CurrentPokemon/PokerusStrainSpinBox.cs" id="26_yw50q"]
 [ext_resource type="Script" uid="uid://b5itqlsl1q5wv" path="res://Scripts/CurrentPokemon/PokerusDaysSpinBox.cs" id="27_ut2yo"]
@@ -176,7 +176,6 @@ text = "Species:"
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
-text = " "
 flat = false
 script = ExtResource("4_pm8xo")
 
@@ -244,13 +243,13 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Nature:"
 
-[node name="NatureMenuButton" type="MenuButton" parent="NatureHBoxContainer" unique_id=21330782]
+[node name="NatureOptionButton" type="OptionButton" parent="NatureHBoxContainer" unique_id=528823125]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
-text = " "
-flat = false
-script = ExtResource("9_lkom8")
+alignment = 1
+allow_reselect = true
+script = ExtResource("16_yw50q")
 
 [node name="StatNatureHBoxContainer" type="HBoxContainer" parent="." unique_id=1420971210]
 layout_mode = 2
@@ -260,13 +259,13 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Stat Nature:"
 
-[node name="StatNatureMenuButton" type="MenuButton" parent="StatNatureHBoxContainer" unique_id=662409767]
+[node name="StatNatureOptionButton" type="OptionButton" parent="StatNatureHBoxContainer" unique_id=546263055]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
-text = " "
-flat = false
-script = ExtResource("10_jay0n")
+alignment = 1
+allow_reselect = true
+script = ExtResource("17_ut2yo")
 
 [node name="FormHBoxContainer" type="HBoxContainer" parent="." unique_id=1306871600]
 layout_mode = 2
@@ -276,13 +275,13 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Form:"
 
-[node name="FormMenuButton" type="MenuButton" parent="FormHBoxContainer" unique_id=862606562]
+[node name="FormOptionButton" type="OptionButton" parent="FormHBoxContainer" unique_id=310641155]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
-text = " "
-flat = false
-script = ExtResource("11_yw50q")
+alignment = 1
+allow_reselect = true
+script = ExtResource("18_yw50q")
 
 [node name="HeldItemHBoxContainer" type="HBoxContainer" parent="." unique_id=621143090]
 layout_mode = 2
@@ -296,7 +295,6 @@ text = "Held Item:"
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
-text = " "
 flat = false
 script = ExtResource("12_ut2yo")
 
@@ -308,18 +306,13 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Ability:"
 
-[node name="AbilityMenuButton" type="MenuButton" parent="AbilityItemHBoxContainer" unique_id=83094614]
+[node name="AbilityOptionButton" type="OptionButton" parent="AbilityItemHBoxContainer" unique_id=2092378643]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
-text = " "
-flat = false
-script = ExtResource("13_tajsu")
-
-[node name="AbilityLineEdit" type="LineEdit" parent="AbilityItemHBoxContainer" unique_id=605612559]
-unique_name_in_owner = true
-layout_mode = 2
-editable = false
+alignment = 1
+allow_reselect = true
+script = ExtResource("20_yw50q")
 
 [node name="FriendshipHBoxContainer" type="HBoxContainer" parent="." unique_id=1881088706]
 layout_mode = 2

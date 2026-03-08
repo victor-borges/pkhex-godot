@@ -53,7 +53,7 @@ public partial class GenderButton : Button
             }
         }
 
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

@@ -3,7 +3,7 @@ using PKHeX.Facade.Repositories;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class FormMenuButton : MenuButton
+public partial class FormOptionButton : OptionButton
 {
     private Application _application = null!;
 
@@ -12,6 +12,7 @@ public partial class FormMenuButton : MenuButton
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
 
+        ItemSelected += OnFormSelected;
         PopulateFormsMenu();
     }
 
@@ -20,33 +21,45 @@ public partial class FormMenuButton : MenuButton
         PopulateFormsMenu();
     }
 
+    private void OnFormSelected(long id)
+    {
+        if (_application.CurrentPokemon is null || !_application.CurrentPokemon.Form.HasForm)
+            return;
+
+        _application.CurrentPokemon.Pkm.Form = (byte)id;
+        _application.EmitEventCurrentPokemonChanged();
+    }
+
     private void PopulateFormsMenu()
     {
-        var popup = GetPopup();
-        popup.Clear(freeSubmenus: true);
+        Clear();
 
         if (_application.Game is null || _application.CurrentPokemon is null || !_application.CurrentPokemon.Form.HasForm)
         {
             Disabled = true;
-            Text = " ";
+            AddItem(" ");
             return;
         }
 
-        Disabled = false;
         var forms = FormRepository.GetFor(_application.CurrentPokemon).ToArray();
 
         if (forms.Length is 0 || forms is [{ ByteId: 0 }])
         {
-            Text = " ";
+            AddItem(" ");
         }
         else
         {
             foreach (var formDefinition in forms)
             {
-                popup.AddItem(formDefinition.Name);
-            }
+                var byteId = formDefinition.ByteId;
+                AddItem(formDefinition.Name, byteId);
 
-            Text = _application.CurrentPokemon.Form.Form.Name;
+                if (byteId == _application.CurrentPokemon.Form.Form.ByteId)
+                    Selected = byteId;
+            }
         }
+
+        if (ItemCount > 0)
+            Disabled = false;
     }
 }

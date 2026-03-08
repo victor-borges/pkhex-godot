@@ -14,7 +14,7 @@ public partial class RerollButton : Button
     private void OnButtonPressed()
     {
         _application.CurrentPokemon?.RerollPID();
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void OnCurrentPokemonChanged()

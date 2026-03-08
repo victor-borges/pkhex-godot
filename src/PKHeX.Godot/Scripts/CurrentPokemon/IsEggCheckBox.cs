@@ -15,7 +15,7 @@ public partial class IsEggCheckBox : CheckBox
     private void OnToggled(bool toggledOn)
     {
         _application.CurrentPokemon?.Egg.IsEgg = toggledOn;
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

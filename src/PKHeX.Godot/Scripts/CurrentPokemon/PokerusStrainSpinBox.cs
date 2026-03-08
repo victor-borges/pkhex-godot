@@ -15,7 +15,7 @@ public partial class PokerusStrainSpinBox : SpinBox
     private void OnValueChanged(double value)
     {
         _application.CurrentPokemon?.Pkm.PokerusStrain = (int)value;
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

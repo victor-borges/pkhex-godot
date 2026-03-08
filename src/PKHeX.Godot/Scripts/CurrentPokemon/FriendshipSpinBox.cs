@@ -18,7 +18,7 @@ public partial class FriendshipSpinBox : SpinBox
             return;
 
         _application.CurrentPokemon.Friendship = (int)value;
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

@@ -1,6 +1,6 @@
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
-public partial class NatureMenuButton : MenuButton
+public partial class StatNatureOptionButton : OptionButton
 {
     private Application _application = null!;
 
@@ -9,10 +9,24 @@ public partial class NatureMenuButton : MenuButton
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
 
-        var popup = GetPopup();
+        ItemSelected += OnNatureSelected;
 
+        Clear();
+
+        var i = 0;
         foreach (var nature in GameInfo.Strings.Natures)
-            popup.AddItem(nature);
+        {
+            AddItem(nature, i++);
+        }
+    }
+
+    private void OnNatureSelected(long id)
+    {
+        if (id >= (long)Nature.Random || _application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.Pkm.StatNature = (Nature)id;
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
@@ -20,13 +34,11 @@ public partial class NatureMenuButton : MenuButton
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
             Disabled = true;
-            Text = " ";
         }
         else
         {
             Disabled = false;
-            var nature = _application.CurrentPokemon.Natures.Nature;
-            Text = GameInfo.Strings.Natures[(int)nature];
+            Selected = (int)_application.CurrentPokemon.Natures.StatNature;
         }
     }
 }

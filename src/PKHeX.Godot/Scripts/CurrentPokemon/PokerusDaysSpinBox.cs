@@ -15,7 +15,7 @@ public partial class PokerusDaysSpinBox : SpinBox
     private void OnValueChanged(double value)
     {
         _application.CurrentPokemon?.Pkm.PokerusDays = (int)value;
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

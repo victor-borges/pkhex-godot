@@ -15,7 +15,7 @@ public partial class InfectedCheckBox : CheckBox
     private void OnToggled(bool toggledOn)
     {
         _application.CurrentPokemon?.Pkm.IsPokerusInfected = toggledOn;
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

@@ -14,12 +14,19 @@ public partial class NicknameCheckBox : CheckBox
 
     private void OnToggled(bool toggledOn)
     {
-        if (toggledOn)
-            _application.CurrentPokemon?.Pkm.SetDefaultNickname();
-        else
-            _application.CurrentPokemon?.Pkm.ClearNickname();
+        if (_application.CurrentPokemon is null)
+            return;
 
-        _application.TriggerCurrentPokemonChanged();
+        if (toggledOn)
+        {
+            _application.CurrentPokemon?.Pkm.IsNicknamed = true;
+        }
+        else
+        {
+            _application.CurrentPokemon?.Pkm.ClearNickname();
+        }
+
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

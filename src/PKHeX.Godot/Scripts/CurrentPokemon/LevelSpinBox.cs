@@ -17,7 +17,7 @@ public partial class LevelSpinBox : SpinBox
             return;
 
         _application.CurrentPokemon.ChangeLevel((int)value);
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()

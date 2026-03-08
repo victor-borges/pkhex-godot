@@ -44,7 +44,7 @@ public partial class Application : Node
         LocalizeUtil.InitializeStrings(lang, FakeSaveFile.Default);
     }
 
-    public void TriggerCurrentPokemonChanged()
+    public void EmitEventCurrentPokemonChanged()
     {
         CurrentPokemonChanged?.Invoke();
     }
@@ -89,7 +89,8 @@ public partial class Application : Node
         if (!didSet)
             return;
 
-        Game = new Game(Game.SaveFile);
+        // Game = new Game(Game.SaveFile);
+        FileLoaded?.Invoke();
         CurrentBoxIndex = 0;
     }
 

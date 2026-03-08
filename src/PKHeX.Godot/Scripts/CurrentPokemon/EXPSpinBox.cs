@@ -18,7 +18,7 @@ public partial class EXPSpinBox : SpinBox
             return;
 
         _application.CurrentPokemon.Experience = (uint)value;
-        _application.TriggerCurrentPokemonChanged();
+        _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
