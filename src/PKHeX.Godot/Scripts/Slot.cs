@@ -64,9 +64,14 @@ public partial class Slot : Button
             _shinyPanel.Visible = false;
         }
 
-        if (pokemon.Pkm is IAlpha { IsAlpha: true })
+        if (pokemon.Pkm is IAlphaReadOnly { IsAlpha: true })
         {
             _markerSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Overlays.Alpha);
+            _markerPanel.Visible = true;
+        }
+        else if (pokemon.Pkm is IGigantamaxReadOnly { CanGigantamax: true })
+        {
+            _markerSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Overlays.Gigantamax);
             _markerPanel.Visible = true;
         }
 

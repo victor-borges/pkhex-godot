@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cdlnxp52dnige"]
+
+[ext_resource type="Script" uid="uid://dhxiotmixftn3" path="res://Scripts/CurrentPokemon/Controls/NicknameCheckBox.cs" id="1_3crw3"]
+[ext_resource type="Script" uid="uid://dtq0px8lrcncs" path="res://Scripts/CurrentPokemon/Controls/NicknameLineEdit.cs" id="2_x4ggl"]
+
+[node name="NicknameEditor" type="HBoxContainer" unique_id=1021579800]
+offset_right = 344.0
+offset_bottom = 31.0
+
+[node name="NicknameCheckBox" type="CheckBox" parent="." unique_id=1833454902]
+layout_mode = 2
+disabled = true
+script = ExtResource("1_3crw3")
+
+[node name="NicknameLabel" type="Label" parent="." unique_id=1993324938]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Nickname:"
+
+[node name="NicknameLineEdit" type="LineEdit" parent="." unique_id=1523740717]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+script = ExtResource("2_x4ggl")
+
+[node name="NicknameLengthLabel" type="Label" parent="NicknameLineEdit" unique_id=574652788]
+visible = false
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+theme_override_font_sizes/font_size = 14
+text = "0/12"
+horizontal_alignment = 1
+vertical_alignment = 1

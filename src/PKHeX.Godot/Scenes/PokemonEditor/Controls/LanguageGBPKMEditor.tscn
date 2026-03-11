@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bwqitv47ew36n"]
+
+[ext_resource type="Script" path="res://Scripts/CurrentPokemon/Controls/LanguageGBPKMOptionButton.cs" id="1_u5gsy"]
+
+[node name="LanguageEditor" type="HBoxContainer" unique_id=1282183215]
+
+[node name="LanguageLabel" type="Label" parent="." unique_id=391574643]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Language:"
+
+[node name="LanguageOptionButton" type="OptionButton" parent="." unique_id=1610360463]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+alignment = 1
+allow_reselect = true
+script = ExtResource("1_u5gsy")

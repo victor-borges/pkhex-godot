@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://blu6g60atikg7"]
+
+[ext_resource type="Script" uid="uid://kolo3mv4im17" path="res://Scripts/CurrentPokemon/Controls/SpeciesOptionButton.cs" id="1_c0guk"]
+
+[node name="SpeciesEditor" type="HBoxContainer" unique_id=868487398]
+
+[node name="SpeciesLabel" type="Label" parent="." unique_id=494037520]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Species:"
+
+[node name="SpeciesOptionButton" type="OptionButton" parent="." unique_id=92631503]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+script = ExtResource("1_c0guk")

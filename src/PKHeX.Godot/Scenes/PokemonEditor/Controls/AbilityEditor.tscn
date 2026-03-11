@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bluvg5jl82ost"]
+
+[ext_resource type="Script" uid="uid://ctdtw8gifbthw" path="res://Scripts/CurrentPokemon/Controls/AbilityOptionButton.cs" id="1_c5fgx"]
+
+[node name="AbilityEditor" type="HBoxContainer" unique_id=1282183215]
+
+[node name="AbilityLabel" type="Label" parent="." unique_id=391574643]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Ability:"
+
+[node name="AbilityOptionButton" type="OptionButton" parent="." unique_id=1610360463]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+alignment = 1
+allow_reselect = true
+script = ExtResource("1_c5fgx")

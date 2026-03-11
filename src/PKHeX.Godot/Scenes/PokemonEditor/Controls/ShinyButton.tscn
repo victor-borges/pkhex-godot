@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cs5k5c6xvtv8j"]
+
+[ext_resource type="Texture2D" uid="uid://bpyn6cxiganvx" path="res://Assets/Sprites/Overlays/shiny-white.png" id="1_xu8kx"]
+[ext_resource type="Script" uid="uid://c5xe3272qn56m" path="res://Scripts/CurrentPokemon/Controls/ShinyButton.cs" id="2_faota"]
+
+[node name="ShinyButton" type="Button" unique_id=1372359880]
+custom_minimum_size = Vector2(40, 30)
+mouse_default_cursor_shape = 2
+disabled = true
+toggle_mode = true
+icon = ExtResource("1_xu8kx")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_faota")

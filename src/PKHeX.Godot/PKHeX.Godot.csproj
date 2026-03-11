@@ -11,7 +11,9 @@
     
   <ItemGroup>
     <Using Include="System" />
+    <Using Include="System.Linq" />
     <Using Include="Godot" />
     <Using Include="PKHeX.Core" />
+    <Using Include="PKHeX.Godot.Scripts" />
   </ItemGroup>
 </Project>

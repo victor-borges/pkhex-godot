@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://0g88gdkfbyda"]
+
+[ext_resource type="Texture2D" uid="uid://bma0dky1d0tsw" path="res://Assets/Sprites/Gender/gender_2.webp" id="1_ily2l"]
+[ext_resource type="Script" uid="uid://bjdu0ilaxavq1" path="res://Scripts/CurrentPokemon/Controls/GenderButton.cs" id="2_d4qcq"]
+
+[node name="GenderButton" type="Button" unique_id=594255023]
+custom_minimum_size = Vector2(40, 0)
+mouse_default_cursor_shape = 2
+disabled = true
+icon = ExtResource("1_ily2l")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_d4qcq")

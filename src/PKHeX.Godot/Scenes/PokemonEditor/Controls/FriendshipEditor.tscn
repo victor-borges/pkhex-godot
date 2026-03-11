@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b8uo1wtvdv572"]
+
+[ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/Controls/FriendshipSpinBox.cs" id="1_qiy7p"]
+
+[node name="FriendshipEditor" type="HBoxContainer" unique_id=637867771]
+
+[node name="FriendshipLabel" type="Label" parent="." unique_id=1751544660]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Friendship:"
+
+[node name="FriendshipSpinBox" type="SpinBox" parent="." unique_id=295160378]
+layout_mode = 2
+max_value = 255.0
+rounded = true
+editable = false
+script = ExtResource("1_qiy7p")

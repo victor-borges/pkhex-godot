@@ -41,6 +41,7 @@ public static class Assets
             public const string Shiny = $"{Overlay}/shiny.png";
             public const string ShinySquare = $"{Overlay}/shiny-square.png";
             public const string Alpha = $"{Overlay}/alpha.webp";
+            public const string Gigantamax = $"{Overlay}/dynamax.webp";
 
             public const string Legal = "res://Assets/Sprites/Overlays/legal.webp";
             public const string Illegal = "res://Assets/Sprites/Overlays/illegal.webp";

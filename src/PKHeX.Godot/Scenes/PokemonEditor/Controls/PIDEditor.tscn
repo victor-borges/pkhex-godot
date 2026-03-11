@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://d6hsd8td8v7w"]
+
+[ext_resource type="Script" uid="uid://c676w3wo8kajt" path="res://Scripts/CurrentPokemon/Controls/PIDLineEdit.cs" id="1_ix7sn"]
+[ext_resource type="Script" uid="uid://03t7at3fqfbe" path="res://Scripts/CurrentPokemon/Controls/RerollButton.cs" id="2_c8y3p"]
+
+[sub_resource type="SystemFont" id="SystemFont_88eia"]
+font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
+
+[sub_resource type="FontVariation" id="FontVariation_gl15w"]
+base_font = SubResource("SystemFont_88eia")
+
+[node name="PIDEditor" type="HBoxContainer" unique_id=1043410809]
+
+[node name="PIDLabel" type="Label" parent="." unique_id=1499681919]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "PID:"
+
+[node name="PIDLineEdit" type="LineEdit" parent="." unique_id=746663552]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_gl15w")
+alignment = 1
+max_length = 8
+editable = false
+expand_to_text_length = true
+emoji_menu_enabled = false
+middle_mouse_paste_enabled = false
+virtual_keyboard_enabled = false
+script = ExtResource("1_ix7sn")
+
+[node name="RerollPIDButton" type="Button" parent="." unique_id=583817568]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+text = "Reroll"
+expand_icon = true
+script = ExtResource("2_c8y3p")

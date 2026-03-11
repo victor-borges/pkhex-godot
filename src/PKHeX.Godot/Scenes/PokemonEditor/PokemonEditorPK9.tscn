@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://3le34m4t3vpu"]
+
+[ext_resource type="PackedScene" uid="uid://c832aqlqlfbww" path="res://Scenes/PokemonEditor/Controls/LegalityReportButton.tscn" id="2_uv3d5"]
+[ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="3_voh30"]
+[ext_resource type="PackedScene" uid="uid://cs5k5c6xvtv8j" path="res://Scenes/PokemonEditor/Controls/ShinyButton.tscn" id="4_c18oy"]
+[ext_resource type="Script" uid="uid://b1cdft6baxlts" path="res://Scripts/CurrentPokemon/Controls/CurrentPokemonSlot.cs" id="4_wq63x"]
+[ext_resource type="PackedScene" uid="uid://0g88gdkfbyda" path="res://Scenes/PokemonEditor/Controls/GenderButton.tscn" id="5_y7x6p"]
+[ext_resource type="PackedScene" uid="uid://d6hsd8td8v7w" path="res://Scenes/PokemonEditor/Controls/PIDEditor.tscn" id="10_71bro"]
+[ext_resource type="PackedScene" uid="uid://blu6g60atikg7" path="res://Scenes/PokemonEditor/Controls/SpeciesEditor.tscn" id="12_88eia"]
+[ext_resource type="PackedScene" uid="uid://cdlnxp52dnige" path="res://Scenes/PokemonEditor/Controls/NicknameEditor.tscn" id="13_gl15w"]
+[ext_resource type="PackedScene" uid="uid://ji2lnrau14ub" path="res://Scenes/PokemonEditor/Controls/EXPEditor.tscn" id="14_yd1c0"]
+[ext_resource type="Script" uid="uid://7ht4ioi0kwtq" path="res://Scripts/CurrentPokemon/Controls/IsEggCheckBox.cs" id="15_te52t"]
+[ext_resource type="Script" uid="uid://biwid7rqfe84i" path="res://Scripts/CurrentPokemon/Controls/InfectedCheckBox.cs" id="16_8r36q"]
+[ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/Controls/CuredCheckBox.cs" id="17_3gdpy"]
+[ext_resource type="PackedScene" uid="uid://lxc2mvhnr52q" path="res://Scenes/PokemonEditor/Controls/NatureEditor.tscn" id="17_yd1c0"]
+[ext_resource type="PackedScene" uid="uid://cbl6il4rew7ae" path="res://Scenes/PokemonEditor/Controls/StatNatureEditor.tscn" id="18_frime"]
+[ext_resource type="PackedScene" uid="uid://boee70uk273hs" path="res://Scenes/PokemonEditor/Controls/FormEditor.tscn" id="19_6owtx"]
+[ext_resource type="PackedScene" uid="uid://d4labimsomvd7" path="res://Scenes/PokemonEditor/Controls/HeldItemEditor.tscn" id="20_qwswa"]
+[ext_resource type="PackedScene" uid="uid://bluvg5jl82ost" path="res://Scenes/PokemonEditor/Controls/AbilityEditor.tscn" id="21_o0mpg"]
+[ext_resource type="PackedScene" uid="uid://b8uo1wtvdv572" path="res://Scenes/PokemonEditor/Controls/FriendshipEditor.tscn" id="22_hdh7j"]
+[ext_resource type="Script" uid="uid://dl8ox8ca2dogt" path="res://Scripts/CurrentPokemon/Controls/InfectedHBoxContainer.cs" id="25_lkom8"]
+[ext_resource type="Script" uid="uid://dba61re4o4d6c" path="res://Scripts/CurrentPokemon/Controls/PokerusStrainSpinBox.cs" id="26_yw50q"]
+[ext_resource type="Script" uid="uid://b5itqlsl1q5wv" path="res://Scripts/CurrentPokemon/Controls/PokerusDaysSpinBox.cs" id="27_ut2yo"]
+
+[node name="PokemonEditorPK9" type="VBoxContainer" unique_id=894197332]
+anchors_preset = -1
+anchor_right = 0.30703124
+anchor_bottom = 0.62222224
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1606253799]
+layout_mode = 2
+alignment = 2
+
+[node name="LegalityReportButton" parent="HBoxContainer" unique_id=1188337260 instance=ExtResource("2_uv3d5")]
+layout_mode = 2
+
+[node name="CurrentPokemonSlot" parent="HBoxContainer" unique_id=1810034235 instance=ExtResource("3_voh30")]
+custom_minimum_size = Vector2(120, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+disabled = true
+script = ExtResource("4_wq63x")
+
+[node name="ShinyPIDGenderHBoxContainer" type="HBoxContainer" parent="." unique_id=2107254492]
+layout_mode = 2
+
+[node name="ShinyButton" parent="ShinyPIDGenderHBoxContainer" unique_id=1372359880 instance=ExtResource("4_c18oy")]
+layout_mode = 2
+
+[node name="GenderButton" parent="ShinyPIDGenderHBoxContainer" unique_id=594255023 instance=ExtResource("5_y7x6p")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="ShinyPIDGenderHBoxContainer" unique_id=1751335239]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PIDEditor" parent="ShinyPIDGenderHBoxContainer" unique_id=1043410809 instance=ExtResource("10_71bro")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SpeciesEditor" parent="." unique_id=868487398 instance=ExtResource("12_88eia")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NicknameEditor" parent="." unique_id=1021579800 instance=ExtResource("13_gl15w")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EXPEditor" parent="." unique_id=1879873129 instance=ExtResource("14_yd1c0")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NatureEditor" parent="." unique_id=1831859519 instance=ExtResource("17_yd1c0")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="StatNatureEditor" parent="." unique_id=1997526162 instance=ExtResource("18_frime")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FormEditor" parent="." unique_id=649075395 instance=ExtResource("19_6owtx")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HeldItemEditor" parent="." unique_id=1542738752 instance=ExtResource("20_qwswa")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AbilityEditor" parent="." unique_id=1282183215 instance=ExtResource("21_o0mpg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FriendshipEditor" parent="." unique_id=637867771 instance=ExtResource("22_hdh7j")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FlagsHBoxContainer" type="HBoxContainer" parent="." unique_id=1652334427]
+layout_mode = 2
+
+[node name="IsEggCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=833870975]
+layout_mode = 2
+disabled = true
+text = "Is Egg"
+script = ExtResource("15_te52t")
+
+[node name="InfectedCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=1066573848]
+layout_mode = 2
+disabled = true
+text = "Infected"
+script = ExtResource("16_8r36q")
+
+[node name="CuredCheckBox" type="CheckBox" parent="FlagsHBoxContainer" unique_id=1216507098]
+layout_mode = 2
+disabled = true
+text = "Cured"
+script = ExtResource("17_3gdpy")
+
+[node name="PokerusEditor" type="HBoxContainer" parent="." unique_id=1702231932]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+script = ExtResource("25_lkom8")
+
+[node name="PokerusStrainLabel" type="Label" parent="PokerusEditor" unique_id=573154992]
+layout_mode = 2
+text = "PkRs: "
+
+[node name="PokerusStrainSpinBox" type="SpinBox" parent="PokerusEditor" unique_id=1275438262]
+layout_mode = 2
+max_value = 15.0
+rounded = true
+editable = false
+script = ExtResource("26_yw50q")
+
+[node name="PokerusDaysLabel" type="Label" parent="PokerusEditor" unique_id=631175149]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "d: "
+
+[node name="PokerusDaysSpinBox" type="SpinBox" parent="PokerusEditor" unique_id=1332210517]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 0.0
+rounded = true
+editable = false
+script = ExtResource("27_ut2yo")

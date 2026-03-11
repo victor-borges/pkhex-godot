@@ -9,7 +9,7 @@ public static class FormRepository
     {
         try
         {
-            return FormConverter.GetFormList((ushort)species, GameInfo.Strings.types, GameInfo.Strings.forms, [], context)
+            return FormConverter.GetFormList((ushort)species, GameInfo.Strings.types, GameInfo.Strings.forms, GameInfo.GenderSymbolUnicode, context)
                 .Select((form, index) => new FormDefinition((ushort)index, form));
         }
         catch (ArgumentOutOfRangeException)

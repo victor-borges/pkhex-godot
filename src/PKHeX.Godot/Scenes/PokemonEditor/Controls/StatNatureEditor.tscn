@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cbl6il4rew7ae"]
+
+[ext_resource type="Script" uid="uid://c7n1aj6fuy62b" path="res://Scripts/CurrentPokemon/Controls/StatNatureOptionButton.cs" id="1_sad30"]
+
+[node name="StatNatureHBoxContainer" type="HBoxContainer" unique_id=1997526162]
+
+[node name="StatNatureLabel" type="Label" parent="." unique_id=1768854707]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Stat Nature:"
+
+[node name="StatNatureOptionButton" type="OptionButton" parent="." unique_id=1896634651]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+alignment = 1
+allow_reselect = true
+script = ExtResource("1_sad30")

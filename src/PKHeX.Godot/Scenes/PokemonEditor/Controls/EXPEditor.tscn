@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ji2lnrau14ub"]
+
+[ext_resource type="Script" uid="uid://ccy53loccgyyk" path="res://Scripts/CurrentPokemon/Controls/EXPSpinBox.cs" id="1_q5tso"]
+[ext_resource type="Script" uid="uid://bm5u5ej726qx2" path="res://Scripts/CurrentPokemon/Controls/LevelSpinBox.cs" id="2_sus7c"]
+
+[node name="EXPEditor" type="HBoxContainer" unique_id=1879873129]
+
+[node name="EXPLabel" type="Label" parent="." unique_id=707362280]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "EXP:"
+
+[node name="EXPSpinBox" type="SpinBox" parent="." unique_id=377921683]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1250000.0
+rounded = true
+editable = false
+script = ExtResource("1_q5tso")
+
+[node name="Spacer" type="Control" parent="." unique_id=1917309493]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="LevelLabel" type="Label" parent="." unique_id=6848804]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Level:"
+
+[node name="LevelSpinBox" type="SpinBox" parent="." unique_id=338339490]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
+rounded = true
+editable = false
+script = ExtResource("2_sus7c")

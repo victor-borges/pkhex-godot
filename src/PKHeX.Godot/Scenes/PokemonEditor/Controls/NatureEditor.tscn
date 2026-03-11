@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://lxc2mvhnr52q"]
+
+[ext_resource type="Script" uid="uid://dm1jyb8p4q5df" path="res://Scripts/CurrentPokemon/Controls/NatureOptionButton.cs" id="1_jdftw"]
+
+[node name="NatureEditor" type="HBoxContainer" unique_id=1831859519]
+
+[node name="NatureLabel" type="Label" parent="." unique_id=1303524689]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Nature:"
+
+[node name="NatureOptionButton" type="OptionButton" parent="." unique_id=787312698]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+alignment = 1
+allow_reselect = true
+script = ExtResource("1_jdftw")
