@@ -17,4 +17,9 @@
     <Using Include="PKHeX.Core" />
     <Using Include="PKHeX.Godot.Scripts" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Scenes\**\*.tscn" />
+    <Content Include="Styles\**\*.tres" />
+  </ItemGroup>
 </Project>

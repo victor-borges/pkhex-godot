@@ -36,13 +36,14 @@ public partial class FormOptionButton : OptionButton
 
         if (_application.Game is null || _application.CurrentPokemon is null || !_application.CurrentPokemon.PersonalInfo.HasForms)
         {
+            Selected = -1;
             Disabled = true;
             return;
         }
 
         var forms = _application.CurrentPokemon.Forms.ToArray();
 
-        if (forms.Length is 0 || forms is [{ ByteId: 0 }])
+        if (forms.Length is 0 || forms is [{ Value: 0 }])
         {
             Disabled = true;
         }
@@ -50,11 +51,10 @@ public partial class FormOptionButton : OptionButton
         {
             foreach (var formDefinition in forms)
             {
-                var byteId = formDefinition.ByteId;
-                AddItem(formDefinition.Name, byteId);
+                AddItem(formDefinition.Text, formDefinition.Value);
 
-                if (byteId == _application.CurrentPokemon.Form)
-                    Selected = GetItemIndex(byteId);
+                if (formDefinition.Value == _application.CurrentPokemon.Form)
+                    Selected = GetItemIndex(formDefinition.Value);
             }
         }
 

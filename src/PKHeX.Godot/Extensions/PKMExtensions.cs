@@ -18,14 +18,14 @@ public static class PKMExtensions
             pkm.SetIsShiny(isShiny);
         }
 
-        public IEnumerable<FormDefinition> Forms
+        public IEnumerable<ComboItem> Forms
         {
             get
             {
                 try
                 {
                     return FormConverter.GetFormList(pkm.Species, GameInfo.Strings.types, GameInfo.Strings.forms, GameInfo.GenderSymbolUnicode, pkm.Context)
-                        .Select((form, index) => new FormDefinition((ushort)index, form));
+                        .Select((form, index) => new ComboItem(form, index));
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -34,16 +34,4 @@ public static class PKMExtensions
             }
         }
     }
-}
-
-public record FormDefinition(ushort Id, string Name)
-{
-    public byte ByteId => (byte)Id;
-
-    public bool IsNormal => Name.Equals("Normal", StringComparison.InvariantCultureIgnoreCase);
-    public bool IsAlolan => Name.Equals("Alola", StringComparison.InvariantCultureIgnoreCase);
-    public bool IsGalarian => Name.Equals("Galar", StringComparison.InvariantCultureIgnoreCase);
-    public bool IsHisuian => Name.Equals("Hisui", StringComparison.InvariantCultureIgnoreCase);
-
-    public static readonly FormDefinition Default = new(0, string.Empty);
 }
