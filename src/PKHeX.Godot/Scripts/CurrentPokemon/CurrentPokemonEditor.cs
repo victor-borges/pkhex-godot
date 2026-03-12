@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon;
 
 public partial class CurrentPokemonEditor : Control
@@ -32,7 +30,7 @@ public partial class CurrentPokemonEditor : Control
         if (_application.Game is null)
             return;
 
-        var generation = _application.Game.SaveFile.Generation;
+        var generation = _application.Game.Generation;
 
         if (!_pokemonEditorScenes.TryGetValue(generation, out var scene))
             throw new NotImplementedException($"No support for generation {generation} games");

@@ -23,9 +23,13 @@ public partial class SpeciesOptionButton : OptionButton
         if (_application.Game is null)
             return;
 
-        foreach (var species in GameInfo.FilteredSources.Species)
+        var speciesSource = GameInfo.FilteredSources.Species
+            .Where(s => s.Value is not 0)
+            .OrderBy(s => s.Value);
+
+        foreach (var species in speciesSource)
         {
-            AddItem(species.Text, species.Value);
+            AddItem($"{species.Text} [{species.Value}]", species.Value);
         }
     }
 
@@ -35,7 +39,7 @@ public partial class SpeciesOptionButton : OptionButton
             return;
 
         var id = GetItemId((int)index);
-        _application.CurrentPokemon.Pkm.Species = (ushort)id;
+        _application.CurrentPokemon.Species = (ushort)id;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -44,13 +48,12 @@ public partial class SpeciesOptionButton : OptionButton
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
             Disabled = true;
-            Text = " ";
+            Selected = -1;
         }
         else
         {
             Disabled = false;
-            var species = _application.CurrentPokemon.Species;
-            Text = $"{species.Name} [{species.Id}]";
+            Selected = GetItemIndex(_application.CurrentPokemon.Species);
         }
     }
 }

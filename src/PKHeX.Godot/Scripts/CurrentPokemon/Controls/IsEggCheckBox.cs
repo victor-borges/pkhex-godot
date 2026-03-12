@@ -14,7 +14,10 @@ public partial class IsEggCheckBox : CheckBox
 
     private void OnToggled(bool toggledOn)
     {
-        _application.CurrentPokemon?.Egg.IsEgg = toggledOn;
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.IsEgg = toggledOn;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -28,7 +31,7 @@ public partial class IsEggCheckBox : CheckBox
         else
         {
             Disabled = false;
-            SetPressedNoSignal(_application.CurrentPokemon.Pkm.IsEgg);
+            SetPressedNoSignal(_application.CurrentPokemon.IsEgg);
         }
     }
 }

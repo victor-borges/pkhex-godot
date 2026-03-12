@@ -12,7 +12,10 @@ public partial class CuredCheckBox : CheckBox
 
     private void OnButtonPressed(bool pressed)
     {
-        _application.CurrentPokemon?.Pkm.IsPokerusCured = pressed;
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.IsPokerusCured = pressed;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -26,7 +29,7 @@ public partial class CuredCheckBox : CheckBox
         else
         {
             Disabled = false;
-            SetPressedNoSignal(_application.CurrentPokemon.Pkm.IsPokerusCured);
+            SetPressedNoSignal(_application.CurrentPokemon.IsPokerusCured);
         }
     }
 }

@@ -19,11 +19,11 @@ public partial class NicknameCheckBox : CheckBox
 
         if (toggledOn)
         {
-            _application.CurrentPokemon?.Pkm.IsNicknamed = true;
+            _application.CurrentPokemon.IsNicknamed = true;
         }
         else
         {
-            _application.CurrentPokemon?.Pkm.ClearNickname();
+            _application.CurrentPokemon.ClearNickname();
         }
 
         _application.EmitEventCurrentPokemonChanged();
@@ -39,7 +39,7 @@ public partial class NicknameCheckBox : CheckBox
         else
         {
             Disabled = false;
-            var isNicknamed = _application.CurrentPokemon.Pkm.IsNicknamed;
+            var isNicknamed = _application.CurrentPokemon.IsNicknamed;
             SetPressedNoSignal(isNicknamed);
         }
     }

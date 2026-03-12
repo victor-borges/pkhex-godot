@@ -23,7 +23,7 @@ public partial class LanguageOptionButton : OptionButton
         if (_application.Game is null)
             return;
 
-        var languages = _application.Game.SaveFile.Generation >= 8
+        var languages = _application.Game.Generation >= 8
             ? GameInfo.FilteredSources.Languages.Append(GameInfo.Sources.Empty)
             : GameInfo.FilteredSources.Languages;
 
@@ -39,7 +39,7 @@ public partial class LanguageOptionButton : OptionButton
             return;
 
         var id = GetItemId((int)index);
-        _application.CurrentPokemon.Pkm.Language = id;
+        _application.CurrentPokemon.Language = id;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -52,7 +52,7 @@ public partial class LanguageOptionButton : OptionButton
         }
         else
         {
-            Selected = GetItemIndex(_application.CurrentPokemon.Pkm.Language);
+            Selected = GetItemIndex(_application.CurrentPokemon.Language);
             Disabled = false;
         }
     }

@@ -12,7 +12,7 @@ public partial class CurrentPokemonSprite : TextureRect
 
     private void CurrentPokemonChanged()
     {
-        Texture = _application.CurrentPokemon != null && _application.CurrentPokemon.Species.Id != 0
+        Texture = _application.CurrentPokemon != null && _application.CurrentPokemon.Species != 0
             ? GD.Load<Texture2D>(Assets.PokemonSprite(_application.CurrentPokemon))
             : null;
     }

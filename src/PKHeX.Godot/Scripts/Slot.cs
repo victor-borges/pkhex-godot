@@ -1,11 +1,10 @@
-using PKHeX.Facade.Extensions;
-using PKHeX.Facade.Pokemons;
+using PKHeX.Godot.Extensions;
 
 namespace PKHeX.Godot.Scripts;
 
 public partial class Slot : Button
 {
-    protected Pokemon? Pokemon;
+    protected PKM? Pokemon;
 
     protected Application Application = null!;
 
@@ -32,9 +31,16 @@ public partial class Slot : Button
         _shinyPanel = GetNode<Panel>("%ShinyPanel");
         _markerPanel = GetNode<Panel>("%MarkerPanel");
         _heldItemPanel = GetNode<Panel>("%HeldItemPanel");
+
+        Pressed += OnButtonPressed;
     }
 
-    protected void SetPokemon(Pokemon? pokemon)
+    private void OnButtonPressed()
+    {
+        Application.CurrentPokemon = Pokemon?.Clone();
+    }
+
+    protected void SetPokemon(PKM? pokemon)
     {
         Pokemon = pokemon;
 
@@ -44,12 +50,12 @@ public partial class Slot : Button
         _heldItemPanel.Visible = false;
         _legalitySprite.Visible = false;
 
-        if (pokemon is null || pokemon.Species.Id is 0)
+        if (pokemon is null || pokemon.Species is 0)
             return;
 
         var pokemonSprite = Assets.PokemonSprite(pokemon);
 
-        _legalitySprite.Visible = pokemon.Species.Id != 0 && !pokemon.Legality().Valid;
+        _legalitySprite.Visible = pokemon.Species != 0 && !pokemon.Legality.Valid;
 
         if (pokemon.IsShiny)
         {
@@ -64,18 +70,18 @@ public partial class Slot : Button
             _shinyPanel.Visible = false;
         }
 
-        if (pokemon.Pkm is IAlphaReadOnly { IsAlpha: true })
+        if (pokemon is IAlphaReadOnly { IsAlpha: true })
         {
             _markerSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Overlays.Alpha);
             _markerPanel.Visible = true;
         }
-        else if (pokemon.Pkm is IGigantamaxReadOnly { CanGigantamax: true })
+        else if (pokemon is IGigantamaxReadOnly { CanGigantamax: true })
         {
             _markerSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Overlays.Gigantamax);
             _markerPanel.Visible = true;
         }
 
-        if (pokemon.Egg.IsEgg)
+        if (pokemon.IsEgg)
         {
             _heldItemSprite.Texture = GD.Load<Texture2D>(pokemonSprite);
             _heldItemPanel.Visible = true;
@@ -83,13 +89,13 @@ public partial class Slot : Button
             _pokemonSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Egg);
             _pokemonSprite.Visible = true;
         }
-        else if (!pokemon.HeldItem.IsNone)
+        else if (pokemon.HeldItem is not 0)
         {
-            _heldItemSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.HeldItem(pokemon.HeldItem.Id));
+            _heldItemSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.HeldItem(pokemon.HeldItem));
             _heldItemPanel.Visible = true;
         }
 
-        if (!pokemon.Egg.IsEgg)
+        if (!pokemon.IsEgg)
         {
             _pokemonSprite.Texture = GD.Load<Texture2D>(pokemonSprite);
             _pokemonSprite.Visible = true;

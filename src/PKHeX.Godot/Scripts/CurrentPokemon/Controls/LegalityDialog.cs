@@ -1,4 +1,4 @@
-using PKHeX.Facade.Extensions;
+using PKHeX.Godot.Extensions;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
@@ -28,7 +28,7 @@ public partial class LegalityDialog : AcceptDialog
 
         _foldableContainer.Folded = true;
 
-        var legalityAnalysis = _application.CurrentPokemon.Legality();
+        var legalityAnalysis = _application.CurrentPokemon.Legality;
         var localizer = LegalityLocalizationContext.Create(legalityAnalysis, GameInfo.CurrentLanguage);
         var simpleReport = localizer.Report(false);
         var fullReport = localizer.Report(true);
@@ -53,12 +53,12 @@ public partial class LegalityDialog : AcceptDialog
         if (_application.CurrentPokemon is null)
             return;
 
-        var legalityAnalysis = _application.CurrentPokemon.Legality();
+        var legalityAnalysis = _application.CurrentPokemon.Legality;
         var localizer = LegalityLocalizationContext.Create(legalityAnalysis, GameInfo.CurrentLanguage);
         var fullReport = localizer.Report(true);
         fullReport = fullReport.Replace("===\n", "");
 
-        var encounterTextLines = _application.CurrentPokemon.Legality().EncounterOriginal.GetTextLines();
+        var encounterTextLines = legalityAnalysis.EncounterOriginal.GetTextLines();
         var clipboardContent = fullReport + System.Environment.NewLine + System.Environment.NewLine +
                   string.Join(System.Environment.NewLine, encounterTextLines);
 

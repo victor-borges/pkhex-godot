@@ -15,7 +15,7 @@ public partial class BoxButton : Button
         if (_application.Game is null)
             return;
 
-        Text = _application.Game.SaveFile.Version is GameVersion.PLA
+        Text = _application.Game.Version is GameVersion.PLA
             ? $"Pasture {boxIndex + 1}"
             : $"Box {boxIndex + 1}";
     }

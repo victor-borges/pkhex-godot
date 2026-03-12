@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://cblydlolivtdp"]
+
+[ext_resource type="Texture2D" uid="uid://dkhfaahoiil6y" path="res://Assets/Cursor/navigation_w.svg" id="1_dx27i"]
+[ext_resource type="Script" uid="uid://d3adw81k7s1a4" path="res://Scripts/Box/PreviousBoxButton.cs" id="2_w6k37"]
+[ext_resource type="Script" uid="uid://biyk02s7veelk" path="res://Scripts/Box/BoxButton.cs" id="3_1ejte"]
+[ext_resource type="Texture2D" uid="uid://c10p75apo8ukf" path="res://Assets/Cursor/navigation_e.svg" id="4_74cfv"]
+[ext_resource type="Script" uid="uid://bakw6mtl0m7" path="res://Scripts/Box/NextBoxButton.cs" id="5_51hq1"]
+[ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="6_8tnl2"]
+[ext_resource type="Script" uid="uid://dsk3neap7ue30" path="res://Scripts/Box/BoxSlot.cs" id="7_hf13b"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_6uvgj"]
+button_index = 9
+
+[sub_resource type="Shortcut" id="Shortcut_cqssq"]
+events = [SubResource("InputEventJoypadButton_6uvgj")]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_fts04"]
+button_index = 10
+
+[sub_resource type="Shortcut" id="Shortcut_rquxj"]
+events = [SubResource("InputEventJoypadButton_fts04")]
+
+[node name="BoxVBoxContainer" type="VBoxContainer" unique_id=1374759851]
+anchors_preset = -1
+anchor_right = 0.3715278
+anchor_bottom = 0.5555556
+offset_bottom = -3.0517578e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1353185615]
+layout_mode = 2
+
+[node name="PreviousBoxButton" type="Button" parent="HBoxContainer" unique_id=1706947920 node_paths=PackedStringArray("shortcut_context")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+shortcut_context = NodePath("../..")
+shortcut = SubResource("Shortcut_cqssq")
+icon = ExtResource("1_dx27i")
+icon_alignment = 1
+script = ExtResource("2_w6k37")
+metadata/_edit_use_anchors_ = true
+
+[node name="BoxButton" type="Button" parent="HBoxContainer" unique_id=826863832]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Box 1"
+script = ExtResource("3_1ejte")
+metadata/_edit_use_anchors_ = true
+
+[node name="NextBoxButton" type="Button" parent="HBoxContainer" unique_id=1178663272 node_paths=PackedStringArray("shortcut_context")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+shortcut_context = NodePath("../..")
+shortcut = SubResource("Shortcut_rquxj")
+icon = ExtResource("4_74cfv")
+icon_alignment = 1
+script = ExtResource("5_51hq1")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1532514693]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Box" type="GridContainer" parent="PanelContainer" unique_id=645785973]
+layout_mode = 2
+columns = 5
+
+[node name="BoxSlot0" parent="PanelContainer/Box" unique_id=547810488 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 0
+
+[node name="BoxSlot1" parent="PanelContainer/Box" unique_id=174699870 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 1
+
+[node name="BoxSlot2" parent="PanelContainer/Box" unique_id=1795686802 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 2
+
+[node name="BoxSlot3" parent="PanelContainer/Box" unique_id=125284386 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 3
+
+[node name="BoxSlot4" parent="PanelContainer/Box" unique_id=909359913 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 4
+
+[node name="BoxSlot5" parent="PanelContainer/Box" unique_id=2007462748 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 5
+
+[node name="BoxSlot6" parent="PanelContainer/Box" unique_id=1864162924 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 6
+
+[node name="BoxSlot7" parent="PanelContainer/Box" unique_id=1181977213 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 7
+
+[node name="BoxSlot8" parent="PanelContainer/Box" unique_id=32930340 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 8
+
+[node name="BoxSlot9" parent="PanelContainer/Box" unique_id=401934779 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 9
+
+[node name="BoxSlot10" parent="PanelContainer/Box" unique_id=960931596 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 10
+
+[node name="BoxSlot11" parent="PanelContainer/Box" unique_id=1722666397 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 11
+
+[node name="BoxSlot12" parent="PanelContainer/Box" unique_id=1946132094 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 12
+
+[node name="BoxSlot13" parent="PanelContainer/Box" unique_id=1522270026 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 13
+
+[node name="BoxSlot14" parent="PanelContainer/Box" unique_id=1883189028 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 14
+
+[node name="BoxSlot15" parent="PanelContainer/Box" unique_id=472801884 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 15
+
+[node name="BoxSlot16" parent="PanelContainer/Box" unique_id=577010679 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 16
+
+[node name="BoxSlot17" parent="PanelContainer/Box" unique_id=1355804136 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 17
+
+[node name="BoxSlot18" parent="PanelContainer/Box" unique_id=989160855 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 18
+
+[node name="BoxSlot19" parent="PanelContainer/Box" unique_id=1322141406 instance=ExtResource("6_8tnl2")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("7_hf13b")
+SlotIndex = 19

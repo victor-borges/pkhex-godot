@@ -18,7 +18,7 @@ public partial class InfectedHBoxContainer : HBoxContainer
         }
         else
         {
-            Visible = _application.CurrentPokemon.Pkm.IsPokerusInfected;
+            Visible = _application.CurrentPokemon.IsPokerusInfected;
         }
     }
 }

@@ -14,7 +14,10 @@ public partial class PokerusDaysSpinBox : SpinBox
 
     private void OnValueChanged(double value)
     {
-        _application.CurrentPokemon?.Pkm.PokerusDays = (int)value;
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.PokerusDays = (int)value;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -27,11 +30,11 @@ public partial class PokerusDaysSpinBox : SpinBox
         }
         else
         {
-            var pkm = _application.CurrentPokemon.Pkm;
+            var pkm = _application.CurrentPokemon;
 
             Editable = pkm.IsPokerusInfected;
             SetMax(Pokerus.GetMaxDuration(pkm.PokerusStrain));
-            SetValueNoSignal(_application.CurrentPokemon.Pkm.PokerusDays);
+            SetValueNoSignal(pkm.PokerusDays);
         }
     }
 }

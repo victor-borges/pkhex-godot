@@ -1,4 +1,4 @@
-using PKHeX.Facade.Extensions;
+using PKHeX.Godot.Extensions;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
@@ -20,15 +20,13 @@ public partial class LegalityButton : TextureButton
             return;
         }
 
-        Visible = _application.CurrentPokemon.Species.Id != 0;
-        var la = _application.CurrentPokemon.Legality();
-        var valid = la.Valid;
+        Visible = _application.CurrentPokemon.Species != 0;
 
-        if (!valid)
+        if (!_application.CurrentPokemon.Legality.Valid)
         {
             TextureNormal = GD.Load<Texture2D>(Assets.Sprites.Overlays.Illegal);
         }
-        if (_application.CurrentPokemon.Pkm.Format >= 8 && MoveInfo.IsDummiedMoveAny(_application.CurrentPokemon.Pkm))
+        if (_application.CurrentPokemon.Format >= 8 && MoveInfo.IsDummiedMoveAny(_application.CurrentPokemon))
         {
             TextureNormal = GD.Load<Texture2D>(Assets.Sprites.Overlays.Illegal); // TODO: change to hint
         }

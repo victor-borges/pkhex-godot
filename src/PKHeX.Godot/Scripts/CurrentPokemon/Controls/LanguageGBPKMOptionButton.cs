@@ -8,46 +8,18 @@ public partial class LanguageGBPKMOptionButton : OptionButton
     {
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
 
         ItemSelected += OnLanguageSelected;
-
-        if (_application.Game is not null)
-            OnFileLoaded();
-    }
-
-    private void OnFileLoaded()
-    {
-        Clear();
-
-        if (_application.Game is null || _application.Game.SaveFile.Generation > 2)
-            return;
-
-        var languages = GameInfo.FilteredSources.Languages;
-        var gameLanguage = _application.Game.SaveFile.Language;
-
-        foreach (var language in languages)
-        {
-            AddItem(language.Text, language.Value);
-
-            if (gameLanguage == (int)LanguageID.Japanese)
-            {
-                SetItemDisabled(GetItemIndex(language.Value), language.Value != (int)LanguageID.Japanese);
-            }
-            else
-            {
-                SetItemDisabled(GetItemIndex(language.Value), language.Value == (int)LanguageID.Japanese);
-            }
-        }
     }
 
     private void OnLanguageSelected(long index)
     {
-        if (_application.CurrentPokemon is null)
+        if (_application.CurrentPokemon is not GBPKML pk1)
             return;
 
         var id = GetItemId((int)index);
-        _application.CurrentPokemon.Pkm.Language = id;
+        pk1.SetNotNicknamed(id);
+
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -60,16 +32,44 @@ public partial class LanguageGBPKMOptionButton : OptionButton
             return;
         }
 
-        Disabled = false;
+        Clear();
 
-        var language = _application.CurrentPokemon.Pkm.Language;
-
-        if (_application.CurrentPokemon.Pkm is PK1 pk1)
+        Dictionary<string, List<ComboItem>> nameLangMap = [];
+        foreach (var language in GameInfo.FilteredSources.Languages)
         {
-            language = _application.Game.SaveFile.Language;
-            language = pk1.IsSpeciesNameMatch(language) ? language : pk1.GuessedLanguage(language);
+            if (language.Value == (int)LanguageID.Korean && _application.Game.Generation == 1)
+                continue;
+
+            var speciesName = SpeciesName.GetSpeciesNameGeneration(
+                _application.CurrentPokemon.Species, language.Value, _application.Game.Generation);
+
+            if (nameLangMap.TryGetValue(speciesName, out var ids))
+                ids.Add(language);
+            else
+                nameLangMap[speciesName] = [language];
         }
 
-        Selected = GetItemIndex(language);
+        foreach (var (_, languages) in nameLangMap)
+        {
+            var text = languages.Select(lang => lang.Text).Aggregate((a, b) => $"{a} or {b}");
+            var value = languages[0].Value;
+            AddItem(text, value);
+
+            if (_application.Game.Language == (int)LanguageID.Japanese)
+            {
+                SetItemDisabled(GetItemIndex(value), value != (int)LanguageID.Japanese);
+            }
+            else
+            {
+                SetItemDisabled(GetItemIndex(value), value == (int)LanguageID.Japanese);
+            }
+
+            if (languages.Select(l => l.Value).Contains(_application.CurrentPokemon.Language))
+            {
+                Selected = GetItemIndex(languages[0].Value);
+            }
+        }
+
+        Disabled = false;
     }
 }

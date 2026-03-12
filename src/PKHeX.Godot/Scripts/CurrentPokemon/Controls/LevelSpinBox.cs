@@ -16,7 +16,7 @@ public partial class LevelSpinBox : SpinBox
         if (_application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.ChangeLevel((int)value);
+        _application.CurrentPokemon.CurrentLevel = (byte)value;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -30,7 +30,7 @@ public partial class LevelSpinBox : SpinBox
         else
         {
             Editable = true;
-            SetValueNoSignal(_application.CurrentPokemon.Level);
+            SetValueNoSignal(_application.CurrentPokemon.CurrentLevel);
         }
     }
 }

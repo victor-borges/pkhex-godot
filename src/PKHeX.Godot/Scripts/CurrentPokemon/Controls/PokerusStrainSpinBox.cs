@@ -14,7 +14,10 @@ public partial class PokerusStrainSpinBox : SpinBox
 
     private void OnValueChanged(double value)
     {
-        _application.CurrentPokemon?.Pkm.PokerusStrain = (int)value;
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.PokerusStrain = (int)value;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -27,8 +30,8 @@ public partial class PokerusStrainSpinBox : SpinBox
         }
         else
         {
-            Editable = _application.CurrentPokemon.Pkm.IsPokerusInfected;
-            SetValueNoSignal(_application.CurrentPokemon.Pkm.PokerusStrain);
+            Editable = _application.CurrentPokemon.IsPokerusInfected;
+            SetValueNoSignal(_application.CurrentPokemon.PokerusStrain);
         }
     }
 }

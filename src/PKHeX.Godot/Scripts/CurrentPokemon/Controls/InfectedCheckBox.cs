@@ -14,7 +14,10 @@ public partial class InfectedCheckBox : CheckBox
 
     private void OnToggled(bool toggledOn)
     {
-        _application.CurrentPokemon?.Pkm.IsPokerusInfected = toggledOn;
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.IsPokerusInfected = toggledOn;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -28,7 +31,7 @@ public partial class InfectedCheckBox : CheckBox
         else
         {
             Disabled = false;
-            SetPressedNoSignal(_application.CurrentPokemon.Pkm.IsPokerusInfected);
+            SetPressedNoSignal(_application.CurrentPokemon.IsPokerusInfected);
         }
     }
 }

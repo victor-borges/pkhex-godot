@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://pt02x0donl1j"]
 
 [ext_resource type="Script" uid="uid://b4m71lfndmts" path="res://Scripts/CurrentPokemon/CurrentPokemonEditor.cs" id="2_jw32o"]
-[ext_resource type="PackedScene" uid="uid://igkio8ea5ydg" path="res://Scenes/Box.tscn" id="2_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://cmtktjvxbuxfb" path="res://Scenes/Party.tscn" id="2_v1gob"]
+[ext_resource type="Script" uid="uid://blwfqiqgv17oq" path="res://Scripts/BoxTab.cs" id="3_jw32o"]
 [ext_resource type="Script" uid="uid://rp7efqxhodq1" path="res://Scripts/OpenFileButton.cs" id="3_v1gob"]
 [ext_resource type="Script" uid="uid://dedta6fhnkq1w" path="res://Scripts/ImportPCDataFileButton.cs" id="4_jw32o"]
 
@@ -44,14 +44,18 @@ anchor_bottom = 0.8963964
 
 [node name="Box" type="Control" parent="TabContainer" unique_id=1487783007]
 layout_mode = 2
+script = ExtResource("3_jw32o")
 metadata/_tab_index = 1
 
-[node name="Box" parent="TabContainer/Box" unique_id=811631958 instance=ExtResource("2_pbw6q")]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Box" unique_id=389317364]
 layout_mode = 1
-anchor_left = 0.02785928
-anchor_top = 0.06217847
-anchor_right = 0.97668636
-anchor_bottom = 0.95996416
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SAV" type="Control" parent="TabContainer" unique_id=1124307158]
 visible = false

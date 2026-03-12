@@ -33,7 +33,7 @@ public partial class NatureOptionButton : OptionButton
         if (id >= (long)Nature.Random || _application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.Pkm.Nature = (Nature)id;
+        _application.CurrentPokemon.Nature = (Nature)id;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -46,7 +46,7 @@ public partial class NatureOptionButton : OptionButton
         else
         {
             Disabled = false;
-            Selected = GetItemIndex((int)_application.CurrentPokemon.Natures.Nature);
+            Selected = GetItemIndex((int)_application.CurrentPokemon.Nature);
         }
     }
 }

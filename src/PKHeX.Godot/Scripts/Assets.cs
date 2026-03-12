@@ -1,4 +1,4 @@
-using PKHeX.Facade.Pokemons;
+using PKHeX.Godot.Extensions;
 using static PKHeX.Core.Species;
 
 namespace PKHeX.Godot.Scripts;
@@ -49,18 +49,20 @@ public static class Assets
     }
 
     private const string BasePath = "res://Assets/Sprites/Pokemon";
+    private static string NormalPath(ushort species) => $"{BasePath}/{species}.png";
     private static string NormalPath(string id) => $"{BasePath}/{id}.png";
     private static string FemalePath(string id) => $"{BasePath}/Female/{id}.png";
     private static string ShinyPath(string id) => $"{BasePath}/Shiny/{id}.png";
     private static string ShinyFemalePath(string id) => $"{BasePath}/Shiny/Female/{id}.png";
 
-    public static string PokemonSprite(Pokemon pokemon)
+    public static string PokemonSprite(ushort species) => NormalPath(species);
+
+    public static string PokemonSprite(PKM pkm)
     {
-        var pkm = pokemon.Pkm;
-        var mappedSpriteId = GetMappedSpriteId(pokemon);
+        var mappedSpriteId = GetMappedSpriteId(pkm);
 
         var isShiny = pkm.IsShiny;
-        var isFemale = pkm.Gender is (int)Gender.Female && SpeciesWithFemaleSprites.Contains(pokemon.Species.Species);
+        var isFemale = pkm.Gender is (int)Gender.Female && SpeciesWithFemaleSprites.Contains((Species)pkm.Species);
 
         if (isShiny && isFemale && ResourceLoader.Exists(ShinyFemalePath(mappedSpriteId)))
             return ShinyFemalePath(mappedSpriteId);
@@ -74,9 +76,9 @@ public static class Assets
         return NormalPath(mappedSpriteId);
     }
 
-    private static string GetMappedSpriteId(Pokemon pokemon)
+    private static string GetMappedSpriteId(PKM pokemon)
     {
-        return (pokemon.Species.Species, pokemon.Form.Form.Name) switch
+        return ((Species)pokemon.Species, pokemon.FormName) switch
         {
             (Unown, "A") => "201-a",
             (Unown, "B") => "201-b",
@@ -503,18 +505,16 @@ public static class Assets
             (Tatsugiri, "Droopy-Mega") => "10323",
             (Tatsugiri, "Stretchy-Mega") => "10324",
             (Baxcalibur, "Mega") => "10325",
-            _ => pokemon.Species.Id.ToString()
+            _ => pokemon.Species.ToString()
         };
     }
 
-    private static string GetAlcremieSprite(Pokemon pokemon)
+    private static string GetAlcremieSprite(PKM pokemon)
     {
-        if (pokemon.Species.Species is not Alcremie || pokemon.Pkm is not IFormArgument f)
+        if (pokemon.Species is not (ushort)Alcremie || pokemon is not IFormArgument pkmFormArgument)
             return ((int)Alcremie).ToString();
 
-        var formArgument = f.FormArgument;
-
-        var flavor = pokemon.Form.Form.Name switch
+        var flavor = pokemon.FormName switch
         {
             "Caramel Swirl" => "caramel-swirl",
             "Lemon Cream" => "lemon-cream",
@@ -528,7 +528,7 @@ public static class Assets
             _ => null
         };
 
-        var topping = (AlcremieDecoration)formArgument switch
+        var topping = (AlcremieDecoration)pkmFormArgument.FormArgument switch
         {
             AlcremieDecoration.Strawberry => "strawberry-sweet",
             AlcremieDecoration.Berry => "berry-sweet",

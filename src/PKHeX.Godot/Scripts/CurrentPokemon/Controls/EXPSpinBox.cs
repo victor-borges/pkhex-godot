@@ -17,7 +17,7 @@ public partial class EXPSpinBox : SpinBox
         if (_application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.Experience = (uint)value;
+        _application.CurrentPokemon.EXP = (uint)value;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -31,11 +31,11 @@ public partial class EXPSpinBox : SpinBox
         else
         {
             Editable = true;
-            var pkm = _application.CurrentPokemon.Pkm;
+            var pkm = _application.CurrentPokemon;
 
             SetMax(Experience.GetEXP(Experience.MaxLevel, pkm.PersonalInfo.EXPGrowth));
             SetMin(Experience.GetEXP(Experience.MinLevel, pkm.PersonalInfo.EXPGrowth));
-            SetValueNoSignal(_application.CurrentPokemon.Experience);
+            SetValueNoSignal(_application.CurrentPokemon.EXP);
         }
     }
 }

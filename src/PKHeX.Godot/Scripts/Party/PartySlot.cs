@@ -8,21 +8,14 @@ public partial class PartySlot : Slot
     {
         base._Ready();
         Application.PartyChanged += OnPartyChanged;
-
-        Pressed += OnButtonPressed;
-    }
-
-    private void OnButtonPressed()
-    {
-        Application.CurrentPokemon = Pokemon?.Clone();
     }
 
     private void OnPartyChanged()
     {
-        if (SlotIndex >= Application.Game?.Trainer.Party.Pokemons.Count)
+        if (Application.Game is null || SlotIndex >= 6)
             return;
 
-        var pokemon = Application.Game?.Trainer.Party.Pokemons[SlotIndex];
+        var pokemon = Application.Game.GetPartySlotAtIndex(SlotIndex);
         SetPokemon(pokemon);
     }
 }

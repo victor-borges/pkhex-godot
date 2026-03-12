@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bwqitv47ew36n"]
 
-[ext_resource type="Script" path="res://Scripts/CurrentPokemon/Controls/LanguageGBPKMOptionButton.cs" id="1_u5gsy"]
+[ext_resource type="Script" uid="uid://cnpfo6pk552ur" path="res://Scripts/CurrentPokemon/Controls/LanguageGBPKMOptionButton.cs" id="1_u5gsy"]
 
 [node name="LanguageEditor" type="HBoxContainer" unique_id=1282183215]
 
@@ -14,5 +14,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 alignment = 1
+autowrap_mode = 3
+fit_to_longest_item = false
 allow_reselect = true
 script = ExtResource("1_u5gsy")

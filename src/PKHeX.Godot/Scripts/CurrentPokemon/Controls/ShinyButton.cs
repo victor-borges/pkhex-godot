@@ -1,3 +1,5 @@
+using PKHeX.Godot.Extensions;
+
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class ShinyButton : Button
@@ -17,7 +19,7 @@ public partial class ShinyButton : Button
         if (_application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.SetShiny(toggled);
+        _application.CurrentPokemon.SetIsShiny(toggled);
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -31,7 +33,7 @@ public partial class ShinyButton : Button
         {
             var isShiny = _application.CurrentPokemon.IsShiny;
             var shinyType = _application.CurrentPokemon.ShinyType;
-            var squareShinyExist = ShinyExtensions.IsSquareShinyExist(_application.CurrentPokemon.Pkm);
+            var squareShinyExists = ShinyExtensions.IsSquareShinyExist(_application.CurrentPokemon);
 
             Disabled = false;
             SetPressedNoSignal(isShiny);
@@ -42,7 +44,7 @@ public partial class ShinyButton : Button
             }
             else
             {
-                Icon = GD.Load<Texture2D>(shinyType is Shiny.AlwaysSquare && squareShinyExist
+                Icon = GD.Load<Texture2D>(shinyType is Shiny.AlwaysSquare && squareShinyExists
                     ? Assets.Sprites.Overlays.ShinySquare
                     : Assets.Sprites.Overlays.Shiny);
             }

@@ -21,6 +21,12 @@ public partial class OpenFileButton : Button
 	private void OnOpenFileDialogFileSelected(string path)
 	{
 		_application.LoadSave(path);
-		_gameLabel.Text = $"Game: {_application.Game?.GameVersionApproximation.Name}";
+
+		if (_application.Game is null)
+			return;
+
+		var version = _application.Game.Version;
+		var versionText = GameInfo.Sources.VersionDataSource.FirstOrDefault(s => s.Value == (int)version)?.Text ?? version.ToString();
+		_gameLabel.Text = $"Game: {versionText}";
 	}
 }

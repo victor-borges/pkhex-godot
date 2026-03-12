@@ -4,8 +4,5 @@
     <BuildType Name="ExportDebug" />
     <BuildType Name="ExportRelease" />
   </Configurations>
-  <Project Path="src/PKHeX.Facade/PKHeX.Facade.csproj">
-    <BuildType Project="Debug" />
-  </Project>
   <Project Path="src/PKHeX.Godot/PKHeX.Godot.csproj" />
 </Solution>

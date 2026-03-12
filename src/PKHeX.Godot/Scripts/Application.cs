@@ -1,6 +1,4 @@
 using System.IO;
-using PKHeX.Facade;
-using PKHeX.Facade.Pokemons;
 
 namespace PKHeX.Godot.Scripts;
 
@@ -8,23 +6,23 @@ public partial class Application : Node
 {
     public static readonly NodePath NodePath = "/root/Application";
 
-    public Game? Game
-    {
-        get;
-        private set
-        {
-            field = value;
-            FileLoaded?.Invoke();
-        }
-    }
+    public SaveFile? Game { get; private set; }
 
-    public Pokemon? CurrentPokemon
+    public PKM? CurrentPokemon
     {
         get;
         set
         {
-            field = value;
-            CurrentPokemonChanged?.Invoke();
+            if (value is null)
+            {
+                field = null;
+                return;
+            }
+
+            var isPokemonPresent = EntityDetection.GetFuncIsPresent(value);
+            field = isPokemonPresent(value.Data) ? value : null;
+
+            EmitSignalCurrentPokemonChanged();
         }
     }
 
@@ -34,7 +32,7 @@ public partial class Application : Node
         set
         {
             field = value;
-            BoxChanged?.Invoke(value);
+            EmitSignalBoxChanged(value);
         }
     }
 
@@ -44,17 +42,14 @@ public partial class Application : Node
         LocalizeUtil.InitializeStrings(lang, FakeSaveFile.Default);
     }
 
-    public void EmitEventCurrentPokemonChanged()
-    {
-        CurrentPokemonChanged?.Invoke();
-    }
+    public void EmitEventCurrentPokemonChanged() => EmitSignalCurrentPokemonChanged();
 
     public void GoToPreviousBox()
     {
         if (Game is null)
             return;
 
-        var totalBoxes = Game.SaveFile.BoxesUnlocked;
+        var totalBoxes = Game.BoxesUnlocked == -1 ? Game.BoxCount : Game.BoxesUnlocked;
         var previousBoxIndex = (CurrentBoxIndex - 1 + totalBoxes) % totalBoxes;
         CurrentBoxIndex = previousBoxIndex;
     }
@@ -64,16 +59,31 @@ public partial class Application : Node
         if (Game is null)
             return;
 
-        var totalBoxes = Game.SaveFile.BoxesUnlocked;
+        var totalBoxes = Game.BoxesUnlocked == -1 ? Game.BoxCount : Game.BoxesUnlocked;
         var nextBoxIndex = (CurrentBoxIndex + 1) % totalBoxes;
         CurrentBoxIndex = nextBoxIndex;
     }
 
     public void LoadSave(string path)
     {
-        Game = Game.LoadFrom(path);
+        Game = SaveUtil.GetSaveFile(path) ?? throw new FileNotFoundException(path);
+        Game.Metadata.SetExtraInfo(path);
 
-        PartyChanged?.Invoke();
+        // if (!SanityCheckSAV(ref sav))
+        //     return true;
+
+        if (Game is SAV3 sav3)
+            EReaderBerrySettings.LoadFrom(sav3);
+
+        ParseSettings.InitFromSaveFileData(Game); // physical GB, no longer used in logic
+        RecentTrainerCache.SetRecentTrainer(Game);
+
+        GameInfo.FilteredSources = new FilteredGameDataSource(Game, GameInfo.Sources);
+
+        Game.State.Edited = false;
+
+        EmitSignalFileLoaded();
+        EmitSignalPartyChanged();
         CurrentBoxIndex = 0;
         CurrentPokemon = null;
     }
@@ -84,18 +94,17 @@ public partial class Application : Node
             return;
 
         var bytes = File.ReadAllBytes(path);
-        var didSet = Game.SaveFile.SetPCBinary(bytes);
+        var didSet = Game.SetPCBinary(bytes);
 
         if (!didSet)
             return;
 
-        // Game = new Game(Game.SaveFile);
-        FileLoaded?.Invoke();
+        EmitSignalFileLoaded();
         CurrentBoxIndex = 0;
     }
 
-    public event Action? FileLoaded;
-    public event Action? PartyChanged;
-    public event Action<int>? BoxChanged;
-    public event Action? CurrentPokemonChanged;
+    [Signal] public delegate void FileLoadedEventHandler();
+    [Signal] public delegate void PartyChangedEventHandler();
+    [Signal] public delegate void BoxChangedEventHandler(int boxIndex);
+    [Signal] public delegate void CurrentPokemonChangedEventHandler();
 }

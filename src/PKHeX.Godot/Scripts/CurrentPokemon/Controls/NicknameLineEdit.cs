@@ -41,14 +41,16 @@ public partial class NicknameLineEdit : LineEdit
         if (_application.Game is null || _application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.Pkm.SetNickname(text);
-        _lengthLabel.Visible = _application.CurrentPokemon.Pkm.IsNicknamed;
+        _application.CurrentPokemon.SetNickname(text);
+        _lengthLabel.Visible = _application.CurrentPokemon.IsNicknamed;
 
         _application.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
+        Clear();
+
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
             Editable = false;
@@ -56,22 +58,30 @@ public partial class NicknameLineEdit : LineEdit
         }
         else
         {
-            var isNicknamed = _application.CurrentPokemon.Pkm.IsNicknamed;
-            var nicknameLength = isNicknamed ? _application.CurrentPokemon.Pkm.Nickname.Length : 0;
-
-            Text = isNicknamed ? _application.CurrentPokemon.Pkm.Nickname : string.Empty;
-            _lengthLabel.Text = $"{nicknameLength}/{MaxLength}";
+            var isNicknamed = _application.CurrentPokemon.IsNicknamed;
+            var nicknameLength = _application.CurrentPokemon.Nickname.Length;
 
             Editable = isNicknamed;
-            _lengthLabel.Visible = isNicknamed;
+            Text = _application.CurrentPokemon.Nickname;
+            _lengthLabel.Text = $"{nicknameLength}/{MaxLength}";
+            _lengthLabel.Visible = true;
         }
     }
 
     private void OnFileLoaded()
     {
+        Clear();
+
         if (_application.Game is null)
             return;
 
-        SetMaxLength(_application.Game.SaveFile.Generation <= 5 ? 10 : 12);
+        if ((LanguageID)_application.Game.Language is LanguageID.Japanese or LanguageID.Korean)
+        {
+            SetMaxLength(5);
+        }
+        else
+        {
+            SetMaxLength(_application.Game.Generation <= 5 ? 10 : 12);
+        }
     }
 }

@@ -16,7 +16,7 @@ public partial class HeldItemMenuButton : MenuButton
 
     private void CurrentPokemonChanged()
     {
-        if (_application.CurrentPokemon is null || _application.CurrentPokemon.HeldItem.IsNone)
+        if (_application.CurrentPokemon is null || _application.CurrentPokemon.HeldItem is 0)
         {
             Disabled = true;
             Text = " ";
@@ -24,7 +24,7 @@ public partial class HeldItemMenuButton : MenuButton
         else
         {
             Disabled = false;
-            Text = _application.CurrentPokemon.HeldItem.Name;
+            Text = GameInfo.FilteredSources.Items[_application.CurrentPokemon.HeldItem].Text;
         }
     }
 
@@ -33,12 +33,12 @@ public partial class HeldItemMenuButton : MenuButton
         var popup = GetPopup();
         popup.Clear(freeSubmenus: true);
 
-        if (_application.Game is null || !_application.Game.ItemRepository.GameItems.Any())
+        if (_application.Game is null || !GameInfo.FilteredSources.Items.Any())
             return;
 
-        foreach (var gameItem in _application.Game.ItemRepository.GameItems)
+        foreach (var gameItem in GameInfo.FilteredSources.Items)
         {
-            popup.AddItem(gameItem.Name);
+            popup.AddItem(gameItem.Text, gameItem.Value);
         }
     }
 }

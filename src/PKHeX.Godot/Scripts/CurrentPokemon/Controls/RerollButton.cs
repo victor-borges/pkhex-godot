@@ -1,3 +1,5 @@
+using PKHeX.Godot.Extensions;
+
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class RerollButton : Button
@@ -13,7 +15,10 @@ public partial class RerollButton : Button
 
     private void OnButtonPressed()
     {
-        _application.CurrentPokemon?.RerollPID();
+        if (_application.CurrentPokemon is null)
+            return;
+
+        _application.CurrentPokemon.RerollPID();
         _application.EmitEventCurrentPokemonChanged();
     }
 

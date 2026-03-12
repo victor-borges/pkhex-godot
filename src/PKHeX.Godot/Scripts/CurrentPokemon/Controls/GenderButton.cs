@@ -1,4 +1,4 @@
-using PKHeX.Facade.Repositories;
+using PKHeX.Godot.Extensions;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
@@ -19,7 +19,7 @@ public partial class GenderButton : Button
         if (_application.CurrentPokemon is null)
             return;
 
-        var pkm = _application.CurrentPokemon.Pkm;
+        var pkm = _application.CurrentPokemon;
         if (!pkm.PersonalInfo.IsDualGender)
         {
             Disabled = true;
@@ -47,9 +47,9 @@ public partial class GenderButton : Button
                 pkm.Gender = (byte)((gender + 1) % 2);
             }
 
-            if (EntityGender.GetFromString(_application.CurrentPokemon.Form.Form.Name) < 2) // Gendered Forms
+            if (EntityGender.GetFromString(_application.CurrentPokemon.FormName) < 2) // Gendered Forms
             {
-                var formCount = FormRepository.GetFor(_application.CurrentPokemon).Count();
+                var formCount = _application.CurrentPokemon.Forms.Count();
                 pkm.Form = (byte)Math.Min(gender, formCount - 1);
             }
         }
@@ -66,7 +66,7 @@ public partial class GenderButton : Button
             return;
         }
 
-        var pkm = _application.CurrentPokemon.Pkm;
+        var pkm = _application.CurrentPokemon;
         if (!pkm.PersonalInfo.IsDualGender)
         {
             Disabled = true;
@@ -75,7 +75,7 @@ public partial class GenderButton : Button
         else
         {
             Disabled = false;
-            var genderIndex = _application.CurrentPokemon.Pkm.Gender;
+            var genderIndex = _application.CurrentPokemon.Gender;
             SetGenderIcon(genderIndex);
         }
     }

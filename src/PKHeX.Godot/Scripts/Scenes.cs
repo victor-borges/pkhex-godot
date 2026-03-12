@@ -4,6 +4,12 @@ public static class Scenes
 {
     private const string ScenesPath = "res://Scenes";
 
+    public static class Boxes
+    {
+        public const string Box = $"{ScenesPath}/Box.tscn";
+        public const string Box20 = $"{ScenesPath}/Box20.tscn";
+    }
+
     public static class PokemonEditor
     {
         private const string EditorPath = $"{ScenesPath}/PokemonEditor";

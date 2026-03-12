@@ -6,12 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PKHeX.Facade\PKHeX.Facade.csproj" />
+    <PackageReference Include="PKHeX.Core" Version="26.3.6" />
   </ItemGroup>
-    
+
   <ItemGroup>
     <Using Include="System" />
     <Using Include="System.Linq" />
+    <Using Include="System.Collections.Generic" /> 
     <Using Include="Godot" />
     <Using Include="PKHeX.Core" />
     <Using Include="PKHeX.Godot.Scripts" />

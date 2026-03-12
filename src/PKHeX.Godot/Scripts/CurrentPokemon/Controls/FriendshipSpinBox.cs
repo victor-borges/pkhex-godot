@@ -17,7 +17,7 @@ public partial class FriendshipSpinBox : SpinBox
         if (_application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.Friendship = (int)value;
+        _application.CurrentPokemon.CurrentFriendship = (byte)value;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -31,7 +31,7 @@ public partial class FriendshipSpinBox : SpinBox
         else
         {
             Editable = true;
-            SetValueNoSignal(_application.CurrentPokemon.Friendship);
+            SetValueNoSignal(_application.CurrentPokemon.CurrentFriendship);
         }
     }
 }

@@ -1,4 +1,4 @@
-using PKHeX.Facade.Repositories;
+using PKHeX.Godot.Extensions;
 
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
@@ -22,11 +22,11 @@ public partial class FormOptionButton : OptionButton
 
     private void OnFormSelected(long index)
     {
-        if (_application.CurrentPokemon is null || !_application.CurrentPokemon.Form.HasForm)
+        if (_application.CurrentPokemon is null || !_application.CurrentPokemon.PersonalInfo.HasForms)
             return;
 
         var id = GetItemId((int)index);
-        _application.CurrentPokemon.Pkm.Form = (byte)id;
+        _application.CurrentPokemon.Form = (byte)id;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -34,13 +34,13 @@ public partial class FormOptionButton : OptionButton
     {
         Clear();
 
-        if (_application.Game is null || _application.CurrentPokemon is null || !_application.CurrentPokemon.Form.HasForm)
+        if (_application.Game is null || _application.CurrentPokemon is null || !_application.CurrentPokemon.PersonalInfo.HasForms)
         {
             Disabled = true;
             return;
         }
 
-        var forms = FormRepository.GetFor(_application.CurrentPokemon).ToArray();
+        var forms = _application.CurrentPokemon.Forms.ToArray();
 
         if (forms.Length is 0 || forms is [{ ByteId: 0 }])
         {
@@ -53,7 +53,7 @@ public partial class FormOptionButton : OptionButton
                 var byteId = formDefinition.ByteId;
                 AddItem(formDefinition.Name, byteId);
 
-                if (byteId == _application.CurrentPokemon.Form.Form.ByteId)
+                if (byteId == _application.CurrentPokemon.Form)
                     Selected = GetItemIndex(byteId);
             }
         }
