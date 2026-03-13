@@ -1,6 +1,6 @@
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
-public partial class CuredCheckBox : CheckBox
+public partial class PokerusInfectedHBoxContainer : HBoxContainer
 {
     private Application _application = null!;
 
@@ -10,26 +10,15 @@ public partial class CuredCheckBox : CheckBox
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
     }
 
-    private void OnButtonPressed(bool pressed)
-    {
-        if (_application.CurrentPokemon is null)
-            return;
-
-        _application.CurrentPokemon.IsPokerusCured = pressed;
-        _application.EmitEventCurrentPokemonChanged();
-    }
-
     private void CurrentPokemonChanged()
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
-            Disabled = true;
-            SetPressedNoSignal(false);
+            Visible = false;
         }
         else
         {
-            Disabled = false;
-            SetPressedNoSignal(_application.CurrentPokemon.IsPokerusCured);
+            Visible = _application.CurrentPokemon.IsPokerusInfected;
         }
     }
 }

@@ -23,11 +23,7 @@ public partial class LanguageOptionButton : OptionButton
         if (_application.Game is null)
             return;
 
-        var languages = _application.Game.Generation >= 8
-            ? GameInfo.FilteredSources.Languages.Append(GameInfo.Sources.Empty)
-            : GameInfo.FilteredSources.Languages;
-
-        foreach (var language in languages)
+        foreach (var language in GameInfo.FilteredSources.Languages)
         {
             AddItem(language.Text, language.Value);
         }
@@ -40,6 +36,10 @@ public partial class LanguageOptionButton : OptionButton
 
         var id = GetItemId((int)index);
         _application.CurrentPokemon.Language = id;
+
+        if (!_application.CurrentPokemon.IsNicknamed)
+            _application.CurrentPokemon.SetDefaultNickname();
+
         _application.EmitEventCurrentPokemonChanged();
     }
 

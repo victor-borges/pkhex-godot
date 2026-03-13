@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b8uo1wtvdv572"]
 
 [ext_resource type="Script" uid="uid://bm7rcok13gwti" path="res://Scripts/CurrentPokemon/Controls/FriendshipSpinBox.cs" id="1_qiy7p"]
+[ext_resource type="Script" uid="uid://7ht4ioi0kwtq" path="res://Scripts/CurrentPokemon/Controls/IsEggCheckBox.cs" id="2_7dklx"]
 
 [node name="FriendshipEditor" type="HBoxContainer" unique_id=637867771]
 
@@ -15,3 +16,9 @@ max_value = 255.0
 rounded = true
 editable = false
 script = ExtResource("1_qiy7p")
+
+[node name="IsEggCheckBox" type="CheckBox" parent="." unique_id=980995820]
+layout_mode = 2
+disabled = true
+text = "Is Egg"
+script = ExtResource("2_7dklx")

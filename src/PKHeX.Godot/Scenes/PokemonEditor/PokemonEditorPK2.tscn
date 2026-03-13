@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://buvimx7uxq66b"]
+
+[ext_resource type="PackedScene" uid="uid://c832aqlqlfbww" path="res://Scenes/PokemonEditor/Controls/LegalityReportButton.tscn" id="1_wgjnr"]
+[ext_resource type="PackedScene" uid="uid://b5i72gvvrc56d" path="res://Scenes/Slot.tscn" id="2_4ui52"]
+[ext_resource type="Script" uid="uid://b1cdft6baxlts" path="res://Scripts/CurrentPokemon/Controls/CurrentPokemonSlot.cs" id="3_2lpv7"]
+[ext_resource type="PackedScene" uid="uid://cs5k5c6xvtv8j" path="res://Scenes/PokemonEditor/Controls/ShinyButton.tscn" id="4_xlm1u"]
+[ext_resource type="PackedScene" uid="uid://0g88gdkfbyda" path="res://Scenes/PokemonEditor/Controls/GenderButton.tscn" id="5_h3c2q"]
+[ext_resource type="PackedScene" uid="uid://blu6g60atikg7" path="res://Scenes/PokemonEditor/Controls/SpeciesEditor.tscn" id="7_eg5jx"]
+[ext_resource type="PackedScene" uid="uid://cdlnxp52dnige" path="res://Scenes/PokemonEditor/Controls/NicknameEditor.tscn" id="8_4prng"]
+[ext_resource type="PackedScene" uid="uid://ji2lnrau14ub" path="res://Scenes/PokemonEditor/Controls/EXPEditor.tscn" id="9_gx13g"]
+[ext_resource type="PackedScene" uid="uid://b4gfoykwgovwv" path="res://Scenes/PokemonEditor/Controls/PokerusEditor.tscn" id="12_sofoc"]
+[ext_resource type="PackedScene" uid="uid://d4labimsomvd7" path="res://Scenes/PokemonEditor/Controls/HeldItemEditor.tscn" id="13_u5npt"]
+[ext_resource type="PackedScene" uid="uid://b8uo1wtvdv572" path="res://Scenes/PokemonEditor/Controls/FriendshipEditor.tscn" id="15_fh4mm"]
+[ext_resource type="PackedScene" uid="uid://d0rfwugj06e73" path="res://Scenes/PokemonEditor/Controls/LanguageEditor.tscn" id="16_maoel"]
+
+[node name="PokemonEditorPK2" type="VBoxContainer" unique_id=894197332]
+anchors_preset = -1
+anchor_right = 0.30703124
+anchor_bottom = 0.62222224
+offset_bottom = 15.9999695
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1606253799]
+layout_mode = 2
+alignment = 2
+
+[node name="LegalityReportButton" parent="HBoxContainer" unique_id=1188337260 instance=ExtResource("1_wgjnr")]
+layout_mode = 2
+
+[node name="CurrentPokemonSlot" parent="HBoxContainer" unique_id=1810034235 instance=ExtResource("2_4ui52")]
+custom_minimum_size = Vector2(120, 100)
+layout_mode = 2
+size_flags_horizontal = 1
+disabled = true
+script = ExtResource("3_2lpv7")
+
+[node name="ShinyPIDGenderHBoxContainer" type="HBoxContainer" parent="." unique_id=2107254492]
+layout_mode = 2
+
+[node name="ShinyButton" parent="ShinyPIDGenderHBoxContainer" unique_id=1372359880 instance=ExtResource("4_xlm1u")]
+layout_mode = 2
+
+[node name="GenderButton" parent="ShinyPIDGenderHBoxContainer" unique_id=594255023 instance=ExtResource("5_h3c2q")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="ShinyPIDGenderHBoxContainer" unique_id=1751335239]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="SpeciesEditor" parent="ShinyPIDGenderHBoxContainer" unique_id=868487398 instance=ExtResource("7_eg5jx")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NicknameEditor" parent="." unique_id=1021579800 instance=ExtResource("8_4prng")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EXPEditor" parent="." unique_id=1879873129 instance=ExtResource("9_gx13g")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HeldItemEditor" parent="." unique_id=1542738752 instance=ExtResource("13_u5npt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FriendshipEditor" parent="." unique_id=637867771 instance=ExtResource("15_fh4mm")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LanguageEditor" parent="." unique_id=847443979 instance=ExtResource("16_maoel")]
+layout_mode = 2
+
+[node name="PokerusEditor" parent="." unique_id=1501147282 instance=ExtResource("12_sofoc")]
+layout_mode = 2

@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://boee70uk273hs"]
 
+[ext_resource type="Script" uid="uid://hlhrpmknuxod" path="res://Scripts/CurrentPokemon/Controls/FormEditor.cs" id="1_6qmmr"]
 [ext_resource type="Script" uid="uid://byj74rqbmwnoy" path="res://Scripts/CurrentPokemon/Controls/FormOptionButton.cs" id="1_58y5t"]
 
 [node name="FormEditor" type="HBoxContainer" unique_id=649075395]
+script = ExtResource("1_6qmmr")
 
 [node name="FormLabel" type="Label" parent="." unique_id=1012998296]
 layout_mode = 2

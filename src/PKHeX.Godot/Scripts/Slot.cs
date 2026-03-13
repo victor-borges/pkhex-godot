@@ -83,11 +83,8 @@ public partial class Slot : Button
 
         if (pokemon.IsEgg)
         {
-            _heldItemSprite.Texture = GD.Load<Texture2D>(pokemonSprite);
+            _heldItemSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Egg);
             _heldItemPanel.Visible = true;
-
-            _pokemonSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.Egg);
-            _pokemonSprite.Visible = true;
         }
         else if (pokemon.HeldItem is not 0)
         {
@@ -95,10 +92,7 @@ public partial class Slot : Button
             _heldItemPanel.Visible = true;
         }
 
-        if (!pokemon.IsEgg)
-        {
-            _pokemonSprite.Texture = GD.Load<Texture2D>(pokemonSprite);
-            _pokemonSprite.Visible = true;
-        }
+        _pokemonSprite.Texture = GD.Load<Texture2D>(pokemonSprite);
+        _pokemonSprite.Visible = true;
     }
 }

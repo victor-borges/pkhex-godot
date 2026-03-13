@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://ji2lnrau14ub" path="res://Scenes/PokemonEditor/Controls/EXPEditor.tscn" id="11_07m6w"]
 [ext_resource type="PackedScene" uid="uid://lxc2mvhnr52q" path="res://Scenes/PokemonEditor/Controls/NatureEditor.tscn" id="12_mw4t3"]
 [ext_resource type="PackedScene" uid="uid://cbl6il4rew7ae" path="res://Scenes/PokemonEditor/Controls/StatNatureEditor.tscn" id="13_0fti8"]
+[ext_resource type="PackedScene" uid="uid://d0rfwugj06e73" path="res://Scenes/PokemonEditor/Controls/LanguageEditor.tscn" id="14_cpkrb"]
 [ext_resource type="PackedScene" uid="uid://boee70uk273hs" path="res://Scenes/PokemonEditor/Controls/FormEditor.tscn" id="14_q3uvi"]
+[ext_resource type="PackedScene" uid="uid://b4gfoykwgovwv" path="res://Scenes/PokemonEditor/Controls/PokerusEditor.tscn" id="16_2ymtt"]
 [ext_resource type="PackedScene" uid="uid://bluvg5jl82ost" path="res://Scenes/PokemonEditor/Controls/AbilityEditor.tscn" id="16_jx3rw"]
 [ext_resource type="PackedScene" uid="uid://b8uo1wtvdv572" path="res://Scenes/PokemonEditor/Controls/FriendshipEditor.tscn" id="17_6fvg3"]
 
@@ -86,4 +88,10 @@ layout_mode = 2
 
 [node name="FriendshipEditor" parent="." unique_id=637867771 instance=ExtResource("17_6fvg3")]
 unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LanguageEditor" parent="." unique_id=1344743292 instance=ExtResource("14_cpkrb")]
+layout_mode = 2
+
+[node name="PokerusEditor" parent="." unique_id=1501147282 instance=ExtResource("16_2ymtt")]
 layout_mode = 2

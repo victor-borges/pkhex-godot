@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b4gfoykwgovwv"]
+
+[ext_resource type="Script" uid="uid://biwid7rqfe84i" path="res://Scripts/CurrentPokemon/Controls/PokerusInfectedCheckBox.cs" id="1_h2k4v"]
+[ext_resource type="Script" uid="uid://5y78i4piqm3o" path="res://Scripts/CurrentPokemon/Controls/PokerusCuredCheckBox.cs" id="2_nemq4"]
+[ext_resource type="Script" uid="uid://dl8ox8ca2dogt" path="res://Scripts/CurrentPokemon/Controls/PokerusInfectedHBoxContainer.cs" id="3_h8yk2"]
+[ext_resource type="Script" uid="uid://dba61re4o4d6c" path="res://Scripts/CurrentPokemon/Controls/PokerusStrainSpinBox.cs" id="4_pyum6"]
+[ext_resource type="Script" uid="uid://b5itqlsl1q5wv" path="res://Scripts/CurrentPokemon/Controls/PokerusDaysSpinBox.cs" id="5_gkqyp"]
+
+[node name="PokerusEditor" type="VBoxContainer" unique_id=1501147282]
+
+[node name="PokerusFlags" type="HBoxContainer" parent="." unique_id=1937767440]
+layout_mode = 2
+
+[node name="PokerusInfectedCheckBox" type="CheckBox" parent="PokerusFlags" unique_id=1342682047]
+layout_mode = 2
+disabled = true
+text = "Infected"
+script = ExtResource("1_h2k4v")
+
+[node name="PokerusCuredCheckBox" type="CheckBox" parent="PokerusFlags" unique_id=1692505355]
+layout_mode = 2
+disabled = true
+text = "Cured"
+script = ExtResource("2_nemq4")
+
+[node name="PokerusValues" type="HBoxContainer" parent="." unique_id=1274820401]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+script = ExtResource("3_h8yk2")
+
+[node name="PokerusStrainLabel" type="Label" parent="PokerusValues" unique_id=1390836671]
+layout_mode = 2
+text = "PkRs: "
+
+[node name="PokerusStrainSpinBox" type="SpinBox" parent="PokerusValues" unique_id=516322526]
+layout_mode = 2
+max_value = 15.0
+rounded = true
+editable = false
+script = ExtResource("4_pyum6")
+
+[node name="PokerusDaysLabel" type="Label" parent="PokerusValues" unique_id=993836153]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "d: "
+
+[node name="PokerusDaysSpinBox" type="SpinBox" parent="PokerusValues" unique_id=1279257813]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 0.0
+rounded = true
+editable = false
+script = ExtResource("5_gkqyp")

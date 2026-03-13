@@ -3,10 +3,12 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 public partial class PokerusDaysSpinBox : SpinBox
 {
     private Application _application = null!;
+    private Label _pokerusDaysLabel = null!;
 
     public override void _Ready()
     {
         _application = GetNode<Application>(Application.NodePath);
+        _pokerusDaysLabel = GetNode<Label>("../PokerusDaysLabel");
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
 
         ValueChanged += OnValueChanged;
@@ -31,8 +33,8 @@ public partial class PokerusDaysSpinBox : SpinBox
         else
         {
             var pkm = _application.CurrentPokemon;
-
             Editable = pkm.IsPokerusInfected;
+            Visible = _pokerusDaysLabel.Visible = !pkm.IsPokerusCured;
             SetMax(Pokerus.GetMaxDuration(pkm.PokerusStrain));
             SetValueNoSignal(pkm.PokerusDays);
         }

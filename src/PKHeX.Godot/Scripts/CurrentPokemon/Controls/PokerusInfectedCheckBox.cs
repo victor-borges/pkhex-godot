@@ -1,25 +1,23 @@
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
-public partial class FriendshipSpinBox : SpinBox
+public partial class PokerusInfectedCheckBox : CheckBox
 {
     private Application _application = null!;
-    private Label _friendshipLabel = null!;
 
     public override void _Ready()
     {
-        _friendshipLabel = GetNode<Label>("../FriendshipLabel");
         _application = GetNode<Application>(Application.NodePath);
         _application.CurrentPokemonChanged += CurrentPokemonChanged;
 
-        ValueChanged += OnValueChanged;
+        Toggled += OnToggled;
     }
 
-    private void OnValueChanged(double value)
+    private void OnToggled(bool toggledOn)
     {
         if (_application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.CurrentFriendship = (byte)value;
+        _application.CurrentPokemon.IsPokerusInfected = toggledOn;
         _application.EmitEventCurrentPokemonChanged();
     }
 
@@ -27,14 +25,13 @@ public partial class FriendshipSpinBox : SpinBox
     {
         if (_application.Game is null || _application.CurrentPokemon is null)
         {
-            Editable = false;
-            SetValueNoSignal(0);
+            Disabled = true;
+            SetPressedNoSignal(false);
         }
         else
         {
-            Editable = true;
-            SetValueNoSignal(_application.CurrentPokemon.CurrentFriendship);
-            _friendshipLabel.Text = _application.CurrentPokemon.IsEgg ? "Hatch Counter:" : "Friendship:";
+            Disabled = false;
+            SetPressedNoSignal(_application.CurrentPokemon.IsPokerusInfected);
         }
     }
 }
