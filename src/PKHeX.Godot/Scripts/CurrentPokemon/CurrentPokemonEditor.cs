@@ -14,7 +14,7 @@ public partial class CurrentPokemonEditor : Control
         _pokemonEditorScenes = new()
         {
             [1] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK1),
-            // [2] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK2),
+            [2] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK2),
             // [3] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK3),
             // [4] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK4),
             // [5] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK5),

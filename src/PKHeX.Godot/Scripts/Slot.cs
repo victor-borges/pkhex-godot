@@ -88,7 +88,7 @@ public partial class Slot : Button
         }
         else if (pokemon.HeldItem is not 0)
         {
-            _heldItemSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.HeldItem(pokemon.HeldItem));
+            _heldItemSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.HeldItem(pokemon.SpriteItem));
             _heldItemPanel.Visible = true;
         }
 

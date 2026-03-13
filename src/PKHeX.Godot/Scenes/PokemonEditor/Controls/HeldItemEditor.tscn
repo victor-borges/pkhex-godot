@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d4labimsomvd7"]
 
-[ext_resource type="Script" uid="uid://b4i3ukneysqi7" path="res://Scripts/CurrentPokemon/Controls/HeldItemMenuButton.cs" id="1_ospiu"]
+[ext_resource type="Script" uid="uid://b4i3ukneysqi7" path="res://Scripts/CurrentPokemon/Controls/HeldItemOptionButton.cs" id="1_ospiu"]
 
 [node name="HeldItemEditor" type="HBoxContainer" unique_id=1542738752]
 
@@ -9,9 +9,10 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Held Item:"
 
-[node name="HeldItemMenuButton" type="MenuButton" parent="." unique_id=1358611576]
+[node name="HeldItemMenuButton" type="OptionButton" parent="." unique_id=778389951]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
-flat = false
+fit_to_longest_item = false
+allow_reselect = true
 script = ExtResource("1_ospiu")
