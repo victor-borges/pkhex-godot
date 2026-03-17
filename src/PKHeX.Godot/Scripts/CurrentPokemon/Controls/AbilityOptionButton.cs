@@ -2,47 +2,43 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class AbilityOptionButton : OptionButton
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
-
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
         ItemSelected += OnAbilitySelected;
     }
 
     private void OnAbilitySelected(long index)
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
             return;
 
         var abilityId = GetItemId((int)index);
-        var abilityIndex = _application.CurrentPokemon.PersonalInfo.GetIndexOfAbility(abilityId);
+        var abilityIndex = Application.CurrentPokemon.PersonalInfo.GetIndexOfAbility(abilityId);
         if (abilityIndex == -1) return;
 
-        _application.CurrentPokemon.RefreshAbility(abilityIndex);
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.RefreshAbility(abilityIndex);
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
         Clear();
 
-        if (_application.Game is null || _application.CurrentPokemon is null || _application.CurrentPokemon.Format < 3)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null || Application.CurrentPokemon.Format < 3)
         {
             Disabled = true;
         }
         else
         {
-            var pi = _application.CurrentPokemon.PersonalInfo;
+            var pi = Application.CurrentPokemon.PersonalInfo;
             var abilities = GameInfo.FilteredSources.GetAbilityList(pi);
 
             foreach (var ability in abilities)
             {
                 AddItem(ability.Text, ability.Value);
 
-                if (_application.CurrentPokemon.Ability == ability.Value)
+                if (Application.CurrentPokemon.Ability == ability.Value)
                     Selected = GetItemIndex(ability.Value);
             }
 

@@ -30,7 +30,17 @@ public static class Assets
     {
         public const string Egg = "res://Assets/Sprites/Pokemon/0.png";
 
-        public static string HeldItem(int id) => $"res://Assets/Sprites/Items/item_{id:D4}.png";
+        public static string HeldItem(PKM pkm) => pkm switch
+        {
+            { Context: EntityContext.Gen2, HeldItem: >= 181 and <= 189 } => "res://Assets/Sprites/Items/2/item_mail.png",
+            { Context: EntityContext.Gen3, HeldItem: >= 121 and <= 132 } => $"res://Assets/Sprites/Items/3/item_{pkm.HeldItem:D4}.png",
+            { Context: EntityContext.Gen4, HeldItem: >= 137 and <= 148 } => $"res://Assets/Sprites/Items/4/item_{pkm.HeldItem:D4}.png",
+            { Context: EntityContext.Gen5, HeldItem: >= 137 and <= 148 } => $"res://Assets/Sprites/Items/5/item_{pkm.HeldItem:D4}.png",
+            _ => HeldItem(pkm.SpriteItem)
+        };
+
+        public static string HeldItem(int item) => $"res://Assets/Sprites/Items/item_{item:D4}.png";
+
         public static string Gender(byte genderIndex) => $"res://Assets/Sprites/Gender/gender_{genderIndex}.webp";
 
         public static class Overlays
@@ -78,7 +88,15 @@ public static class Assets
 
     private static string GetMappedSpriteId(PKM pokemon)
     {
-        return ((Species)pokemon.Species, pokemon.FormName) switch
+        var species = (Species)pokemon.Species;
+        var formName = pokemon.FormName;
+
+        // Starting in Legends: Z-A, Xerneas no longer has two forms, and it transitions to what was then-considered Active Mode when it attacks
+        // The in-game icon always displays it as active, so match that behavior here
+        if (species == Xerneas && pokemon.Context == EntityContext.Gen9a)
+            formName = "Active";
+
+        return (species, formName) switch
         {
             (Unown, "A") => "201-a",
             (Unown, "B") => "201-b",
@@ -106,8 +124,8 @@ public static class Assets
             (Unown, "X") => "201-x",
             (Unown, "Y") => "201-y",
             (Unown, "Z") => "201-z",
-            (Unown, "!") => "201-!",
-            (Unown, "?") => "201-?",
+            (Unown, "!") => "201-exclamation",
+            (Unown, "?") => "201-question",
             (Burmy, "Plant") => "412-plant",
             (Burmy, "Sandy") => "412-sandy",
             (Burmy, "Trash") => "412-trash",

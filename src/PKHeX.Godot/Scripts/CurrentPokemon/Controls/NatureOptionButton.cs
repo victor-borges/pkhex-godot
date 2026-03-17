@@ -2,17 +2,14 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class NatureOptionButton : OptionButton
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.FileLoaded += OnFileLoaded;
 
         ItemSelected += OnNatureSelected;
 
-        if (_application.Game is not null)
+        if (Application.SaveFile is not null)
             OnFileLoaded();
     }
 
@@ -30,23 +27,23 @@ public partial class NatureOptionButton : OptionButton
     {
         var id = GetItemId((int)index);
 
-        if (id >= (long)Nature.Random || _application.CurrentPokemon is null)
+        if (id >= (long)Nature.Random || Application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.Nature = (Nature)id;
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.Nature = (Nature)id;
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Disabled = true;
         }
         else
         {
             Disabled = false;
-            Selected = GetItemIndex((int)_application.CurrentPokemon.Nature);
+            Selected = GetItemIndex((int)Application.CurrentPokemon.Nature);
         }
     }
 }

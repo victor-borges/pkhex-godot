@@ -2,12 +2,10 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class ImportPCDataFileButton : Button
 {
-    private Application _application = null!;
     private FileDialog _importPCDataFileDialog = null!;
 
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
         _importPCDataFileDialog = GetNode<FileDialog>("%ImportPCDataFileDialog");
     }
 
@@ -18,9 +16,9 @@ public partial class ImportPCDataFileButton : Button
 
     private void OnImportPCDataFileDialogFileSelected(string path)
     {
-        if (_application.Game is null)
+        if (Application.SaveFile is null)
             return;
 
-        _application.LoadPCData(path);
+        Application.Instance.LoadPCData(path);
     }
 }

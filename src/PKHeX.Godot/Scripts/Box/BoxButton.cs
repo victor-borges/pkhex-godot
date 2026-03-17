@@ -2,20 +2,17 @@ namespace PKHeX.Godot.Scripts.Box;
 
 public partial class BoxButton : Button
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.BoxChanged += OnBoxChanged;
+        Application.Instance.BoxChanged += OnBoxChanged;
     }
 
     private void OnBoxChanged(int boxIndex)
     {
-        if (_application.Game is null)
+        if (Application.SaveFile is null)
             return;
 
-        Text = _application.Game.Version is GameVersion.PLA
+        Text = Application.SaveFile.Version is GameVersion.PLA
             ? $"Pasture {boxIndex + 1}"
             : $"Box {boxIndex + 1}";
     }

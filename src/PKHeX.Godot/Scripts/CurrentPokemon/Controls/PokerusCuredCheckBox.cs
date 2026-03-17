@@ -2,28 +2,25 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class PokerusCuredCheckBox : CheckBox
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
 
         Toggled += OnButtonPressed;
     }
 
     private void OnButtonPressed(bool pressed)
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.IsPokerusCured = pressed;
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.IsPokerusCured = pressed;
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Disabled = true;
             SetPressedNoSignal(false);
@@ -31,7 +28,7 @@ public partial class PokerusCuredCheckBox : CheckBox
         else
         {
             Disabled = false;
-            SetPressedNoSignal(_application.CurrentPokemon.IsPokerusCured);
+            SetPressedNoSignal(Application.CurrentPokemon.IsPokerusCured);
         }
     }
 }

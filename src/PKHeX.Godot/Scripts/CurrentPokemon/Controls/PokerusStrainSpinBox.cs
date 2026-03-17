@@ -2,36 +2,33 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class PokerusStrainSpinBox : SpinBox
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
 
         ValueChanged += OnValueChanged;
     }
 
     private void OnValueChanged(double value)
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.PokerusStrain = (int)value;
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.PokerusStrain = (int)value;
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Editable = false;
             SetValueNoSignal(0);
         }
         else
         {
-            Editable = _application.CurrentPokemon.IsPokerusInfected;
-            SetValueNoSignal(_application.CurrentPokemon.PokerusStrain);
+            Editable = Application.CurrentPokemon.IsPokerusInfected;
+            SetValueNoSignal(Application.CurrentPokemon.PokerusStrain);
         }
     }
 }

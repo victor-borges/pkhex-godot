@@ -2,23 +2,20 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class PokerusInfectedHBoxContainer : HBoxContainer
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Visible = false;
         }
         else
         {
-            Visible = _application.CurrentPokemon.IsPokerusInfected;
+            Visible = Application.CurrentPokemon.IsPokerusInfected;
         }
     }
 }

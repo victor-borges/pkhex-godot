@@ -2,24 +2,21 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class BoxTab : Control
 {
-    private Application _application = null!;
     private MarginContainer _marginContainer = null!;
     private const string BoxSceneName = "Box";
 
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.FileLoaded += OnFileLoaded;
-
+        Application.Instance.FileLoaded += OnFileLoaded;
         _marginContainer = GetNode<MarginContainer>("MarginContainer");
     }
 
     private void OnFileLoaded()
     {
-        if (_application.Game is null)
+        if (Application.SaveFile is null)
             return;
 
-        var generation = _application.Game.Generation;
+        var generation = Application.SaveFile.Generation;
         var scene = generation <= 2
             ? ResourceLoader.Load<PackedScene>(Scenes.Boxes.Box20)
             : ResourceLoader.Load<PackedScene>(Scenes.Boxes.Box);

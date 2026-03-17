@@ -2,17 +2,14 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class LanguageOptionButton : OptionButton
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.FileLoaded += OnFileLoaded;
 
         ItemSelected += OnLanguageSelected;
 
-        if (_application.Game is not null)
+        if (Application.SaveFile is not null)
             OnFileLoaded();
     }
 
@@ -20,7 +17,7 @@ public partial class LanguageOptionButton : OptionButton
     {
         Clear();
 
-        if (_application.Game is null)
+        if (Application.SaveFile is null)
             return;
 
         foreach (var language in GameInfo.FilteredSources.Languages)
@@ -31,28 +28,28 @@ public partial class LanguageOptionButton : OptionButton
 
     private void OnLanguageSelected(long index)
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
             return;
 
         var id = GetItemId((int)index);
-        _application.CurrentPokemon.Language = id;
+        Application.CurrentPokemon.Language = id;
 
-        if (!_application.CurrentPokemon.IsNicknamed)
-            _application.CurrentPokemon.SetDefaultNickname();
+        if (!Application.CurrentPokemon.IsNicknamed)
+            Application.CurrentPokemon.SetDefaultNickname();
 
-        _application.EmitEventCurrentPokemonChanged();
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Selected = -1;
             Disabled = true;
         }
         else
         {
-            Selected = GetItemIndex(_application.CurrentPokemon.Language);
+            Selected = GetItemIndex(Application.CurrentPokemon.Language);
             Disabled = false;
         }
     }

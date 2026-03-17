@@ -2,30 +2,28 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class FriendshipSpinBox : SpinBox
 {
-    private Application _application = null!;
     private Label _friendshipLabel = null!;
 
     public override void _Ready()
     {
         _friendshipLabel = GetNode<Label>("../FriendshipLabel");
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
 
         ValueChanged += OnValueChanged;
     }
 
     private void OnValueChanged(double value)
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.CurrentFriendship = (byte)value;
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.CurrentFriendship = (byte)value;
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Editable = false;
             SetValueNoSignal(0);
@@ -33,8 +31,8 @@ public partial class FriendshipSpinBox : SpinBox
         else
         {
             Editable = true;
-            SetValueNoSignal(_application.CurrentPokemon.CurrentFriendship);
-            _friendshipLabel.Text = _application.CurrentPokemon.IsEgg ? "Hatch Counter:" : "Friendship:";
+            SetValueNoSignal(Application.CurrentPokemon.CurrentFriendship);
+            _friendshipLabel.Text = Application.CurrentPokemon.IsEgg ? "Hatch Counter:" : "Friendship:";
         }
     }
 }

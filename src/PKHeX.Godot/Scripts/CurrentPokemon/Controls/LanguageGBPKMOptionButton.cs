@@ -2,30 +2,27 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class LanguageGBPKMOptionButton : OptionButton
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
 
         ItemSelected += OnLanguageSelected;
     }
 
     private void OnLanguageSelected(long index)
     {
-        if (_application.CurrentPokemon is not GBPKML pk1)
+        if (Application.CurrentPokemon is not GBPKML pk1)
             return;
 
         var id = GetItemId((int)index);
         pk1.SetNotNicknamed(id);
 
-        _application.EmitEventCurrentPokemonChanged();
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Selected = -1;
             Disabled = true;
@@ -37,11 +34,11 @@ public partial class LanguageGBPKMOptionButton : OptionButton
         Dictionary<string, List<ComboItem>> nameLangMap = [];
         foreach (var language in GameInfo.FilteredSources.Languages)
         {
-            if (language.Value == (int)LanguageID.Korean && _application.Game.Generation == 1)
+            if (language.Value == (int)LanguageID.Korean && Application.SaveFile.Generation == 1)
                 continue;
 
             var speciesName = SpeciesName.GetSpeciesNameGeneration(
-                _application.CurrentPokemon.Species, language.Value, _application.Game.Generation);
+                Application.CurrentPokemon.Species, language.Value, Application.SaveFile.Generation);
 
             if (nameLangMap.TryGetValue(speciesName, out var ids))
                 ids.Add(language);
@@ -55,7 +52,7 @@ public partial class LanguageGBPKMOptionButton : OptionButton
             var value = languages[0].Value;
             AddItem(text, value);
 
-            if (_application.Game.Language == (int)LanguageID.Japanese)
+            if (Application.SaveFile.Language == (int)LanguageID.Japanese)
             {
                 SetItemDisabled(GetItemIndex(value), value != (int)LanguageID.Japanese);
             }
@@ -64,7 +61,7 @@ public partial class LanguageGBPKMOptionButton : OptionButton
                 SetItemDisabled(GetItemIndex(value), value == (int)LanguageID.Japanese);
             }
 
-            if (languages.Select(l => l.Value).Contains(_application.CurrentPokemon.Language))
+            if (languages.Select(l => l.Value).Contains(Application.CurrentPokemon.Language))
             {
                 Selected = GetItemIndex(languages[0].Value);
             }

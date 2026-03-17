@@ -7,15 +7,15 @@ public partial class PartySlot : Slot
     public override void _Ready()
     {
         base._Ready();
-        Application.PartyChanged += OnPartyChanged;
+        Application.Instance.PartyChanged += OnPartyChanged;
     }
 
     private void OnPartyChanged()
     {
-        if (Application.Game is null || SlotIndex >= 6)
+        if (Application.SaveFile is null || SlotIndex >= 6)
             return;
 
-        var pokemon = Application.Game.GetPartySlotAtIndex(SlotIndex);
+        var pokemon = Application.SaveFile.GetPartySlotAtIndex(SlotIndex);
         SetPokemon(pokemon);
     }
 }

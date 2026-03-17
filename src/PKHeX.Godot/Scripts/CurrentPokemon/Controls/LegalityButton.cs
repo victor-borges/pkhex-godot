@@ -4,29 +4,27 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class LegalityButton : TextureButton
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
         {
             Visible = false;
             return;
         }
 
-        Visible = _application.CurrentPokemon.Species != 0;
+        // Visible = Application.CurrentPokemon.Species != 0;
+        Visible = true;
 
-        if (!_application.CurrentPokemon.Legality.Valid)
+        if (!Application.CurrentPokemon.Legality.Valid)
         {
             TextureNormal = GD.Load<Texture2D>(Assets.Sprites.Overlays.Illegal);
         }
-        if (_application.CurrentPokemon.Format >= 8 && MoveInfo.IsDummiedMoveAny(_application.CurrentPokemon))
+        if (Application.CurrentPokemon.Format >= 8 && MoveInfo.IsDummiedMoveAny(Application.CurrentPokemon))
         {
             TextureNormal = GD.Load<Texture2D>(Assets.Sprites.Overlays.Illegal); // TODO: change to hint
         }

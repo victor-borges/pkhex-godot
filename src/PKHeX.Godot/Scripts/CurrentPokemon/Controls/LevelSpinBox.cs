@@ -2,27 +2,24 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class LevelSpinBox : SpinBox
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
         ValueChanged += OnValueChanged;
     }
 
     private void OnValueChanged(double value)
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
             return;
 
-        _application.CurrentPokemon.CurrentLevel = (byte)value;
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.CurrentLevel = (byte)value;
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Editable = false;
             SetValueNoSignal(0);
@@ -30,7 +27,7 @@ public partial class LevelSpinBox : SpinBox
         else
         {
             Editable = true;
-            SetValueNoSignal(_application.CurrentPokemon.CurrentLevel);
+            SetValueNoSignal(Application.CurrentPokemon.CurrentLevel);
         }
     }
 }

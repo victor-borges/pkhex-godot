@@ -2,17 +2,14 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class HeldItemOptionButton : OptionButton
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.FileLoaded += OnFileLoaded;
 
         ItemSelected += OnItemSelected;
 
-        if (_application.Game is not null)
+        if (Application.SaveFile is not null)
             OnFileLoaded();
     }
 
@@ -20,7 +17,7 @@ public partial class HeldItemOptionButton : OptionButton
     {
         Clear();
 
-        if (_application.Game is null)
+        if (Application.SaveFile is null)
             return;
 
         foreach (var gameItem in GameInfo.FilteredSources.Items)
@@ -31,17 +28,17 @@ public partial class HeldItemOptionButton : OptionButton
 
     private void OnItemSelected(long index)
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
             return;
 
         var id = GetItemId((int)index);
-        _application.CurrentPokemon.HeldItem = id;
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.HeldItem = id;
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
         {
             Disabled = true;
             Selected = -1;
@@ -49,7 +46,7 @@ public partial class HeldItemOptionButton : OptionButton
         else
         {
             Disabled = false;
-            Selected = _application.CurrentPokemon.HeldItem is 0 ? -1 : GetItemIndex(_application.CurrentPokemon.HeldItem);
+            Selected = GetItemIndex(Application.CurrentPokemon.HeldItem);
         }
     }
 }

@@ -16,6 +16,7 @@
     <Using Include="Godot" />
     <Using Include="PKHeX.Core" />
     <Using Include="PKHeX.Godot.Scripts" />
+    <Using Include="PKHeX.Godot.Extensions" />
   </ItemGroup>
 
   <ItemGroup>

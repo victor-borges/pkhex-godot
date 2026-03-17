@@ -7,25 +7,25 @@ public partial class BoxSlot : Slot
     public override void _Ready()
     {
         base._Ready();
-        Application.BoxChanged += OnBoxChanged;
-        Application.FileLoaded += OnFileLoaded;
+        Application.Instance.BoxChanged += OnBoxChanged;
+        Application.Instance.FileLoaded += OnFileLoaded;
     }
 
     private void OnBoxChanged(int boxIndex)
     {
-        if (Application.Game is null)
+        if (Application.SaveFile is null)
         {
             SetPokemon(null);
         }
         else
         {
-            var pokemon = Application.Game.GetBoxSlotAtIndex(boxIndex, SlotIndex);
+            var pokemon = Application.SaveFile.GetBoxSlotAtIndex(boxIndex, SlotIndex);
             SetPokemon(pokemon);
         }
     }
 
     private void OnFileLoaded()
     {
-        Visible = Application.Game is not null && SlotIndex < Application.Game.BoxSlotCount;
+        Visible = Application.SaveFile is not null && SlotIndex < Application.SaveFile.BoxSlotCount;
     }
 }

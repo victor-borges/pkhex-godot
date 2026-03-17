@@ -4,25 +4,27 @@ namespace PKHeX.Godot.Scripts;
 
 public partial class Application : Node
 {
-    public static readonly NodePath NodePath = "/root/Application";
+    public static Application Instance { get; private set; } = null!;
+    public static SaveFile? SaveFile => Instance._saveFile;
 
-    public SaveFile? Game { get; private set; }
+    private SaveFile? _saveFile;
+    private PKM? _currentPokemon;
 
-    public PKM? CurrentPokemon
+    public static PKM? CurrentPokemon
     {
-        get;
+        get => Instance._currentPokemon;
         set
         {
-            if (value is null)
+            if (value is null || !EntityDetection.GetFuncIsPresent(value)(value.Data))
             {
-                field = null;
-                return;
+                Instance._currentPokemon = null;
+            }
+            else
+            {
+                Instance._currentPokemon = value;
             }
 
-            var isPokemonPresent = EntityDetection.GetFuncIsPresent(value);
-            field = isPokemonPresent(value.Data) ? value : null;
-
-            EmitSignalCurrentPokemonChanged();
+            Instance.EmitSignalCurrentPokemonChanged();
         }
     }
 
@@ -38,49 +40,49 @@ public partial class Application : Node
 
     public override void _Ready()
     {
-        var lang = GameInfo.CurrentLanguage;
-        LocalizeUtil.InitializeStrings(lang, FakeSaveFile.Default);
+        Instance = this;
+        LocalizeUtil.InitializeStrings(GameInfo.CurrentLanguage, FakeSaveFile.Default);
     }
 
     public void EmitEventCurrentPokemonChanged() => EmitSignalCurrentPokemonChanged();
 
     public void GoToPreviousBox()
     {
-        if (Game is null)
+        if (_saveFile is null)
             return;
 
-        var totalBoxes = Game.BoxesUnlocked == -1 ? Game.BoxCount : Game.BoxesUnlocked;
+        var totalBoxes = _saveFile.BoxesUnlocked == -1 ? _saveFile.BoxCount : _saveFile.BoxesUnlocked;
         var previousBoxIndex = (CurrentBoxIndex - 1 + totalBoxes) % totalBoxes;
         CurrentBoxIndex = previousBoxIndex;
     }
 
     public void GoToNextBox()
     {
-        if (Game is null)
+        if (_saveFile is null)
             return;
 
-        var totalBoxes = Game.BoxesUnlocked == -1 ? Game.BoxCount : Game.BoxesUnlocked;
+        var totalBoxes = _saveFile.BoxesUnlocked == -1 ? _saveFile.BoxCount : _saveFile.BoxesUnlocked;
         var nextBoxIndex = (CurrentBoxIndex + 1) % totalBoxes;
         CurrentBoxIndex = nextBoxIndex;
     }
 
     public void LoadSave(string path)
     {
-        Game = SaveUtil.GetSaveFile(path) ?? throw new FileNotFoundException(path);
-        Game.Metadata.SetExtraInfo(path);
+        _saveFile = SaveUtil.GetSaveFile(path) ?? throw new FileNotFoundException(path);
+        _saveFile.Metadata.SetExtraInfo(path);
 
         // if (!SanityCheckSAV(ref sav))
         //     return true;
 
-        if (Game is SAV3 sav3)
+        if (_saveFile is SAV3 sav3)
             EReaderBerrySettings.LoadFrom(sav3);
 
-        ParseSettings.InitFromSaveFileData(Game); // physical GB, no longer used in logic
-        RecentTrainerCache.SetRecentTrainer(Game);
+        LocalizeUtil.InitializeStrings(GameInfo.CurrentLanguage, _saveFile);
+        ParseSettings.InitFromSaveFileData(_saveFile); // physical GB, no longer used in logic
+        RecentTrainerCache.SetRecentTrainer(_saveFile);
 
-        GameInfo.FilteredSources = new FilteredGameDataSource(Game, GameInfo.Sources);
-
-        Game.State.Edited = false;
+        GameInfo.FilteredSources = new FilteredGameDataSource(_saveFile, GameInfo.Sources);
+        _saveFile.State.Edited = false;
 
         EmitSignalFileLoaded();
         EmitSignalPartyChanged();
@@ -90,11 +92,11 @@ public partial class Application : Node
 
     public void LoadPCData(string path)
     {
-        if (Game is null)
+        if (_saveFile is null)
             return;
 
         var bytes = File.ReadAllBytes(path);
-        var didSet = Game.SetPCBinary(bytes);
+        var didSet = _saveFile.SetPCBinary(bytes);
 
         if (!didSet)
             return;

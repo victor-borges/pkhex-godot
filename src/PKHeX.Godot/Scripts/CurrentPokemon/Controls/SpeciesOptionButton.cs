@@ -2,17 +2,14 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class SpeciesOptionButton : OptionButton
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
-        _application.FileLoaded += OnFileLoaded;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.FileLoaded += OnFileLoaded;
 
         ItemSelected += OnSpeciesSelected;
 
-        if (_application.Game is not null)
+        if (Application.SaveFile is not null)
             OnFileLoaded();
     }
 
@@ -20,7 +17,7 @@ public partial class SpeciesOptionButton : OptionButton
     {
         Clear();
 
-        if (_application.Game is null)
+        if (Application.SaveFile is null)
             return;
 
         var speciesSource = GameInfo.FilteredSources.Species
@@ -35,17 +32,17 @@ public partial class SpeciesOptionButton : OptionButton
 
     private void OnSpeciesSelected(long index)
     {
-        if (_application.CurrentPokemon is null)
+        if (Application.CurrentPokemon is null)
             return;
 
         var id = GetItemId((int)index);
-        _application.CurrentPokemon.Species = (ushort)id;
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.Species = (ushort)id;
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void CurrentPokemonChanged()
     {
-        if (_application.Game is null || _application.CurrentPokemon is null)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null)
         {
             Disabled = true;
             Selected = -1;
@@ -53,7 +50,7 @@ public partial class SpeciesOptionButton : OptionButton
         else
         {
             Disabled = false;
-            Selected = GetItemIndex(_application.CurrentPokemon.Species);
+            Selected = GetItemIndex(Application.CurrentPokemon.Species);
         }
     }
 }

@@ -4,12 +4,9 @@ namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class FormOptionButton : OptionButton
 {
-    private Application _application = null!;
-
     public override void _Ready()
     {
-        _application = GetNode<Application>(Application.NodePath);
-        _application.CurrentPokemonChanged += CurrentPokemonChanged;
+        Application.Instance.CurrentPokemonChanged += CurrentPokemonChanged;
 
         ItemSelected += OnFormSelected;
         PopulateFormsMenu();
@@ -22,26 +19,26 @@ public partial class FormOptionButton : OptionButton
 
     private void OnFormSelected(long index)
     {
-        if (_application.CurrentPokemon is null || !_application.CurrentPokemon.PersonalInfo.HasForms)
+        if (Application.CurrentPokemon is null || !Application.CurrentPokemon.PersonalInfo.HasForms)
             return;
 
         var id = GetItemId((int)index);
-        _application.CurrentPokemon.Form = (byte)id;
-        _application.EmitEventCurrentPokemonChanged();
+        Application.CurrentPokemon.Form = (byte)id;
+        Application.Instance.EmitEventCurrentPokemonChanged();
     }
 
     private void PopulateFormsMenu()
     {
         Clear();
 
-        if (_application.Game is null || _application.CurrentPokemon is null || !_application.CurrentPokemon.PersonalInfo.HasForms)
+        if (Application.SaveFile is null || Application.CurrentPokemon is null || !Application.CurrentPokemon.PersonalInfo.HasForms)
         {
             Selected = -1;
             Disabled = true;
             return;
         }
 
-        var forms = _application.CurrentPokemon.Forms.ToArray();
+        var forms = Application.CurrentPokemon.Forms.ToArray();
 
         if (forms.Length is 0 || forms is [{ Value: 0 }])
         {
@@ -53,7 +50,7 @@ public partial class FormOptionButton : OptionButton
             {
                 AddItem(formDefinition.Text, formDefinition.Value);
 
-                if (formDefinition.Value == _application.CurrentPokemon.Form)
+                if (formDefinition.Value == Application.CurrentPokemon.Form)
                     Selected = GetItemIndex(formDefinition.Value);
             }
         }

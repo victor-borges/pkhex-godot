@@ -1,12 +1,8 @@
-using PKHeX.Godot.Extensions;
-
 namespace PKHeX.Godot.Scripts;
 
 public partial class Slot : Button
 {
     protected PKM? Pokemon;
-
-    protected Application Application = null!;
 
     private TextureRect _pokemonSprite = null!;
     private TextureRect _shinySprite = null!;
@@ -20,8 +16,6 @@ public partial class Slot : Button
 
     public override void _Ready()
     {
-        Application = GetNode<Application>(Application.NodePath);
-
         _pokemonSprite = GetNode<TextureRect>("%PokemonSprite");
         _shinySprite = GetNode<TextureRect>("%ShinySprite");
         _markerSprite = GetNode<TextureRect>("%MarkerSprite");
@@ -88,7 +82,10 @@ public partial class Slot : Button
         }
         else if (pokemon.HeldItem is not 0)
         {
-            _heldItemSprite.Texture = GD.Load<Texture2D>(Assets.Sprites.HeldItem(pokemon.SpriteItem));
+            _heldItemSprite.Texture = ResourceLoader.Exists(Assets.Sprites.HeldItem(pokemon))
+                ? GD.Load<Texture2D>(Assets.Sprites.HeldItem(pokemon))
+                : GD.Load<Texture2D>(Assets.Sprites.HeldItem(0));
+
             _heldItemPanel.Visible = true;
         }
 

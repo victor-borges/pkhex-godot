@@ -9,6 +9,7 @@
 [node name="CanvasLayer" type="CanvasLayer" unique_id=7499068]
 
 [node name="CurrentPokemonEditor" type="Control" parent="." unique_id=1902591362]
+unique_name_in_owner = true
 layout_mode = 3
 anchor_left = 0.02578125
 anchor_top = 0.13611111
