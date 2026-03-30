@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bribqfue7n0ul"]
+
+[ext_resource type="Script" uid="uid://mojqavpeivop" path="res://Scripts/CurrentPokemon/Controls/NSparkleCheckBox.cs" id="1_0p5m7"]
+
+[node name="NSparkleEditor" type="HBoxContainer" unique_id=920064105]
+
+[node name="NSparkleLabel" type="Label" parent="." unique_id=532724662]
+layout_mode = 2
+text = "N's Sparkle:"
+
+[node name="NSparkleCheckBox" type="CheckBox" parent="." unique_id=309823641]
+layout_mode = 2
+disabled = true
+text = "Active"
+script = ExtResource("1_0p5m7")

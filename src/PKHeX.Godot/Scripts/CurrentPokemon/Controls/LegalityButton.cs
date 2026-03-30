@@ -1,5 +1,3 @@
-using PKHeX.Godot.Extensions;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class LegalityButton : TextureButton

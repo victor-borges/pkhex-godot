@@ -1,10 +1,8 @@
-using PKHeX.Godot.Extensions;
-
 namespace PKHeX.Godot.Scripts.CurrentPokemon.Controls;
 
 public partial class LegalityDialog : AcceptDialog
 {
-        private FoldableContainer _foldableContainer = null!;
+    private FoldableContainer _foldableContainer = null!;
     private Label _simpleReportLabel = null!;
     private RichTextLabel _fullReportLabel = null!;
     private Button? _copyToClipboardButton;

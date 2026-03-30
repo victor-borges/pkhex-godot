@@ -7,15 +7,17 @@ public partial class CurrentPokemonEditor : Control
 
     public override void _Ready()
     {
+        Application.Instance.FileLoaded += SetupEditor;
+
         _pokemonEditorScenes = new()
         {
             [1] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK1),
             [2] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK2),
             [3] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK3),
-            // [4] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK4),
-            // [5] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK5),
-            // [6] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK6),
-            // [7] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK7),
+            [4] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK4),
+            [5] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK5),
+            [6] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK6),
+            [7] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK7),
             [8] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK8),
             [9] = ResourceLoader.Load<PackedScene>(Scenes.PokemonEditor.PK9),
         };
